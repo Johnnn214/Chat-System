@@ -34,6 +34,7 @@ module.exports = function (req, res) {
                 }
             }
             res.send(customer);
+            console.log(customer);
             
             }catch(err){
               console.log("Error pasing the userdata");

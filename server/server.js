@@ -21,3 +21,5 @@ console.log("Server listening on: "+ host + " port: " + port);
 });
 
 app.post('/api/auth' ,require('./routes/login'));
+
+app.post('/api/getusers' ,require('./routes/getusers'));
