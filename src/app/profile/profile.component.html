@@ -1,12 +1,14 @@
 <div>
 
-    username
-    email
-
-    logout 
-    delete
-
-
-
+    
+        <div *ngIf="loggedin">
+            <h1> Profile</h1>
+            <div >
+                <div>Username: {{currentuser.username}}</div>
+                <div>Email: {{currentuser.email}}</div>
+                <div>logout</div>
+                <div>delete account</div>
+            </div>
+        <div>
 
 </div>
