@@ -32,8 +32,8 @@ module.exports = function (req, res) {
             
             console.log(userNamesWithRole);
 
-            // res.send(userNamesWithRole);
-            res.send(users);
+            res.send(userNamesWithRole);
+            // res.send(users);
             // res.send(customer);
             // console.log(customer);
             

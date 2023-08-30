@@ -15,7 +15,7 @@ export class UserlistComponent {
   constructor(private usersService: UsersService) { }
   newuser:User = new User();
   username:string ="a"
-  Userarray:Array<User[]> = []
+  Userarray:Array<User> = []
   roles:string= "users"
 
   ngOnInit(){
@@ -23,6 +23,7 @@ export class UserlistComponent {
       this.Userarray= Userarray;
       console.log(this.Userarray);
     })
+
   }
 
 }
