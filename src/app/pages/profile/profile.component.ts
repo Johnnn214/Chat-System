@@ -28,5 +28,5 @@ export class ProfileComponent {
     }
     console.log(this.show)
   }
-
+  
 }
