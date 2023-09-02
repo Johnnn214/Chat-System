@@ -4,13 +4,12 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class GroupsService {
 
   constructor(private http: HttpClient) { }
 
 
-  getAllUsernames(roles:string){
-    return this.http.post<any>('http://localhost:3000/api/getusers',{roles: roles});
+  getAllGroups(name:string){
+    return this.http.post<any>('http://localhost:3000/api/getgroups',{name: name});
   }
-
 }
