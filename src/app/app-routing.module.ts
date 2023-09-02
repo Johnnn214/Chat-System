@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChatComponent } from './chat/chat.component';
-import { GroupComponent } from './group/group.component';
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
-import { SignupComponent } from './signup/signup.component';
-import { RolesComponent } from './roles/roles.component';
+import { ChatComponent } from '../pages/chat/chat.component';
+import { GroupComponent } from '../pages/group/group.component';
+import { LoginComponent } from '../pages/login/login.component';
+import { ProfileComponent } from '../pages/profile/profile.component';
+import { SignupComponent } from '../pages/signup/signup.component';
+import { RolesComponent } from '../pages/roles/roles.component';
 
 const routes: Routes = [
   { path: 'chat', component: ChatComponent},

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersService } from '../services/users.service';
+import { UsersService } from '../../services/users.service';
 import { User } from 'src/models/user';
 
 @Component({
@@ -16,7 +16,7 @@ export class UserlistComponent {
   newuser:User = new User();
   username:string ="a"
   Userarray:Array<User> = []
-  roles:string= "users"
+  roles:string= "user";
 
   ngOnInit(){
     this.usersService.getAllUsernames(this.roles).subscribe( Userarray => {

@@ -1,4 +1,4 @@
-import { ChatComponent } from "src/app/chat/chat.component";
+import { ChatComponent } from "src/pages/chat/chat.component";
 
 export class channel {
 

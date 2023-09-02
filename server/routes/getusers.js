@@ -25,7 +25,7 @@ module.exports = function (req, res) {
             const userNamesWithRole = [];
     
             for (const obj of users) {
-              if (obj.roles === req.body.roles ) {
+              if (obj.roles.includes(req.body.roles) ) {
                 userNamesWithRole.push({ "username": obj.username });
               }
             }

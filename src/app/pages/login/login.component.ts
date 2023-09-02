@@ -3,7 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/models/user';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../app/services/auth.service';
 
 @Component({
   selector: 'app-login',
