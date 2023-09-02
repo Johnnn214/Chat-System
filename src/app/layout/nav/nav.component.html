@@ -1,1 +1,13 @@
-<p>nav works!</p>
+<nav class="navbar navbar-expand-sm bg-light">
+    <div class="container-fluid">
+      <div class="navbar-brand" >Logo</div>
+        <div class="navbar-nav">
+          <a class="nav-link" routerLink="/login">Login</a>
+          <a class="nav-link" routerLink="/chat">Chat</a>
+          <a class="nav-link" routerLink="/group">Group</a>
+          <a class="nav-link" routerLink="/profile">Profile</a>
+          <a *ngIf="issuperadmin" class="nav-link" routerLink="/roles">Roles</a>
+          <a class="nav-link " href="/login" (click) ="logout($event)">Logout</a>
+        </div>
+    </div>
+  </nav>
