@@ -1,0 +1,8 @@
+{
+    "groups":[
+        {"name": "group1", "id": "", "channel": []},
+        {"name": "group2", "id": "", "channel": []},
+        {"name": "group3", "id": "", "channel": []}
+        ]
+    
+}

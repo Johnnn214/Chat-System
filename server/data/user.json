@@ -1,7 +1,8 @@
-{"users":
-    [{"username": "Super","email":"super@com.au","password":"123","roles":["super", "group", "user"],"group":"[]", "valid":"false"},
+{
+    "users":[
+    {"username": "Super","email":"super@com.au","password":"123","roles":["super", "group", "user"],"group":"[]", "valid":"false"},
     {"username": "user1","email":"c@com.au","password":"123","roles":["user"],"group":"[]", "valid":"false"},
     {"username": "user2","email":"a@com.au","password":"123","roles":["user"],"group":"[]", "valid":"false"},
     {"username": "user3","email":"b@com.au","password":"123","roles":["user"],"group":"[]", "valid":"false"}
-]
+    ]
 }     
