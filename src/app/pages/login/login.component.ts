@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/models/user';
-import { AuthService } from '../../app/services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ import { AuthService } from '../../app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private AuthService: AuthService, 
+  constructor(private authService: AuthService, 
     private router: Router) { }
 
   email:string = "";
@@ -33,13 +33,13 @@ export class LoginComponent implements OnInit {
   signin(event:any){
     console.log("at signin");
     event.preventDefault();
-    this.AuthService.login(this.email,this.password).subscribe({
+    this.authService.login(this.email,this.password).subscribe({
       next:
         (data)=>{
           if (data.valid == true){
             this.newuser = new User(data.username, data.email,data.id, data.password,
                data.roles, data.group, data.valid)
-            this.AuthService.setCurrentuser(this.newuser);
+            this.authService.setCurrentuser(this.newuser);
             this.router.navigate(['/profile']);
           }else{
            

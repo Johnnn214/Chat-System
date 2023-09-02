@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { User } from 'src/models/user';
-import { UsersService } from '../../services/users.service';
+import { UsersService } from 'src/app/services/users.service';
+import { User } from 'src/app/models/user';
 
 @Component({
-  selector: 'app-grouplist',
+  selector: 'app-groupadminlist',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './grouplist.component.html',
-  styleUrls: ['./grouplist.component.css']
+  templateUrl: './groupadminlist.component.html',
+  styleUrls: ['./groupadminlist.component.css']
 })
-export class GrouplistComponent {
+export class GroupadminlistComponent {
   constructor(private usersService: UsersService) { }
   newuser:User = new User();
   username:string ="a"
