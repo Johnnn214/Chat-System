@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Group } from '../models/group';
+import { GroupsService } from '../services/groups.service';
 
 @Component({
   selector: 'app-grouplist',
@@ -10,11 +11,15 @@ import { Group } from '../models/group';
   styleUrls: ['./grouplist.component.css']
 })
 export class GrouplistComponent {
-  newgroup:Group = new Group();
+  constructor(private groupsservice: GroupsService) { }
+  newgroup:string = "";
   newgrouplist:Array<Group> = []; 
 
+  ngOnInit(){
+    this.groupsservice.getAllGroups().subscribe( newgrouplist => {
+      this.newgrouplist= newgrouplist;
+      console.log(this.newgrouplist);
+    })
 
-
-
-
+  }
 }
