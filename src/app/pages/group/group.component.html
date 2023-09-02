@@ -2,55 +2,66 @@
 <!-- group admin/super admin  -->
 <div>
     <!-- Group list  -->
-    <div>
-    list of users
-    <app-userlist></app-userlist>
-    add user to group
+    <div *ngIf="isadmin">
+        <h1>admin view</h1>
+        <app-userlist></app-userlist>
+        <button type="button" (click)="adduser($event) " class="btn btn-primary">adduser</button>
 
 
-    </div>
+    
     <!-- group -->
-    <div>
-        create group
-        <br>
-        edit/ cancel
-         remove group
-         <br>
-         chane group name etc...
-    </div>
+        <div>
+            
+            create group
+            <br>
+            <button type="button" (click)="edit($event) " class="btn btn-primary">edit</button>
+            <button type="button" (click)="cancel($event) " class="btn btn-primary">cancel</button>
+            <br>
+            <button type="button" (click)="remove($event) " class="btn btn-primary">removegroup</button>
+            <br>
+            <form>
+                <input type="text">
+                <label for="">change name</label>
+                <br>
+                <button type="button" (click)="submit($event) " class="btn btn-primary">submit</button>
+            </form>
+        </div>
     <!-- grouplist -->
-    <div><br>
-        admin view
-        <br>
-        create channel
-        <br>
-        edit/ cancel
-        <br>
-         remove channel
-         <br>
-        group list 
-        <br>
-        dropdown 
-        users list 
-        <br>
-         remove users
+        <div><br>
+            grouplist
+            <app-grouplist></app-grouplist>
+            <br>
+            create channel
+            <button type="button" (click)="addchannel($event) " class="btn btn-primary">addchannel</button>
+            <br>
+            <button type="button" (click)="removechannel($event) " class="btn btn-primary">removechannel</button>
+            remove channel
+            <br>
+
+            <br>
+            dropdown 
+            users list 
+            <br>
+            remove users
+        </div>
 
 
     </div>
-        <br><br>
-    <!-- users -->
-    <h1>User view</h1>
-    <br>
-    groups list 
-        <br>
-    join channel
-    <br>
-    apply group
-    <br>
-    leave group
-    <br>
-
     <div>
+        <br><br>
+        <!-- users -->
+        <h1>User view</h1>
+        <br>
+        groups list 
+        <app-grouplist></app-grouplist>
+        <br>
+        join channel
+        <br>
+        apply group
+        <br>
+        leave group
+        <br>
+
     </div>
 
 </div>
