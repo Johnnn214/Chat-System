@@ -17,21 +17,24 @@ export class GroupComponent {
   user:any = sessionStorage.getItem('currentUser');
   admin:string = "group"
   user1 = JSON.parse(this.user);
-  role:Array<string> | null | undefined;
+  role!: Array<string>;
+
   ngOnInit() {
-    if (this.role == null){
-      console.log("role is empty")
-    }
-    else {
-      this.role == this.user1.roles;
-      if (this.role?.includes(this.admin)){
+    if (this.user1 != null){
+      this.role = this.user1.roles;
+      if (this.role.includes(this.admin)){
       this.isadmin = true;
       }else{
         this.isadmin = false;
       }
+      console.log("user ",this.user1);
+      console.log("roles", this.role);
+      console.log(this.isadmin);
     }
-    console.log(this.isadmin);
-    console.log(this.role);
+    else {
+      console.log("role is empty")
+    }
+
   }
 
   adduser(event:any){

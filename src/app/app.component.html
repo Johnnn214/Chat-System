@@ -6,7 +6,7 @@
         <a class="nav-link" routerLink="/chat">Chat</a>
         <a class="nav-link" routerLink="/group">Group</a>
         <a class="nav-link" routerLink="/profile">Profile</a>
-        <a class="nav-link" routerLink="/roles">Roles</a>
+        <a *ngIf="issuperadmin" class="nav-link" routerLink="/roles">Roles</a>
         <a class="nav-link " href="/login" (click) ="logout($event)">Logout</a>
       </div>
   </div>
