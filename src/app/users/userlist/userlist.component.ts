@@ -18,11 +18,14 @@ export class UserlistComponent {
   Userarray:Array<User> = []
   roles:string= "user";
   show:boolean = false;
+  
 
   ngOnInit(){
     this.usersService.getAllUsernames(this.roles).subscribe( Userarray => {
       this.Userarray= Userarray;
-      console.log(this.Userarray);
+     // console.log(this.Userarray);
+
+ 
     })
 
   }

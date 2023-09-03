@@ -26,9 +26,9 @@ export class AppComponent {
       }else{
         this.issuperadmin = false;
       }
-      console.log("user ",this.user1);
-      console.log("roles", this.role);
-      console.log(this.issuperadmin);
+      // console.log("user ",this.user1);
+      // console.log("roles", this.role);
+      // console.log(this.issuperadmin);
     }
     else {
       console.log("role is empty")

@@ -1,12 +1,12 @@
-import { ChatComponent } from "src/pages/chat/chat.component";
 
-export class channel {
+export class Channel {
 
-    //chattttt
+    chat:string;
 
-    constructor(){
+    constructor(chat:string=''){
        
-    // chat
+        this.chat = chat;
+
     
     }
     

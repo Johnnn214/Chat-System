@@ -20,7 +20,7 @@ export class SuperlistComponent {
   ngOnInit(){
     this.usersService.getAllUsernames(this.roles).subscribe( Userarray => {
       this.Userarray= Userarray;
-      console.log(this.Userarray);
+      //console.log(this.Userarray);
     })
 
   }

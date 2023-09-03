@@ -28,33 +28,13 @@ export class GroupComponent {
       }else{
         this.isadmin = false;
       }
-      console.log("user ",this.user1);
-      console.log("roles", this.role);
-      console.log(this.isadmin);
+      // console.log("user ",this.user1);
+      // console.log("roles", this.role);
+      // console.log(this.isadmin);
     }
     else {
       console.log("role is empty")
     }
-
-  }
-
-  adduser(event:any){
-
-  }
-  remove(event:any){
-
-  }
-  addchannel(event:any){
-
-  }
-
-  removechannel(event:any){
-
-  }
-  submit(event: any){
-
-  }
-  creategroup(event: any){
 
   }
 
