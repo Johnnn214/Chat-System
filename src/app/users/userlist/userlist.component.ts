@@ -17,6 +17,7 @@ export class UserlistComponent {
   username:string ="a"
   Userarray:Array<User> = []
   roles:string= "user";
+  show:boolean = false;
 
   ngOnInit(){
     this.usersService.getAllUsernames(this.roles).subscribe( Userarray => {
@@ -24,6 +25,17 @@ export class UserlistComponent {
       console.log(this.Userarray);
     })
 
+  }
+  adduser(event:any){
+
+  }
+  edit(event:any){
+    this.show =true;
+    console.log(this.show);
+  }
+  cancel(event:any){
+    this.show =false;
+    console.log(this.show);
   }
 
 }
