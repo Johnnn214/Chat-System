@@ -1,0 +1,13 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-channel',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './channel.component.html',
+  styleUrls: ['./channel.component.css']
+})
+export class ChannelComponent {
+
+}
