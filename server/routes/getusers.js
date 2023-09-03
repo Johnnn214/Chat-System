@@ -26,11 +26,15 @@ module.exports = function (req, res) {
     
             for (const obj of users) {
               if (obj.roles.includes(req.body.roles) ) {
-                userNamesWithRole.push({ "username": obj.username });
+                userNamesWithRole.push({ "username": obj.username,
+                "email": obj.email,
+                "roles": obj.roles,
+                 "group": obj.group,
+                "valid": obj.valid });
               }
             }
             
-            console.log(userNamesWithRole);
+            console.log("users", userNamesWithRole);
 
             res.send(userNamesWithRole);
             // res.send(users);
