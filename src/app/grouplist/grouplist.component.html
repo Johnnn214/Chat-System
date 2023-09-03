@@ -1,9 +1,9 @@
 <div>
     <div>
         <button type="button" (click)="edit($event) " class="btn btn-primary">edit</button>
-        
-        <button type="button" (click)="cancel($event) " class="btn btn-primary">cancel</button>
-        <form>
+    
+        <button *ngIf="show" type="button" (click)="cancel($event) " class="btn btn-primary">cancel</button>
+        <form *ngIf="show">
             <input type="text">
             <button type="button" (click)="creategroup($event) " class="btn btn-primary">create group</button>
         </form>
@@ -11,7 +11,7 @@
     </div>
     <div>
         <ul *ngFor="let group of newgrouplist">
-            <li>{{group.name}} <button type="button" (click)="remove($event) " class="btn btn-primary">removegroup</button> </li>
+            <li>{{group.name}} <button *ngIf="show" type="button" (click)="remove($event) " class="btn btn-primary">removegroup</button> </li>
         </ul>
     </div>
 </div>

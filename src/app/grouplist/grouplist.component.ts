@@ -14,6 +14,7 @@ export class GrouplistComponent {
   constructor(private groupsservice: GroupsService) { }
   newgroup:string = "";
   newgrouplist:Array<Group> = []; 
+  show:boolean = false;
 
   ngOnInit(){
     this.groupsservice.getAllGroups().subscribe( newgrouplist => {
@@ -22,16 +23,19 @@ export class GrouplistComponent {
     })
   }
   edit(event:any){
-
+    this.show =true;
+    console.log(this.show);
   }
   cancel(event:any){
-
+    this.show =false;
+    console.log(this.show);
   }
+
   remove(event:any){
 
   }
   creategroup(event:any){
-    
+
   }
 
 }
