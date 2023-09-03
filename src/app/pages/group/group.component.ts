@@ -40,12 +40,6 @@ export class GroupComponent {
   adduser(event:any){
 
   }
-  edit(event:any){
-
-  }
-  cancel(event:any){
-
-  }
   remove(event:any){
 
   }
@@ -57,6 +51,9 @@ export class GroupComponent {
 
   }
   submit(event: any){
+
+  }
+  creategroup(event: any){
 
   }
 

@@ -5,26 +5,7 @@
     <div *ngIf="isadmin">
         <h1>admin view</h1>
         <app-userlist></app-userlist>
-        <button type="button" (click)="adduser($event) " class="btn btn-primary">adduser</button>
-
-
-    
-    <!-- group -->
         <div>
-            
-            create group
-            <br>
-            <button type="button" (click)="edit($event) " class="btn btn-primary">edit</button>
-            <button type="button" (click)="cancel($event) " class="btn btn-primary">cancel</button>
-            <br>
-            <button type="button" (click)="remove($event) " class="btn btn-primary">removegroup</button>
-            <br>
-            <form>
-                <input type="text">
-                <label for="">change name</label>
-                <br>
-                <button type="button" (click)="submit($event) " class="btn btn-primary">submit</button>
-            </form>
         </div>
     <!-- grouplist -->
         <div><br>
@@ -34,10 +15,9 @@
             create channel
             <button type="button" (click)="addchannel($event) " class="btn btn-primary">addchannel</button>
             <br>
-            <button type="button" (click)="removechannel($event) " class="btn btn-primary">removechannel</button>
             remove channel
+            <button type="button" (click)="removechannel($event) " class="btn btn-primary">removechannel</button>
             <br>
-
             <br>
             dropdown 
             users list 

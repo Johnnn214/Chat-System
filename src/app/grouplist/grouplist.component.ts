@@ -20,6 +20,18 @@ export class GrouplistComponent {
       this.newgrouplist= newgrouplist;
       console.log(this.newgrouplist);
     })
+  }
+  edit(event:any){
 
   }
+  cancel(event:any){
+
+  }
+  remove(event:any){
+
+  }
+  creategroup(event:any){
+    
+  }
+
 }
