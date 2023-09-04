@@ -18,6 +18,12 @@ export class UserlistComponent {
   Userarray:Array<User> = []
   roles:string= "user";
   show:boolean = false;
+
+  isadmin: boolean= false;
+  user:any = sessionStorage.getItem('currentUser');
+  admin:string = "super"
+  user1 = JSON.parse(this.user);
+  role!: Array<string>;
   
 
   ngOnInit(){
@@ -25,9 +31,32 @@ export class UserlistComponent {
       this.Userarray= Userarray;
      // console.log(this.Userarray);
 
- 
+     
+    if (this.user1 != null){
+      this.role = this.user1.roles;
+      if (this.role.includes(this.admin)){
+      this.isadmin = true;
+      }else{
+        this.isadmin = false;
+      }
+      console.log("user ",this.user1);
+      console.log("roles", this.role);
+      console.log(this.isadmin);
+    }
+    else {
+      console.log("role is empty")
+
+    }
     })
 
+  }
+  promotetosuper(event:any){
+    this.show =false;
+    console.log(this.show);
+  }
+  promotetogroup(event:any){
+    this.show =false;
+    console.log(this.show);
   }
   adduser(event:any){
 
