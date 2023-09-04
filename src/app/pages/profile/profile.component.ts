@@ -27,7 +27,9 @@ export class ProfileComponent {
       this.loggedin = false;
     }
     console.log(this.show)
-     
+  }
+  deleteAcount(event:any){
+    
   }
  
 }

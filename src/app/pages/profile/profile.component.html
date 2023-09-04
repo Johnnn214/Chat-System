@@ -4,8 +4,10 @@
         <div >
             <div>Username: {{currentuser.username}}</div>
             <div>Email: {{currentuser.email}}</div>
-            <div>logout</div>
-            <div>delete account</div>
+            <div *ngFor=" let roles of currentuser.roles">
+                <li>{{roles}}</li>
+            </div>
+            <button type="button" (click)="deleteAcount($event) " class="btn btn-primary">Delete Acount</button>
         </div>
     <div>
 </div>
