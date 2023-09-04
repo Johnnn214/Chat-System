@@ -1,9 +1,7 @@
 <div>
+    <h3>Group list</h3>
     <div *ngIf="isadmin">
-        <button type="button" (click)="edit($event) " class="btn btn-primary">edit</button>
-    
-        <button *ngIf="show" type="button" (click)="cancel($event) " class="btn btn-primary">cancel</button>
-        <form *ngIf="show">
+        <form >
             <input type="text">
             <button type="button" (click)="creategroup($event) " class="btn btn-primary">create group</button>
         </form>
@@ -12,9 +10,12 @@
     <div>
         <ul *ngFor="let group of newgrouplist" >
             <li>
-                <div (click)="onSelect(group)">{{group.name}} </div>
-                                
-                <button  *ngIf="show" type="button" (click)="remove($event) " class="btn btn-primary">removegroup</button> </li>
+                <button (click)="onSelect(group)" class="btn btn-primary" >{{group.name}} </button>
+                <form *ngIf="isadmin" >
+                    <input type="text">
+                    <button type="button" (click)="addUser($event) " class="btn btn-primary">add User</button>
+                </form>               
+                <button *ngIf="isadmin"  type="button" (click)="remove($event) " class="btn btn-primary">removegroup</button> </li>
         </ul>
     </div>
 </div>

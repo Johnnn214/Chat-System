@@ -16,18 +16,28 @@ export class GrouplistComponent {
   newgrouplist:Array<Group> = []; 
   show:boolean = false;
   channel?: Array<Channel>;
-
+  newgroup:Group = new Group();
   isadmin: boolean= false;
   user:any = sessionStorage.getItem('currentUser');
-  admin:string = "super"
+  super:string= "super";
+  admin:string = "group";
   user1 = JSON.parse(this.user);
   role!: Array<string>;
   ngOnInit(){
     this.groupsservice.getAllGroups().subscribe( newgrouplist => {
-      this.newgrouplist=  newgrouplist;
-      //console.log("group",this.newgrouplist);
-    })
-
+      if (this.user1.roles.includes(this.super)){
+      this.newgrouplist =  newgrouplist;
+      }else {
+       newgrouplist.forEach((group: Group) => {
+        if (group.admin.includes(this.user1.username)|
+        (this.user1.group.includes(group.name) && !this.user1.roles.includes(this.admin))){
+          this.newgroup = group;
+          console.log("admin groups",this.newgroup);
+          this.newgrouplist.push(this.newgroup);
+        }
+      })}
+        console.log("group",this.newgrouplist);
+      })
 
     if (this.user1 != null){
       this.role = this.user1.roles;
@@ -36,9 +46,9 @@ export class GrouplistComponent {
       }else{
         this.isadmin = false;
       }
-      console.log("user ",this.user1);
-      console.log("roles", this.role);
-      console.log(this.isadmin);
+      // console.log("user ",this.user1);
+      // console.log("roles", this.role);
+      // console.log(this.isadmin);
     }
     else {
       console.log("role is empty")
