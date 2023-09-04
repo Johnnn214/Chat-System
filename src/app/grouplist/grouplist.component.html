@@ -10,7 +10,7 @@
     <div>
         <ul *ngFor="let group of newgrouplist" >
             <li>
-                <button (click)="onSelect(group)" class="btn btn-primary" >{{group.name}} </button>
+                <button (click)="onSelect(group)">{{group.name}} </button>
                 <form *ngIf="isadmin" >
                     <input type="text">
                     <button type="button" (click)="addUser($event) " class="btn btn-primary">add User</button>

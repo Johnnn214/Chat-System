@@ -29,8 +29,7 @@ export class GrouplistComponent {
       this.newgrouplist =  newgrouplist;
       }else {
        newgrouplist.forEach((group: Group) => {
-        if (group.admin.includes(this.user1.username)|
-        (this.user1.group.includes(group.name) && !this.user1.roles.includes(this.admin))){
+        if (group.admin.includes(this.user1.username)||this.user1.group.includes(group.name)){
           this.newgroup = group;
           this.newgrouplist.push(this.newgroup);
         }

@@ -1,10 +1,10 @@
 {
     "users":[
     {"username": "Super","email":"super@com.au","password":"123","roles":["super", "group", "user"],"group":[], "valid":"false"},
-    {"username": "user1","email":"aaa@com.au","password":"123","roles":["user", "group"],"group":["group1", "group2"], "valid":"false"},
+    {"username": "user1","email":"aaa@com.au","password":"123","roles":["user", "group"],"group":["group1", "group2", "group3"], "valid":"false"},
     {"username": "user2","email":"bbb@com.au","password":"123","roles":["user", "group"],"group":["group3"], "valid":"false"},
     {"username": "user3","email":"b@com.au","password":"123","roles":["user"],"group":["group3"], "valid":"false"},
     {"username": "user12","email":"c@com.au","password":"123","roles":["user"],"group":["group1", "group2"], "valid":"false"},
-    {"username": "user23","email":"a@com.au","password":"123","roles":["user"],"group":["group3"], "valid":"false"}
+    {"username": "user23","email":"a@com.au","password":"123","roles":["user"],"group":["group2"], "valid":"false"}
     ]
 }     
