@@ -17,8 +17,14 @@ export class NavComponent {
   superadmin:string = "super"
   user1 = JSON.parse(this.user);
   role!: Array<string>;
+  loggedin:boolean = false;
 
   ngOnInit() {
+    if (sessionStorage.getItem('currentUser')){
+      this.loggedin = true;
+    }else{
+      this.loggedin = false;
+    }
     if (this.user1 != null){
       this.role = this.user1.roles;
       if (this.role.includes(this.superadmin)){
