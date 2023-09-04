@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserlistComponent } from 'src/app/users/userlist/userlist.component';
-import { GroupadminlistComponent } from 'src/app/users/groupadminlist/groupadminlist.component';
-import { SuperlistComponent } from 'src/app/users/superlist/superlist.component';
+import { UserlistComponent } from 'src/app/userlist/userlist.component';
+import { GroupadminlistComponent } from 'src/app/groupadminlist/groupadminlist.component';
+import { SuperlistComponent } from 'src/app/superlist/superlist.component';
 
 
 @Component({

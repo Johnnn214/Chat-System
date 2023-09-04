@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { User } from 'src/app/models/user';
-import { UsersService } from '../../services/users.service';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-superlist',

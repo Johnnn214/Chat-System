@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { User } from '../models/user';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-userslist-group-view',
@@ -10,4 +12,15 @@ import { CommonModule } from '@angular/common';
 })
 export class UserslistGroupViewComponent {
 
+  constructor(private usersService: UsersService) { }
+  Userarray:Array<User> = []
+  roles:string= "user";  
+
+  ngOnInit(){
+    this.usersService.getAllUsernames(this.roles).subscribe( Userarray => {
+      this.Userarray= Userarray;
+     // console.log(this.Userarray);
+    })
+
+  }
 }
