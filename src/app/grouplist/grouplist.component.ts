@@ -32,11 +32,10 @@ export class GrouplistComponent {
         if (group.admin.includes(this.user1.username)|
         (this.user1.group.includes(group.name) && !this.user1.roles.includes(this.admin))){
           this.newgroup = group;
-          console.log("admin groups",this.newgroup);
           this.newgrouplist.push(this.newgroup);
         }
       })}
-        console.log("group",this.newgrouplist);
+        console.log("group1",this.newgrouplist);
       })
 
     if (this.user1 != null){
@@ -57,29 +56,17 @@ export class GrouplistComponent {
 
   }
  
-  
   onSelect(group:Group){
     this.groupsservice.setcurrentgroup(group);
   }
 
-
-  edit(event:any){
-    this.show =true;
-    console.log("show",this.show);
-  }
-  cancel(event:any){
-    this.show =false;
-    console.log("show",this.show);
+  creategroup(event:any){
   }
 
   remove(event:any){
-
   }
-  creategroup(event:any){
 
-  }
   addUser(event:any){
-
   }
 
 }

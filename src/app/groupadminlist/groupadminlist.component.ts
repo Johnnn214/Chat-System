@@ -12,8 +12,7 @@ import { User } from 'src/app/models/user';
 })
 export class GroupadminlistComponent {
   constructor(private usersService: UsersService) { }
-  newuser:User = new User();
-  username:string ="a"
+
   Userarray:Array<User> = []
   roles:string= "group";
   show:boolean = false;
@@ -52,8 +51,7 @@ export class GroupadminlistComponent {
 
   }
   promotetosuper(event:any){
-    this.show =false;
-    console.log(this.show);
+
   }
 
 }

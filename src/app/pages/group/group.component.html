@@ -1,7 +1,8 @@
 
-<!-- group admin/super admin  -->
+
 <div>
-    <!-- Group list  -->
+    <!-- group admin/super admin View  -->
+    <!-- Userlist -->
     <div *ngIf="isadmin">
         <h1>admin view</h1>
         <h3>Users</h3>
@@ -12,11 +13,10 @@
             <app-channel></app-channel>
             <app-groupuser></app-groupuser>
         </div>
-
-
     </div>
+    <!-- User admin View  -->
     <div  *ngIf="!isadmin">
-        <!-- users -->
+    <!-- users -->
         <h1>User view</h1>
         <app-grouplist></app-grouplist>
         <app-channel></app-channel>
