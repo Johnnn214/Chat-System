@@ -1,0 +1,9 @@
+<div>
+    <h3>Available groups</h3>
+    <ul *ngFor="let group of newgrouplist" >
+        <li>
+            <button>{{group.name}} </button>         
+            <button type="button" (click)="apply($event) " class="btn btn-primary">apply</button> 
+        </li>
+    </ul>
+</div>
