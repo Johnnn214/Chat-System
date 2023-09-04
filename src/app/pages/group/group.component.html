@@ -3,20 +3,21 @@
     <!-- Userlist -->
     <div *ngIf="isadmin">
         <div class="row">
+            <app-grouplist-user-view class="col-sm" *ngIf="!issuperadmin"></app-grouplist-user-view>
             <app-userslist-group-view class="col-sm"></app-userslist-group-view>
             <app-grouplist class="col-sm"></app-grouplist>
             <app-channel class="col-sm"></app-channel>
             <app-groupuser class="col-sm"></app-groupuser>
         </div>
     </div>
-
-
     <!-- User admin View  -->
     <div  *ngIf="!isadmin">
     <!-- users -->
-        <h1>User view</h1>
-        <app-grouplist></app-grouplist>
-        <app-channel></app-channel>
+        <div class="row">
+            <app-grouplist-user-view class="col-sm"></app-grouplist-user-view>
+            <app-grouplist class="col-sm"></app-grouplist>
+            <app-channel class="col-sm"></app-channel>
+        </div>
     </div>
 
 </div>
