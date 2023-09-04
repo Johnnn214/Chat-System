@@ -12,5 +12,8 @@ export class UsersService {
   getAllUsernames(roles:string){
     return this.http.post<any>('http://localhost:3000/api/getusers',{roles: roles});
   }
+  getUserinGroup(group:string){
+    return this.http.post<any>('http://localhost:3000/api/getgroupsuser',{group: group});
+  }
 
 }

@@ -68,5 +68,8 @@ export class GrouplistComponent {
   creategroup(event:any){
 
   }
+  addUser(event:any){
+
+  }
 
 }

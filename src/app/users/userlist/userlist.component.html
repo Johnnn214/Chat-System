@@ -1,14 +1,8 @@
 <div>
-    <div >
-        <button type="button" (click)="edit($event) " class="btn btn-primary">edit</button>
-        <button *ngIf="show" type="button" (click)="cancel($event) " class="btn btn-primary">cancel</button>
-    </div>
-
     <ul *ngFor="let user of Userarray">
         <li>{{user.username}}
-            <div *ngIf="show">
+            <div>
                 <input type="text">
-                <button  type="button" (click)="adduser($event) " class="btn btn-primary">adduser</button>
             </div>
         </li>
     </ul>
