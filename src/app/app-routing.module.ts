@@ -6,14 +6,15 @@ import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RolesComponent } from './pages/roles/roles.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { authGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: 'chat', component: ChatComponent},
-  { path: 'group',component: GroupComponent},
-  { path: 'login',component: LoginComponent},
-  { path: 'profile',component: ProfileComponent},
-  { path: 'roles',component: RolesComponent},
-  { path: 'signup',component: SignupComponent},
+  { path: '',component: LoginComponent},
+  { path: 'chat', component: ChatComponent, canActivate: [authGuard]},
+  { path: 'group',component: GroupComponent, canActivate: [authGuard]},
+  { path: 'profile',component: ProfileComponent, canActivate: [authGuard]},
+  { path: 'roles',component: RolesComponent, canActivate: [authGuard]},
+  { path: 'signup',component: SignupComponent, canActivate: [authGuard]},
 
 ];
 

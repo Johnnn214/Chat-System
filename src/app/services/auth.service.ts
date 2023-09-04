@@ -34,7 +34,7 @@ export class AuthService {
 
   logout(event:any){
     sessionStorage.removeItem('currentUser');
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('');
 
   }
 
