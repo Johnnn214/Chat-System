@@ -4,8 +4,6 @@ import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-nav',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })

@@ -4,11 +4,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import{ HttpClientModule } from '@angular/common/http';
+import { NavComponent } from './layout/nav/nav.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
@@ -18,6 +20,6 @@ import{ HttpClientModule } from '@angular/common/http';
   
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,NavComponent]
 })
 export class AppModule { }
