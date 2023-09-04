@@ -4,42 +4,22 @@
     <!-- Group list  -->
     <div *ngIf="isadmin">
         <h1>admin view</h1>
+        <h3>Users</h3>
         <app-userlist></app-userlist>
-        <div>
-        </div>
     <!-- grouplist -->
         <div>
-            <h3>grouplist</h3> 
             <app-grouplist></app-grouplist>
-
             <app-channel></app-channel>
-          
-            <br>
-            <br>
-            dropdown 
-            users list 
-            <br>
-            remove users
+            <app-groupuser></app-groupuser>
         </div>
 
 
     </div>
-    <div>
-        <br><br>
+    <div  *ngIf="!isadmin">
         <!-- users -->
         <h1>User view</h1>
-        <br>
-        groups list 
         <app-grouplist></app-grouplist>
         <app-channel></app-channel>
-        <br>
-        join channel
-        <br>
-        apply group
-        <br>
-        leave group
-        <br>
-
     </div>
 
 </div>

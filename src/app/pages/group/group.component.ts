@@ -4,13 +4,14 @@ import { UserlistComponent } from 'src/app/users/userlist/userlist.component';
 import { GrouplistComponent } from "../../grouplist/grouplist.component";
 import { User } from 'src/app/models/user';
 import { ChannelComponent } from 'src/app/channel/channel.component';
+import { GroupuserComponent } from 'src/app/groupuser/groupuser.component';
 
 @Component({
     selector: 'app-group',
     standalone: true,
     templateUrl: './group.component.html',
     styleUrls: ['./group.component.css'],
-    imports: [CommonModule, UserlistComponent, GrouplistComponent, ChannelComponent]
+    imports: [CommonModule, UserlistComponent, GrouplistComponent, ChannelComponent, GroupuserComponent]
 })
 export class GroupComponent {
 
