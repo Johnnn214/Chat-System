@@ -5,12 +5,14 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import{ HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './layout/nav/nav.component';
+import { FooterComponent } from './layout/footer/footer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent
+    NavComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -20,6 +22,6 @@ import { NavComponent } from './layout/nav/nav.component';
   
   ],
   providers: [],
-  bootstrap: [AppComponent,NavComponent]
+  bootstrap: [AppComponent,NavComponent,FooterComponent]
 })
 export class AppModule { }
