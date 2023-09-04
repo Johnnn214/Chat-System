@@ -1,9 +1,7 @@
-<div>
+<section>
     <ul *ngFor="let user of Userarray">
         <li>{{user.username}} 
             <button *ngIf="isadmin" type="button" (click)="promotetosuper($event) " class="btn btn-primary">promote to super</button>
-
         </li>
     </ul>
-   
-</div>
+</section>
