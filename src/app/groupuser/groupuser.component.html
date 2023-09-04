@@ -1,0 +1,9 @@
+<div>
+    <h3>Users in {{group.name}}</h3>
+    <button type="button" (click)="showUsersingroup($event) " class="btn btn-primary">show users in group</button>
+    <ul *ngFor="let user of Userarray">
+        <li>{{user.username}}
+            <button type="button" (click)="removeuser($event) " class="btn btn-primary">remove user</button>
+        </li>
+    </ul>
+</div>
