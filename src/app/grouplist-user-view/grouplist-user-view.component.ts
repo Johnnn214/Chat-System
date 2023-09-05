@@ -28,11 +28,13 @@ export class GrouplistUserViewComponent {
     this.groupsservice.getAllGroups().subscribe(newgrouplist => {
       newgrouplist.forEach((group: Group) => {
         if (!this.user1.group.includes(group.name) && !group.admin.includes(this.user1.name)){
-          this.newgroup = group;
-          this.newgrouplist.push(this.newgroup);
+          this.newgrouplist.push(group);
         }
       })
         console.log("group1",this.newgrouplist);
+        // this.groupsservice.setAvailablegrouplist(this.newgrouplist);  
+        // this.currentuserarray = JSON.parse(this.groupsservice.setAvailablegrouplist() || '{}');
+        // console.log("users", this.currentuserarray);
     })
   }
 

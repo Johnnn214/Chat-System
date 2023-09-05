@@ -21,7 +21,7 @@ export class SuperlistComponent {
     this.usersService.getAllUsernames(this.roles).subscribe( Userarray => {
       this.usersService.setCurrentsuperlist(Userarray);  
       this.Userarray = JSON.parse(this.usersService.getCurrentsuperlist() || '{}');
-      console.log("users", this.Userarray);
+      console.log("super", this.Userarray);
     })
 
   }
