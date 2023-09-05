@@ -25,16 +25,23 @@ export class GrouplistComponent {
   newgroup = new Group('','',['channel1']);
   ngOnInit(){
     this.groupsservice.getAllGroups().subscribe( newgrouplist => {
-      if (this.user1.roles.includes(this.super)){
-      this.groupsservice.setCurrentgrouplist(newgrouplist);
+      if (this.user1.roles.includes(this.super)){ 
+        if (!sessionStorage.getItem('currentGrouplist')){
+        this.groupsservice.setCurrentgrouplist(this.newgrouplist);
+          }
+ 
       }else {
        newgrouplist.forEach((group: Group) => {
         if (group.admin.includes(this.user1.username)||this.user1.group.includes(group.name)){
           this.newgrouplist.push(group);
-          this.groupsservice.setCurrentgrouplist(this.newgrouplist);  
-        }
-      })}  
+          console.log(this.newgrouplist);
+        }})
+        if (!sessionStorage.getItem('currentGrouplist')){
+          this.groupsservice.setCurrentgrouplist(this.newgrouplist); 
+          } 
+    }  
     })
+      
       this.currentgrouplist = JSON.parse(this.groupsservice.getCurrentgrouplist() || '{}');
       console.log("group", this.currentgrouplist);
 
@@ -55,24 +62,28 @@ export class GrouplistComponent {
     }
 
   }
- 
   onSelect(group:Group){
     this.groupsservice.setcurrentgroup(group);
   }
-
   creategroup(newgroup:Group){
     newgroup = Object.assign({}, newgroup);
     newgroup.name = this.newgroupname;
-    newgroup.admin.push(this.user1.username);
+    if(!newgroup.admin.includes(this.user1.username)){
+      newgroup.admin.push(this.user1.username);
+    }
     this.currentgrouplist.push(newgroup);
     this.groupsservice.setCurrentgrouplist(this.currentgrouplist);
     this.newgroupname = "";
   }
-
-  remove(event:any){
+  remove(groupname:string){
+    this.currentgrouplist = this.currentgrouplist.filter((obj) => obj.name !== groupname);
+    console.log(this.currentgrouplist);
+    this.groupsservice.setCurrentgrouplist(this.currentgrouplist);
+      
   }
 
   addUser(event:any){
+
   }
 
 }
