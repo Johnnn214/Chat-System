@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Channel } from '../models/channel';
-import { Group } from '../models/group';
-import { GroupsService } from '../services/groups.service';
+import { Channel } from '../../../models/channel';
+import { Group } from '../../../models/group';
+import { GroupsService } from '../../../services/groups.service';
 
 @Component({
   selector: 'app-grouplist-user-view',
@@ -19,7 +19,7 @@ export class GrouplistUserViewComponent {
   channel?: Array<Channel>;
   newgroup:Group = new Group();
   isadmin: boolean= false;
-  user:any = sessionStorage.getItem('currentUser');
+  user:any = localStorage.getItem('currentUser');
   super:string= "super";
   admin:string = "group";
   user1 = JSON.parse(this.user);

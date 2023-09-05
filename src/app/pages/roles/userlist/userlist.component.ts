@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersService } from '../services/users.service';
+import { UsersService } from '../../../services/users.service';
 import { User } from 'src/app/models/user';
 
 @Component({
@@ -17,7 +17,7 @@ export class UserlistComponent {
   currentuserarray:Array<User> = [];
   roles:string= "user";
   isadmin: boolean= false;
-  user:any = sessionStorage.getItem('currentUser');
+  user:any = localStorage.getItem('currentUser');
   admin:string = "super"
   user1 = JSON.parse(this.user);
   role!: Array<string>;

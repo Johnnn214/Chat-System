@@ -18,7 +18,7 @@ export class GroupadminlistComponent {
   show:boolean = false;
 
   isadmin: boolean= false;
-  user:any = sessionStorage.getItem('currentUser');
+  user:any = localStorage.getItem('currentUser');
   admin:string = "super"
   user1 = JSON.parse(this.user);
   role!: Array<string>;

@@ -13,14 +13,14 @@ export class NavComponent {
 
   isadmin:boolean = false;
   issuperadmin: boolean= false;
-  user:any = sessionStorage.getItem('currentUser');
+  user:any = localStorage.getItem('currentUser');
   superadmin:string = "super"
   user1 = JSON.parse(this.user);
   role!: Array<string>;
   loggedin:boolean = false;
 
   ngOnInit() {
-    if (sessionStorage.getItem('currentUser')){
+    if (localStorage.getItem('currentUser')){
       this.loggedin = true;
     }else{
       this.loggedin = false;

@@ -14,7 +14,7 @@ export class AuthService {
 
 
   isLoggedin(){
-    if (sessionStorage.getItem('currentUser')){
+    if (localStorage.getItem('currentUser')){
       return true;
     }else{
       return false;
@@ -26,14 +26,14 @@ export class AuthService {
   }
 
   setCurrentuser(newuser:User){
-    sessionStorage.setItem('currentUser',JSON.stringify(newuser));
+    localStorage.setItem('currentUser',JSON.stringify(newuser));
   }
   getCurrentuser(){
-    return sessionStorage.getItem('currentUser');
+    return localStorage.getItem('currentUser');
   }
 
   logout(event:any){
-    sessionStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUser');
     this.router.navigateByUrl('');
 
   }

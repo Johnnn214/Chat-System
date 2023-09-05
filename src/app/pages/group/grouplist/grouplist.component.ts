@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Group } from '../models/group';
-import { GroupsService } from '../services/groups.service';
+import { Group } from '../../../models/group';
+import { GroupsService } from '../../../services/groups.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -16,7 +16,7 @@ export class GrouplistComponent {
   newgrouplist:Array<Group> = []; 
   currentgrouplist:Array<Group> = [];
   isadmin: boolean= false;
-  user:any = sessionStorage.getItem('currentUser');
+  user:any = localStorage.getItem('currentUser');
   super:string= "super";
   admin:string = "group";
   user1 = JSON.parse(this.user);
@@ -25,6 +25,7 @@ export class GrouplistComponent {
   newgroup = new Group('','',['channel1']);
   ngOnInit(){
     this.groupsservice.getAllGroups().subscribe( newgrouplist => {
+      
       if (this.user1.roles.includes(this.super)){ 
         if (!sessionStorage.getItem('currentGrouplist')){
         this.groupsservice.setCurrentgrouplist(this.newgrouplist);

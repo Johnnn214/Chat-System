@@ -21,7 +21,7 @@ export class ProfileComponent {
   ngOnInit(){
     this.currentuser = JSON.parse(this.authService.getCurrentuser() || '{}');
     console.log(this.currentuser);
-    if (sessionStorage.getItem('currentUser')){
+    if (localStorage.getItem('currentUser')){
       this.loggedin = true;
     }else{
       this.loggedin = false;

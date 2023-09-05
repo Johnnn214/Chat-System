@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { User } from '../models/user';
-import { UsersService } from '../services/users.service';
-import { GroupsService } from '../services/groups.service';
-import { Group } from '../models/group';
+import { User } from '../../../models/user';
+import { UsersService } from '../../../services/users.service';
+import { GroupsService } from '../../../services/groups.service';
+import { Group } from '../../../models/group';
 
 @Component({
   selector: 'app-groupuser',

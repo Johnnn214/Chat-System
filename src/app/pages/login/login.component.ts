@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   newuser:User = new User();
   loggedin:boolean = false;
   ngOnInit() {
-    if (sessionStorage.getItem('currentUser')){
+    if (localStorage.getItem('currentUser')){
       this.loggedin = true;
     }else{
       this.loggedin = false;

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserlistComponent } from 'src/app/userlist/userlist.component';
-import { GrouplistComponent } from "../../grouplist/grouplist.component";
+import { UserlistComponent } from 'src/app/pages/roles/userlist/userlist.component';
+import { GrouplistComponent } from "./grouplist/grouplist.component";
 import { User } from 'src/app/models/user';
-import { ChannelComponent } from 'src/app/channel/channel.component';
-import { GroupuserComponent } from 'src/app/groupuser/groupuser.component';
+import { ChannelComponent } from 'src/app/pages/group/channel/channel.component';
+import { GroupuserComponent } from 'src/app/pages/group/groupuser/groupuser.component';
 import { UserslistGroupViewComponent } from 'src/app/userslist-group-view/userslist-group-view.component';
-import { GrouplistUserViewComponent } from 'src/app/grouplist-user-view/grouplist-user-view.component';
+import { GrouplistUserViewComponent } from 'src/app/pages/group/grouplist-user-view/grouplist-user-view.component';
 
 @Component({
     selector: 'app-group',
@@ -19,7 +19,7 @@ import { GrouplistUserViewComponent } from 'src/app/grouplist-user-view/grouplis
 export class GroupComponent {
   issuperadmin:boolean = false;
   isadmin:boolean = false;
-  user:any = sessionStorage.getItem('currentUser');
+  user:any = localStorage.getItem('currentUser');
   admin:string = "group"
   superadmin:string = "super"
   user1 = JSON.parse(this.user);
