@@ -17,5 +17,24 @@ export class GroupsService {
 
   setcurrentgroup(group:Group){
     this._currentgroup.next(group)
+    sessionStorage.setItem('currentGroup',JSON.stringify(group));
   }
+  getCurrentgroup(){
+    return sessionStorage.getItem('currentGroup');
+  }
+
+  setCurrentgrouplist(grouplist:Array<Group>){
+    sessionStorage.setItem('currentGrouplist',JSON.stringify(grouplist));
+  }
+  getCurrentgrouplist(){
+    return sessionStorage.getItem('currentGrouplist');
+  }
+  setAvailablegrouplist(grouplist:Array<Group>){
+    sessionStorage.setItem('availableGrouplist',JSON.stringify(grouplist));
+  }
+  getAvailablegrouplist(){
+    return sessionStorage.getItem('availableGrouplist');
+  }
+  
+
 }

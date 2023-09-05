@@ -14,7 +14,7 @@ export class UserlistComponent {
   
   constructor(private usersService: UsersService) { }
 
-  Userarray:Array<User> = []
+  currentuserarray:Array<User> = [];
   roles:string= "user";
   isadmin: boolean= false;
   user:any = sessionStorage.getItem('currentUser');
@@ -24,7 +24,10 @@ export class UserlistComponent {
   
   ngOnInit(){
     this.usersService.getAllUsernames(this.roles).subscribe( Userarray => {
-      this.Userarray= Userarray;
+      this.usersService.setCurrentuserlist(Userarray);  
+      this.currentuserarray = JSON.parse(this.usersService.getCurrentuserlist() || '{}');
+      console.log("users", this.currentuserarray);
+
      // console.log(this.Userarray);
 
     if (this.user1 != null){

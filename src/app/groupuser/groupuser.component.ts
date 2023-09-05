@@ -30,8 +30,9 @@ export class GroupuserComponent {
   }
   showUsersingroup(event:any){
     this.usersService.getUserinGroup(this.group.name).subscribe( Userarray => {
-      this.Userarray= Userarray;
-     console.log("users",this.Userarray);
+      this.usersService.setCurrentgroupuserlist(Userarray);  
+      this.Userarray = JSON.parse(this.usersService.getCurrentgroupuserlist() || '{}');
+      console.log("users", this.Userarray);
     }) 
 
   }

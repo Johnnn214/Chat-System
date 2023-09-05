@@ -26,8 +26,10 @@ export class GroupadminlistComponent {
 
   ngOnInit(){
     this.usersService.getAllUsernames(this.roles).subscribe( Userarray => {
-      this.Userarray= Userarray;
      // console.log(this.Userarray);
+     this.usersService.setCurrentgroupadminlist(Userarray);  
+     this.Userarray = JSON.parse(this.usersService.getCurrentgroupadminlist() || '{}');
+     console.log("users", this.Userarray);
 
      
     if (this.user1 != null){

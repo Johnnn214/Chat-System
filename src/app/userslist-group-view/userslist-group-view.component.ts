@@ -17,10 +17,8 @@ export class UserslistGroupViewComponent {
   roles:string= "user";  
 
   ngOnInit(){
-    this.usersService.getAllUsernames(this.roles).subscribe( Userarray => {
-      this.Userarray= Userarray;
-     // console.log(this.Userarray);
-    })
+    this.Userarray = JSON.parse(this.usersService.getCurrentuserlist() || '{}');
+    console.log("users", this.Userarray);
 
   }
 }

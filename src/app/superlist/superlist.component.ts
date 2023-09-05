@@ -19,8 +19,9 @@ export class SuperlistComponent {
 
   ngOnInit(){
     this.usersService.getAllUsernames(this.roles).subscribe( Userarray => {
-      this.Userarray= Userarray;
-      //console.log(this.Userarray);
+      this.usersService.setCurrentsuperlist(Userarray);  
+      this.Userarray = JSON.parse(this.usersService.getCurrentsuperlist() || '{}');
+      console.log("users", this.Userarray);
     })
 
   }
