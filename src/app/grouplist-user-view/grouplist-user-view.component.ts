@@ -14,6 +14,7 @@ import { GroupsService } from '../services/groups.service';
 export class GrouplistUserViewComponent {
   constructor(private groupsservice: GroupsService) { }
   newgrouplist:Array<Group> = []; 
+  currentgrouplist:Array<Group> = [];
   show:boolean = false;
   channel?: Array<Channel>;
   newgroup:Group = new Group();
@@ -29,13 +30,12 @@ export class GrouplistUserViewComponent {
       newgrouplist.forEach((group: Group) => {
         if (!this.user1.group.includes(group.name) && !group.admin.includes(this.user1.name)){
           this.newgrouplist.push(group);
+          this.groupsservice.setAvailablegrouplist(this.newgrouplist);  
         }
       })
-        console.log("group1",this.newgrouplist);
-        // this.groupsservice.setAvailablegrouplist(this.newgrouplist);  
-        // this.currentuserarray = JSON.parse(this.groupsservice.setAvailablegrouplist() || '{}');
-        // console.log("users", this.currentuserarray);
     })
+    this.currentgrouplist = JSON.parse(this.groupsservice.getAvailablegrouplist() || '{}');
+    console.log("users", this.currentgrouplist);
   }
 
   apply(event:any){

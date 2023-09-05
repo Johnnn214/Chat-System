@@ -8,7 +8,7 @@
 
     </div>
     <div>
-        <ul *ngFor="let group of newgrouplist" >
+        <ul *ngFor="let group of currentgrouplist" >
             <li>
                 <button (click)="onSelect(group)">{{group.name}} </button>
                 <form *ngIf="isadmin" >

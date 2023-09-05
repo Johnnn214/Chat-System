@@ -14,9 +14,7 @@ import { Channel } from '../models/channel';
 export class GrouplistComponent {
   constructor(private groupsservice: GroupsService) { }
   newgrouplist:Array<Group> = []; 
-  show:boolean = false;
-  channel?: Array<Channel>;
-  newgroup:Group = new Group();
+  currentgrouplist:Array<Group> = [];
   isadmin: boolean= false;
   user:any = sessionStorage.getItem('currentUser');
   super:string= "super";
@@ -26,16 +24,17 @@ export class GrouplistComponent {
   ngOnInit(){
     this.groupsservice.getAllGroups().subscribe( newgrouplist => {
       if (this.user1.roles.includes(this.super)){
-      this.newgrouplist =  newgrouplist;
+      this.groupsservice.setCurrentgrouplist(newgrouplist);
       }else {
        newgrouplist.forEach((group: Group) => {
         if (group.admin.includes(this.user1.username)||this.user1.group.includes(group.name)){
-          this.newgroup = group;
-          this.newgrouplist.push(this.newgroup);
+          this.newgrouplist.push(group);
+          this.groupsservice.setCurrentgrouplist(this.newgrouplist);  
         }
-      })}
-        console.log("group1",this.newgrouplist);
+      })}  
       })
+      this.currentgrouplist = JSON.parse(this.groupsservice.getCurrentgrouplist() || '{}');
+      console.log("group", this.currentgrouplist);
 
     if (this.user1 != null){
       this.role = this.user1.roles;
@@ -60,6 +59,7 @@ export class GrouplistComponent {
   }
 
   creategroup(event:any){
+
   }
 
   remove(event:any){
