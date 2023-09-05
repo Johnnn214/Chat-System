@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Group } from '../models/group';
 import { GroupsService } from '../services/groups.service';
-import { Channel } from '../models/channel';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-grouplist',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './grouplist.component.html',
   styleUrls: ['./grouplist.component.css']
 })
@@ -21,9 +21,12 @@ export class GrouplistComponent {
   admin:string = "group";
   user1 = JSON.parse(this.user);
   role!: Array<string>;
+  newgroupname: string = '';
+  newgroup:Group = new Group();
   ngOnInit(){
     this.groupsservice.getAllGroups().subscribe( newgrouplist => {
       if (this.user1.roles.includes(this.super)){
+        
       this.groupsservice.setCurrentgrouplist(newgrouplist);
       }else {
        newgrouplist.forEach((group: Group) => {
@@ -32,7 +35,7 @@ export class GrouplistComponent {
           this.groupsservice.setCurrentgrouplist(this.newgrouplist);  
         }
       })}  
-      })
+    })
       this.currentgrouplist = JSON.parse(this.groupsservice.getCurrentgrouplist() || '{}');
       console.log("group", this.currentgrouplist);
 
@@ -59,7 +62,11 @@ export class GrouplistComponent {
   }
 
   creategroup(event:any){
-
+    this.newgroup.name = this.newgroupname;
+    this.currentgrouplist.push(this.newgroup);
+    console.log(this.newgroupname);
+    console.log(this.newgroup);
+    console.log(this.currentgrouplist)
   }
 
   remove(event:any){
