@@ -13,12 +13,15 @@ import { UsersService } from '../services/users.service';
 export class UserslistGroupViewComponent {
 
   constructor(private usersService: UsersService) { }
-  Userarray:Array<User> = []
-  roles:string= "user";  
+  currentuserarray:Array<User> = []
+  roles:string= "user";
 
   ngOnInit(){
-    this.Userarray = JSON.parse(this.usersService.getCurrentuserlist() || '{}');
-    console.log("users", this.Userarray);
+    this.usersService.getAllUsernames(this.roles).subscribe( Userarray => {
+      this.usersService.setCurrentuserlist(Userarray);  
+      this.currentuserarray = JSON.parse(this.usersService.getCurrentuserlist() || '{}');
+      console.log("users", this.currentuserarray);
+    })
 
   }
 }
