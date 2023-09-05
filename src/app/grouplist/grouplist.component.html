@@ -3,7 +3,7 @@
     <div *ngIf="isadmin">
         <form >
             <input type="text" [(ngModel)]="newgroupname"  name="newgroup" class="form-control" />
-            <button type="button" (click)="creategroup($event)" class="btn btn-primary">create group</button>
+            <button type="button" (click)="creategroup(newgroup)" class="btn btn-primary">create group</button>
         </form>
 
     </div>

@@ -22,11 +22,10 @@ export class GrouplistComponent {
   user1 = JSON.parse(this.user);
   role!: Array<string>;
   newgroupname: string = '';
-  newgroup:Group = new Group();
+  newgroup = new Group('','',['channel1']);
   ngOnInit(){
     this.groupsservice.getAllGroups().subscribe( newgrouplist => {
       if (this.user1.roles.includes(this.super)){
-        
       this.groupsservice.setCurrentgrouplist(newgrouplist);
       }else {
        newgrouplist.forEach((group: Group) => {
@@ -61,12 +60,13 @@ export class GrouplistComponent {
     this.groupsservice.setcurrentgroup(group);
   }
 
-  creategroup(event:any){
-    this.newgroup.name = this.newgroupname;
-    this.currentgrouplist.push(this.newgroup);
-    console.log(this.newgroupname);
-    console.log(this.newgroup);
-    console.log(this.currentgrouplist)
+  creategroup(newgroup:Group){
+    newgroup = Object.assign({}, newgroup);
+    newgroup.name = this.newgroupname;
+    newgroup.admin.push(this.user1.username);
+    this.currentgrouplist.push(newgroup);
+    this.groupsservice.setCurrentgrouplist(this.currentgrouplist);
+    this.newgroupname = "";
   }
 
   remove(event:any){
