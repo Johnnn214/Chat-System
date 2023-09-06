@@ -24,8 +24,8 @@ export class UserlistComponent {
   
   ngOnInit(){
     this.usersService.getAllUsernames(this.roles).subscribe( Userarray => {
-      this.usersService.setCurrentuserlist(Userarray);  
-      this.currentuserarray = JSON.parse(this.usersService.getCurrentuserlist() || '{}');
+      this.usersService.setuserlist(Userarray);  
+      this.currentuserarray = JSON.parse(this.usersService.getuserlist() || '{}');
       console.log("users", this.currentuserarray);
 
      // console.log(this.Userarray);

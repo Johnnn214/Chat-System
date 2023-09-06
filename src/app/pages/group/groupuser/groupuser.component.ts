@@ -30,26 +30,29 @@ export class GroupuserComponent {
   
   }
   showUsersingroup(event:any){
-    // this.usersService.getUserinGroup(this.group.name).subscribe( Userarray => {
-    //   this.usersService.setCurrentgroupuserlist(Userarray);  
-    //   this.Userarray = JSON.parse(this.usersService.getCurrentgroupuserlist() || '{}');
-    //   console.log("users", this.Userarray);
-    // }) 
     this.userarray = [];
     this.Userarray = JSON.parse(this.usersService.getCurrentuserlist() || '{}');
-    console.log(this.Userarray);
+    //console.log(this.Userarray);
     this.Userarray.forEach(user => {
       if (user.group.includes(this.group.name)){
         this.userarray.push(user);
         this.usersService.setCurrentgroupuserlist(this.userarray); 
-        this.userarray = JSON.parse(this.usersService.getCurrentgroupuserlist() || '{}');
-      }
-      
-    });
-    
-
+        
+      }})
+    this.userarray = JSON.parse(this.usersService.getCurrentgroupuserlist() || '{}');
   }
-  removeuser(event:any){
+  removeuser(username:string){
+    this.userarray.forEach(user => {
+      if(user.username == username){
+       user.group = user.group.filter(group => group !== this.group.name);
+       console.log(this.userarray);
+       this.usersService.setCurrentgroupuserlist(this.userarray);
+      }
+    
+    });
+    //this.userarray = this.userarray.filter(user => user.username !== username);
+   // console.log(this.userarray);
+    //this.usersService.setCurrentgroupadminlist(this.userarray);
 
   }
   

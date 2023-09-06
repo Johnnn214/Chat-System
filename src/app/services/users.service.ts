@@ -23,15 +23,19 @@ export class UsersService {
   getCurrentgroupuserlist(){
     return sessionStorage.getItem('currentgroupuserlist');
   }
-  removeCurrentgroupuserlist(){
-    sessionStorage.removeItem('currentgroupuserlist');
-  }
   setCurrentuserlist(userlist:Array<User>){
     sessionStorage.setItem('currentuserlist',JSON.stringify(userlist));
+  }
+  getuserlist(){
+    return sessionStorage.getItem('userlist');
+  }
+  setuserlist(userlist:Array<User>){
+    sessionStorage.setItem('userlist',JSON.stringify(userlist));
   }
   getCurrentuserlist(){
     return sessionStorage.getItem('currentuserlist');
   }
+
   setCurrentgroupadminlist(userlist:Array<User>){
     sessionStorage.setItem('currentgroupadminlist',JSON.stringify(userlist));
   }

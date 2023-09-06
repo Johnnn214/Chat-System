@@ -53,15 +53,7 @@ export class GrouplistComponent {
           console.log("admin", this.currentgrouplist); 
       }  
     })
-    this.usersService.getAllUsernames(this.roles).subscribe( Userarray => {
-      this.usersService.setCurrentuserlist(Userarray);  
-      this.currentuserarray = JSON.parse(this.usersService.getCurrentuserlist() || '{}');
-      console.log("123", this.currentuserarray);
-    })
-
-    
-      
-
+ 
     if (this.user1 != null){
       this.role = this.user1.roles;
       if (this.role.includes(this.admin)){
@@ -112,6 +104,7 @@ export class GrouplistComponent {
         this.usersService.setCurrentuserlist(this.userarray);
       }
       })
+    this.adduser = "";
   }
 
 }
