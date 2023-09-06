@@ -109,7 +109,7 @@ export class GrouplistComponent {
       if (user.username == username){
         user.group.push(groupname);
         console.log(this.userarray);
-        this.usersService.setCurrentgroupuserlist(this.userarray);
+        this.usersService.setCurrentuserlist(this.userarray);
       }
       })
   }

@@ -23,7 +23,9 @@ export class UsersService {
   getCurrentgroupuserlist(){
     return sessionStorage.getItem('currentgroupuserlist');
   }
-
+  removeCurrentgroupuserlist(){
+    sessionStorage.removeItem('currentgroupuserlist');
+  }
   setCurrentuserlist(userlist:Array<User>){
     sessionStorage.setItem('currentuserlist',JSON.stringify(userlist));
   }

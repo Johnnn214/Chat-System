@@ -30,14 +30,23 @@ export class GroupuserComponent {
   
   }
   showUsersingroup(event:any){
-    this.Userarray = JSON.parse(this.usersService.getCurrentgroupuserlist() || '{}');
+    // this.usersService.getUserinGroup(this.group.name).subscribe( Userarray => {
+    //   this.usersService.setCurrentgroupuserlist(Userarray);  
+    //   this.Userarray = JSON.parse(this.usersService.getCurrentgroupuserlist() || '{}');
+    //   console.log("users", this.Userarray);
+    // }) 
+    this.userarray = [];
+    this.Userarray = JSON.parse(this.usersService.getCurrentuserlist() || '{}');
+    console.log(this.Userarray);
     this.Userarray.forEach(user => {
       if (user.group.includes(this.group.name)){
         this.userarray.push(user);
         this.usersService.setCurrentgroupuserlist(this.userarray); 
         this.userarray = JSON.parse(this.usersService.getCurrentgroupuserlist() || '{}');
-      }})
-      this.userarray = JSON.parse(this.usersService.getCurrentgroupuserlist() || '{}');
+      }
+      
+    });
+    
 
   }
   removeuser(event:any){
