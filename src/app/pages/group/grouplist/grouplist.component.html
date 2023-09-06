@@ -12,8 +12,8 @@
             <li>
                 <button (click)="onSelect(group)">{{group.name}} </button>
                 <form *ngIf="isadmin" >
-                    <input type="text">
-                    <button type="button" (click)="addUser($event) " class="btn btn-primary">add User</button>
+                    <input type="text" [(ngModel)]="adduser"  name="newgroup" class="form-control" />
+                    <button type="button" (click)="addUser(adduser,group.name) " class="btn btn-primary">add User</button>
                 </form>               
                 <button *ngIf="isadmin"  type="button" (click)="remove(group.name) " class="btn btn-primary">removegroup</button> </li>
         </ul>

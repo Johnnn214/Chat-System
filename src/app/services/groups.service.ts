@@ -14,21 +14,31 @@ export class GroupsService {
   getAllGroups(){
     return this.http.post<any>('http://localhost:3000/api/getgroups',{});
   }
-
+  setallgroup(grouplist:Array<Group>){
+    localStorage.setItem('allGroup',JSON.stringify(grouplist));
+  }
+  getallgroup(){
+    return localStorage.getItem('allgroup');
+  }
+  
   setcurrentgroup(group:Group){
     this._currentgroup.next(group)
     sessionStorage.setItem('currentGroup',JSON.stringify(group));
   }
-  getCurrentgroup(){
-    return sessionStorage.getItem('currentGroup');
+
+  setadmingrouplist(grouplist:Array<Group>){
+    sessionStorage.setItem('adminGrouplist',JSON.stringify(grouplist));
+  }
+  getadmingrouplist(){
+    return sessionStorage.getItem('adminGrouplist');
+  }
+  setsupergrouplist(grouplist:Array<Group>){
+    sessionStorage.setItem('superGrouplist',JSON.stringify(grouplist));
+  }
+  getsupergrouplist(){
+    return sessionStorage.getItem('superGrouplist');
   }
 
-  setCurrentgrouplist(grouplist:Array<Group>){
-    sessionStorage.setItem('currentGrouplist',JSON.stringify(grouplist));
-  }
-  getCurrentgrouplist(){
-    return sessionStorage.getItem('currentGrouplist');
-  }
   setAvailablegrouplist(grouplist:Array<Group>){
     sessionStorage.setItem('availableGrouplist',JSON.stringify(grouplist));
   }
