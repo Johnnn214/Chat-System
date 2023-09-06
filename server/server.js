@@ -26,4 +26,3 @@ app.post('/api/getusers' ,require('./routes/getusers'));
 
 app.post('/api/getgroups' ,require('./routes/getgroups'));
 
-app.post('/api/getgroupsuser' ,require('./routes/getgroupuser'));
