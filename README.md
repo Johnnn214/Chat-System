@@ -53,20 +53,31 @@ channel (channel where the message was sent): string
 ## REST- API
 Route:
 #### Login-
-Method: POST 
+Method: POST  
+
 Description: Handles user authentication by verifying credentials 
+
 Parameters: JSON payload containing email, password in the request body.
+
 Return Value: return the current user
 #### Getuser
 Method: POST
+
 Description: gets all users based on what role they have
+
 Parameters: JSON payload containing roles in the request body
+
 Return Value:  array of user containing all user info except for password.
+
 #### Getgroup
 Method: POST
+
 Description: retrieves all groups
+
 Parameters:  None
+
 Return Value: array of  groups
+
 ## Angular Architecture
 #### Components:
 appComponents is the container of all the pages/contents. The page is split up into 6 parts chat, group, login, profile, roles and signup. The group component is slip up into channel, grouplist, grouplistuserview, groupuser. The group component is responsible for showing the group list, the available group that can be applied and the user in one group. The role component is split up into groupadminlist, superlist and userlist and it is also responsible for promoting users to admin or super admin. The login component is where the user can login. The profile components is where the user and see their info (email, username) and logout and delete their account. 
