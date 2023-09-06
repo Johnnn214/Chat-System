@@ -10,27 +10,46 @@ The approach that I took is to create a remote repo in GitHub. After creating th
 ### Entities:
 ####  User:
 id: string
+
 username: string
+
 email: string 
+
 password: string
+
 roles (Array of roles: ["Super Admin", "Group Admin", "User"]: array<string>
+
 groups (Array of group the user is a member of): array<string>
+
 #### Group:
 Id: string
+
 name: string
+
 admins (Array of user who are group admins): array<string>
+
 channels (Array of channel objects): array<channel>
+
 #### Channel:
 id (unique identifier) : string
+
 name: string
+
 groupId (ID of the parent group): string
+
 users (Array of user who are members of the channel): array<string>
+
 messages (Array of message objects)<array>
+
 #### Message:
-id: string
+id: string 
+
 text: string
+
 sender (user who sent the message): string
+
 channel (channel where the message was sent): string
+
 ## REST- API
 Route:
 #### Login-
