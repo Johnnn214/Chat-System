@@ -23,11 +23,7 @@ export class LoginComponent implements OnInit {
   newuser:User = new User();
   loggedin:boolean = false;
   ngOnInit() {
-    if (localStorage.getItem('currentUser')){
-      this.loggedin = true;
-    }else{
-      this.loggedin = false;
-    }
+    this.loggedin = this.authService.isLoggedin();
   }
 
   signin(event:any){
@@ -38,7 +34,8 @@ export class LoginComponent implements OnInit {
         (data)=>{
           if (data.valid == true){
             this.newuser = new User(data.username, data.email,data.id, data.password,
-               data.roles, data.group, data.valid)
+               data.roles, data.group, data.valid);
+            console.log(this.newuser);
             this.authService.setCurrentuser(this.newuser);
             this.router.navigate(['/profile']);
           }else{

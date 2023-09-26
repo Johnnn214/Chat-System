@@ -4,7 +4,6 @@ import { ChatComponent } from './pages/chat/chat.component';
 import { GroupComponent } from './pages/group/group.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { RolesComponent } from './pages/roles/roles.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { authGuard } from './auth.guard';
 
@@ -13,7 +12,6 @@ const routes: Routes = [
   { path: 'chat', component: ChatComponent, canActivate: [authGuard]},
   { path: 'group',component: GroupComponent, canActivate: [authGuard]},
   { path: 'profile',component: ProfileComponent, canActivate: [authGuard]},
-  { path: 'roles',component: RolesComponent, canActivate: [authGuard]},
   { path: 'signup',component: SignupComponent},
 
 ];

@@ -11,9 +11,25 @@ export class GroupsService {
   constructor(private http: HttpClient) { }
   private _currentgroup = new BehaviorSubject<Group>(<Group>{})
   readonly currentgroup$ = this._currentgroup.asObservable();
-  getAllGroups(){
-    return this.http.post<any>('http://localhost:3000/api/getgroups',{});
+
+  private baseUrl = 'http://localhost:3000'
+  getAllGroups(): Observable<Group[]> {
+    return this.http.get<Group[]>(`${this.baseUrl}/api/getgroups`);
   }
+
+  getGroupById(groupId: string): Observable<Group> {
+    return this.http.get<Group>(`${this.baseUrl}/api/getgroups${groupId}`);
+  }
+
+  createGroup(group: Group): Observable<Group> {
+    return this.http.post<Group>(`${this.baseUrl}/api/getgroups`, group);
+  }
+
+
+
+
+
+  
   setallgroup(grouplist:Array<Group>){
     localStorage.setItem('allGroup',JSON.stringify(grouplist));
   }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/user';
 import{ HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
 
 
 
@@ -10,8 +11,13 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
+  private baseUrl = 'http://localhost:3000'
   constructor(private http: HttpClient, private router: Router) { }
 
+  login(email: string, password: string): Observable<User> {
+    const loginData = { email: email, password: password };
+    return this.http.post<User>(`${this.baseUrl}/api/auth`, loginData);
+  }
 
   isLoggedin(){
     if (localStorage.getItem('currentUser')){
@@ -19,10 +25,6 @@ export class AuthService {
     }else{
       return false;
     }
-  }
-
-  login(email:string,password:string){
-    return this.http.post<User>('http://localhost:3000/api/auth', { email: email , password: password});
   }
 
   setCurrentuser(newuser:User){

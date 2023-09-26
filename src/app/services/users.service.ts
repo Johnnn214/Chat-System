@@ -2,21 +2,34 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Group } from '../models/group';
 import { User } from '../models/user';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
-  constructor(private http: HttpClient) { }
+  private baseUrl = 'http://localhost:3000'; // Update with your server route for users
+
+  constructor(private http: HttpClient) {}
+
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/api/getusers`);
+  }
+
+  // getUserinGroup(group: string): Observable<User[]> {
+  //   return this.http.get<User[]>(`${this.baseUrl}/group/${group}`);
+  // }
 
 
-  getAllUsernames(roles:string){
-    return this.http.post<any>('http://localhost:3000/api/getusers',{roles: roles});
-  }
-  getUserinGroup(group:string){
-    return this.http.post<any>('http://localhost:3000/api/getgroupsuser',{group: group});
-  }
+
+
+
+
+
+
+
+
   setCurrentgroupuserlist(userlist:Array<User>){
     sessionStorage.setItem('currentgroupuserlist',JSON.stringify(userlist));
   }

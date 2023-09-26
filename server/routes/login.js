@@ -1,23 +1,14 @@
-var fs = require('fs');
+module.exports = async function (app,db) {
 
-module.exports = function (req, res) {
-        if (!req.body) {
-            return res.sendStatus(400)
-        }
-        fs.readFile('../server/data/user.json','utf8',(err,data)=>{
-            if (err) {
-                console.error(err)
-                return
-            }
-
-            try{
-            console.log(data);
-            let users = JSON.parse(data);
-            users = users.users;
-            console.log(users);
-              
+    app.post('/api/auth', async (req, res) => {     
+        try {
+            const usersCollection = db.collection('users');
+            const users = await usersCollection.find({}).toArray();
+            //console.log(users);
+            const email = req.body.email;
+            const password = req.body.password;     
             var customer = {};
-    
+            customer.id;
             customer.valid = false;
             customer.email = '';
             customer.username = '';
@@ -25,7 +16,8 @@ module.exports = function (req, res) {
             customer.group = [];
     
             for (let i = 0; i < users.length; i++) {
-                if (req.body.email == users[i].email && req.body.password == users[i].password) {
+                if (email == users[i].email && password == users[i].password) {
+                    customer.id = users[i]._id;
                     customer.valid = true;
                     customer.email = users[i].email;
                     customer.username = users[i].username;
@@ -34,12 +26,11 @@ module.exports = function (req, res) {
                 }
             }
             res.send(customer);
-            console.log(customer);
-            
-            }catch(err){
-              console.log("Error pasing the userdata");
-            }
-           })
-    
+            //console.log(customer);
 
-}
+        } catch (error) {
+          console.error('Error querying the database:', error);
+          res.sendStatus(500); // Handle the error appropriately
+        }
+      });
+    }

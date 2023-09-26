@@ -83,6 +83,7 @@ export class GrouplistComponent {
     }
     this.currentgrouplist.push(newgroup);
     this.groupsservice.setadmingrouplist(this.currentgrouplist);
+
     this.groupsservice.setsupergrouplist(this.currentgrouplist);
     this.newgroupname = "";
   }
