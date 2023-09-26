@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Group } from '../../../models/group';
 import { GroupsService } from '../../../services/groups.service';
 import { FormsModule } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { UsersService } from 'src/app/services/users.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-grouplist',
@@ -13,99 +14,67 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './grouplist.component.html',
   styleUrls: ['./grouplist.component.css']
 })
-export class GrouplistComponent {
- 
-  constructor(private groupsservice: GroupsService,private usersService: UsersService) { }
-  newgrouplist:Array<Group> = []; 
-  currentgrouplist:Array<Group> = [];
-  isadmin: boolean= false;
-  user:any = localStorage.getItem('currentUser');
-  super:string= "super";
-  admin:string = "group";
-  user1 = JSON.parse(this.user);
-  role!: Array<string>;
+export class GrouplistComponent implements OnInit {
   newgroupname: string = '';
-  newgroup = new Group('','',['channel1']);
-  adduser:string = "";
-  userarray!:Array<User>;
-  groupuserarray!:Array<User>;
-  roles:string = "user";
-  currentuserarray!:Array<User>;
-  ngOnInit(){
-    this.groupsservice.getAllGroups().subscribe( newgrouplist => {
-      this.groupsservice.setallgroup(newgrouplist);
-      if (this.user1.roles.includes(this.super)){ 
-        if (!sessionStorage.getItem('superGrouplist')){
-        this.groupsservice.setsupergrouplist(newgrouplist);
-        }
-        this.currentgrouplist = JSON.parse(this.groupsservice.getsupergrouplist() || '{}');
-        console.log("super", this.currentgrouplist);
-      }else {
-       newgrouplist.forEach((group: Group) => {
-        if (group.admin.includes(this.user1.username)||this.user1.group.includes(group.name)){
-          this.newgrouplist.push(group);
-          console.log(this.newgrouplist);
-        }})
-        if (!sessionStorage.getItem('adminGrouplist')){
-          this.groupsservice.setadmingrouplist(this.newgrouplist); 
-          } 
-          this.currentgrouplist = JSON.parse(this.groupsservice.getadmingrouplist() || '{}');
-          console.log("admin", this.currentgrouplist); 
-      }  
-    })
- 
-    if (this.user1 != null){
-      this.role = this.user1.roles;
-      if (this.role.includes(this.admin)){
-      this.isadmin = true;
-      }else{
-        this.isadmin = false;
+  currentgrouplist: Group[] = [];
+  adduser: string = '';
+  currentUser!: any;
+
+  constructor(
+    private groupsService: GroupsService,
+    private authService: AuthService
+  ) {}
+
+  loadgroup(){
+    if (this.currentUser) {
+      if (this.currentUser.roles && this.currentUser.roles.includes('super')) {
+        // Fetch super groups
+        this.groupsService.getAllGroups().subscribe((groups) => {
+          this.currentgrouplist = groups;
+          console.log("allgroups",this.currentgrouplist);
+        });
+      } else if (this.currentUser.roles && this.currentUser.roles.includes('group')) {
+        // Fetch admin groups based on the current user's ID
+        this.groupsService.getAdminGroups(this.currentUser.username).subscribe((groups) => {
+          this.currentgrouplist = groups;
+          console.log("admingroup",this.currentgrouplist);
+        });
       }
-      // console.log("user ",this.user1);
-      // console.log("roles", this.role);
-      // console.log(this.isadmin);
     }
-    else {
-      console.log("role is empty")
-
-    }
+  }
+  ngOnInit() {
+    // Check if currentUser is defined before accessing its properties
+    this.currentUser = this.authService.getCurrentuser();
+    this.currentUser = JSON.parse(this.currentUser);
+    this.loadgroup();
 
   }
-
-  onSelect(group:Group){
-    this.groupsservice.setcurrentgroup(group);
-  }
-  creategroup(newgroup:Group){
-    newgroup = Object.assign({}, newgroup);
-    newgroup.name = this.newgroupname;
-    if(!newgroup.admin.includes(this.user1.username)){
-      newgroup.admin.push(this.user1.username);
-    }
-    this.currentgrouplist.push(newgroup);
-    this.groupsservice.setadmingrouplist(this.currentgrouplist);
-
-    this.groupsservice.setsupergrouplist(this.currentgrouplist);
-    this.newgroupname = "";
+  onSelect(group: Group) {
+    // Implement your logic when a group is selected
   }
 
-  remove(groupname:string){
-    this.currentgrouplist = this.currentgrouplist.filter((obj) => obj.name !== groupname);
-    console.log(this.currentgrouplist);
-    this.groupsservice.setadmingrouplist(this.currentgrouplist);
-    this.groupsservice.setsupergrouplist(this.currentgrouplist);
-      
+  createGroup() {
+    // Implement your logic to create a group
+    const newGroup: Group = {
+      name: this.newgroupname,
+      admins: [this.currentUser?.username],
+      channel: [],
+    };
+    this.groupsService.createGroup(newGroup).subscribe((createdGroup) => {
+      this.currentgrouplist.push(createdGroup);
+    });
+    this.loadgroup();
+    this.newgroupname = ""; // Clear the input field
   }
 
-  addUser(username:string, groupname:string){
-    this.userarray = JSON.parse(this.usersService.getCurrentuserlist() || '{}');
-    this.userarray.forEach(user => {
-      if (user.username == username){
-        user.group.push(groupname);
-        console.log(this.userarray);
-        this.usersService.setCurrentuserlist(this.userarray);
-      }
-      })
-    this.adduser = "";
+  remove(group: any) {
+    // Implement your logic to delete a group
+    this.groupsService.deleteGroup(group._id).subscribe(() => {
+      this.loadgroup();
+    });
   }
 
+  addUser() {
+    // Implement your logic to add a user to a group
+  }
 }

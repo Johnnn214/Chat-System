@@ -21,8 +21,14 @@ async function main() {
       console.log('Connected to MongoDB');
 
       require('./routes/login.js')(app,db)
+    
       require('./routes/getusers.js')(app,db);
+
+      require('./routes/creategroup.js')(app,db);
+      require('./routes/deletegroup.js')(app,db);
+      require('./routes/getadmingroups.js')(app,db);
       require('./routes/getgroups.js')(app,db);
+
       require('./listen.js')(http,PORT);
       
   

@@ -1,22 +1,22 @@
 <div>
     <h3>Group list</h3>
-    <div *ngIf="isadmin">
-        <form >
-            <input type="text" [(ngModel)]="newgroupname"  name="newgroup" class="form-control" />
-            <button type="button" (click)="creategroup(newgroup)" class="btn btn-primary">create group</button>
-        </form>
-
+    <div>
+      <form>
+        <input type="text" [(ngModel)]="newgroupname" name="newgroup" class="form-control" />
+        <button type="button" (click)="createGroup()" class="btn btn-primary">Create Group</button>
+      </form>
     </div>
     <div>
-        <ul *ngFor="let group of currentgrouplist" >
-            <li>
-                <button (click)="onSelect(group)">{{group.name}} </button>
-                <form *ngIf="isadmin" >
-                    <input type="text" [(ngModel)]="adduser"  name="newgroup" class="form-control" />
-                    <button type="button" (click)="addUser(adduser,group.name) " class="btn btn-primary">add User</button>
-                </form>               
-                <button *ngIf="isadmin"  type="button" (click)="remove(group.name) " class="btn btn-primary">removegroup</button> </li>
-        </ul>
+      <ul>
+        <li *ngFor="let group of currentgrouplist">
+          <button (click)="onSelect(group)">{{ group.name }}</button>
+          <form>
+            <input type="text" [(ngModel)]="adduser" name="newuser" class="form-control" />
+            <button type="button" (click)="addUser()" class="btn btn-primary">Add User</button>
+          </form>
+          <button type="button" (click)="remove(group)" class="btn btn-danger">Remove Group</button>
+        </li>
+      </ul>
     </div>
-</div>
+  </div>
 

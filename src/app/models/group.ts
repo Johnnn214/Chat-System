@@ -2,17 +2,16 @@ import { Channel } from '../models/channel';
 
 export class Group {
     name:string;
-    id:string;
+
     channel: Array<string>;
-    admin:Array<string>
+    admins:Array<string>
 
 
-    constructor(name:string='', id:string="",channel:Array<string>=[], admin:Array<string>=[]){
+    constructor(name:string='',channel:Array<string>=[], admins:Array<string>=[]){
        
         this.name = name;
-        this.id = id;
         this.channel = channel;
-        this.admin =admin;
+        this.admins = admins;
     
     }
     

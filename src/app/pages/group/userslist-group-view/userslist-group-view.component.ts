@@ -21,6 +21,5 @@ export class UserslistGroupViewComponent {
       console.log("users",this.currentuserarray);
     })
     
-
   }
 }

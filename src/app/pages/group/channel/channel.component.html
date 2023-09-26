@@ -1,18 +1,18 @@
 <div>
     <div>
         <h3>Channels</h3>
-        <div *ngIf="isadmin">
+        <div>
             <form action="">
                 <input type="text">
-                <button  type="button" (click)="addchannel($event) " class="btn btn-primary">addchannel</button>
+                <button  type="button" class="btn btn-primary">addchannel</button>
             </form>
            <br><br>
         </div>
         <div>
-            <ul *ngFor="let channel of group.channel">
-                <li>{{channel}}  
-                    <button type="button" (click)="joinchannel($event) " class="btn btn-primary">joinchannel</button>
-                    <button *ngIf="isadmin" type="button" (click)="removechannel($event) " class="btn btn-primary">removechannel</button>
+            <ul *ngFor="let any of group">
+                <li>{{any}}  
+                    <button type="button" class="btn btn-primary">joinchannel</button>
+                    <button  type="button"  class="btn btn-primary">removechannel</button>
                 </li>
             </ul>
         </div>
