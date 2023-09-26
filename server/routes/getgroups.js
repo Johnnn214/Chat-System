@@ -1,6 +1,6 @@
 module.exports = async function (app,db) {
 
-    app.get('/api/getgroups', async (req, res) => {
+    app.get('/api/groups', async (req, res) => {
         try {
             const collection = db.collection('groups');
             const groups = await collection.find({}).toArray();

@@ -35,10 +35,6 @@ id (unique identifier) : string
 
 name: string
 
-groupId (ID of the parent group): string
-
-users (Array of user who are members of the channel): array<string>
-
 messages (Array of message objects)<array>
 
 #### Message:

@@ -29,6 +29,8 @@ async function main() {
       require('./routes/getadmingroups.js')(app,db);
       require('./routes/getgroups.js')(app,db);
 
+      require('./routes/createchannel.js')(app,db);
+
       require('./listen.js')(http,PORT);
       
   

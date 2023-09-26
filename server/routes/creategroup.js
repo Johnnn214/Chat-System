@@ -1,5 +1,5 @@
 module.exports = async function (app,db) {
-    app.post('/api/getgroups', async (req, res) => {
+    app.post('/api/groups', async (req, res) => {
         try {
           const collection = db.collection('groups');
           const newGroup = req.body;

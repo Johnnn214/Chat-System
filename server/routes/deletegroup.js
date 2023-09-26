@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb');
 module.exports = async function (app, db) {
     
-    app.delete('/api/getgroups/:groupId', async (req, res) => {
+    app.delete('/api/groups/:groupId', async (req, res) => {
         try {
         const collection = db.collection('groups');
         const groupId = req.params.groupId;

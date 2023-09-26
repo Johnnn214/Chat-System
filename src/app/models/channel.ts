@@ -1,14 +1,13 @@
-import { User } from "./user";
 
 export class Channel {
 
-    chat:string;
-    user:User;
+    msg: Array<string>;
+    name:string;
 
-    constructor(chat:string = '', user:User= new User()){
+    constructor(msg:Array<string> = [], name:string = ''){
 
-        this.chat = chat;
-        this.user = user;
+        this.msg = msg;
+        this.name = name;
 
     
     }

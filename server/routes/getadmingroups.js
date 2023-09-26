@@ -1,6 +1,6 @@
 module.exports = async function (app,db) {
 
-    app.get('/api/getgroups/admin/:username', async (req, res) => {
+    app.get('/api/groups/admin/:username', async (req, res) => {
         try {
             const username = req.params.username;
             const groupsCollection = db.collection('groups');

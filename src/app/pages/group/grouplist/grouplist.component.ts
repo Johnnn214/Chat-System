@@ -49,8 +49,9 @@ export class GrouplistComponent implements OnInit {
     this.loadgroup();
 
   }
+  group!:any;
   onSelect(group: Group) {
-    // Implement your logic when a group is selected
+    this.group = this.groupsService.setcurrentgroup(group);
   }
 
   createGroup() {
