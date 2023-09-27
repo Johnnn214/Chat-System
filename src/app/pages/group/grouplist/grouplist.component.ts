@@ -36,10 +36,19 @@ export class GrouplistComponent implements OnInit {
           console.log("allgroups",this.currentgrouplist);
         });
       } else if (this.currentUser.roles && this.currentUser.roles.includes('group')) {
-        // Fetch admin groups based on the current user's ID
-        this.groupsService.getAdminGroups(this.currentUser._id).subscribe((groups) => {
+          // Fetch groups where the admin (current user) is a member
+        this.groupsService.getUserGroups(this.currentUser.id).subscribe((userGroups) => {
+        // Fetch groups that the admin has created
+          this.groupsService.getAdminGroups(this.currentUser.id).subscribe((adminGroups) => {
+        // Merge the two arrays of groups
+            this.currentgrouplist = [...userGroups, ...adminGroups];
+            console.log("groups where admin is a member and created groups", this.currentgrouplist);
+          });
+        });
+      }else if (this.currentUser.roles && this.currentUser.roles.includes('user')) {
+        this.groupsService.getUserGroups(this.currentUser.id).subscribe((groups) => {
           this.currentgrouplist = groups;
-          console.log("admingroup",this.currentgrouplist);
+          console.log("usergroups", this.currentgrouplist);
         });
       }
     }

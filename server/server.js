@@ -34,6 +34,9 @@ async function main() {
       require('./routes/deletegroup.js')(app,db);
       require('./routes/getadmingroups.js')(app,db);
       require('./routes/getgroups.js')(app,db);
+      require('./routes/getusergroups.js')(app,db);
+      require('./routes/getavailablegroup.js')(app,db);
+      
 
       require('./routes/createchannel.js')(app,db);
       require('./routes/getchannel.js')(app,db);

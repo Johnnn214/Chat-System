@@ -24,6 +24,14 @@ export class GroupsService {
     return this.http.get<Group[]>(`${this.baseUrl}/admin/${id}`);
   }
 
+  getUserGroups(id: string): Observable<Group[]> {
+    return this.http.get<Group[]>(`${this.baseUrl}/users/${id}`);
+  }
+
+  getOtherGroups(userId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/other-groups/${userId}`);
+  }
+
   createGroup(group: Group): Observable<Group> {
     return this.http.post<Group>(`${this.baseUrl}`, group);
   }
