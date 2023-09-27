@@ -36,10 +36,14 @@ export class GroupsService {
     this._currentgroup.next(group);
   }
 
-  
+
   addChannelToGroup(groupId: string, channel: Channel): Observable<Channel> {
-    const url = `${this.baseUrl}/${groupId}/channels`;
+    const url = `${this.baseUrl}/${groupId}/channel`;
     return this.http.post<Channel>(url, channel);
+  }
+
+  getChannelsForGroup(groupId: string): Observable<any[]> {
+    return this.http.get<Channel[]>(`${this.baseUrl}/${groupId}/channels`);
   }
 
   // Remove a channel from the current group

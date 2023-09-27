@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb'); // Import ObjectId for converting IDs
 
 module.exports = async function (app, db) {
-  app.post('/api/groups/:id/channels', async (req, res) => {
+  app.post('/api/groups/:id/channel', async (req, res) => {
     try {
       const channelsCollection = db.collection('channels');
       const { name } = req.body; // Destructure name from req.body

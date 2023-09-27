@@ -30,6 +30,7 @@ async function main() {
       require('./routes/getgroups.js')(app,db);
 
       require('./routes/createchannel.js')(app,db);
+      require('./routes/getchannel.js')(app,db);
 
       require('./listen.js')(http,PORT);
       

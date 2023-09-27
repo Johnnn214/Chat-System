@@ -5,6 +5,7 @@ module.exports = async function (app,db) {
           const newGroup = req.body;
           console.log(req.body);
           const result = await collection.insertOne(newGroup);
+          
           console.log('Insert result:', result);
         } catch (error) {
           console.error('Error adding product:', error);

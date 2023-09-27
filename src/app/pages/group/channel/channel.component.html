@@ -1,6 +1,6 @@
 <div>
     <div>
-        <h3>Channels</h3>
+        <h3>{{group.name}} <br> Channels</h3>
         <div>
             <form (submit)="addChannel()">
                 <input type="text" [(ngModel)]="newchannel.name" name="channelName" placeholder="Enter channel name">
@@ -9,8 +9,8 @@
             <br><br>
         </div>
         <div>
-            <ul *ngFor="let channel of group.channel">
-                <li>{{ channel}}
+            <ul *ngFor="let channel of channels">
+                <li>{{ channel.name}}
                     <button type="button" class="btn btn-primary" (click)="joinChannel(channel.name)">Join Channel</button>
                     <button type="button" class="btn btn-primary" (click)="removeChannel(channel.name)">Remove Channel</button>
                 </li>

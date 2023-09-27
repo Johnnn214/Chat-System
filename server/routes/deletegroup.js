@@ -1,6 +1,7 @@
 const { ObjectId } = require('mongodb');
+
 module.exports = async function (app, db) {
-    
+
     app.delete('/api/groups/:groupId', async (req, res) => {
         try {
         const collection = db.collection('groups');
@@ -11,7 +12,6 @@ module.exports = async function (app, db) {
     
         const result = await collection.deleteOne({ _id: objectId });
         console.log('removed successfully', result);
-        res.send();
         
         } catch (error) {
         console.error('Error deleting product:', error);

@@ -59,7 +59,6 @@ export class GrouplistComponent implements OnInit {
     const newGroup: Group = {
       name: this.newgroupname,
       admins: [this.currentUser?.username],
-      channel: [],
     };
     this.groupsService.createGroup(newGroup).subscribe((createdGroup) => {
       this.currentgrouplist.push(createdGroup);
@@ -69,10 +68,9 @@ export class GrouplistComponent implements OnInit {
   }
 
   remove(group: any) {
-    // Implement your logic to delete a group
     this.groupsService.deleteGroup(group._id).subscribe(() => {
-      this.loadgroup();
     });
+    this.loadgroup();
   }
 
   addUser() {

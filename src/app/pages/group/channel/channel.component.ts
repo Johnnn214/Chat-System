@@ -14,7 +14,8 @@ import { FormsModule } from '@angular/forms';
 export class ChannelComponent implements OnInit {
   group: any = <any>{};
   newchannel: Channel = new Channel();
-
+  channels: any[] = [];
+  groupId:string = "";
   constructor(private groupsservice: GroupsService) { }
 
   ngOnInit(){
@@ -22,10 +23,20 @@ export class ChannelComponent implements OnInit {
       next: (data) => {
         this.group = data;
         console.log("current group",this.group);
+        this.groupId = this.group._id;
+        //console.log(this.groupId);
+        this.loadChannels();
+      }
+    }); 
+  }
+  loadChannels() {
+    this.groupsservice.getChannelsForGroup(this.groupId).subscribe(
+      {next: (data) => {
+      this.channels = data;
+      console.log(this.channels);
       }
     });
   }
-
   addChannel() {
     // Implement logic to add a channel to the current group
     this.groupsservice.addChannelToGroup(this.group._id, this.newchannel).subscribe((result) => {
@@ -33,12 +44,13 @@ export class ChannelComponent implements OnInit {
       this.group.channels.push(result);
       this.newchannel.name = ''; // Clear the input field
     });
-
+    this.loadChannels();
   }
 
   removeChannel(channelId: string) {
     // Implement logic to remove a channel from the current group
-    this.groupsservice.removeChannelFromGroup(this.group._id, channelId).subscribe(() => {
+    this.groupsservice.removeChannelFromGroup(this.group._id, channelId).subscribe((result) => {
+      console.log('Response from API:', result);
       // Handle the result (e.g., remove the channel from the group object)
       this.group.channels = this.group.channels.filter((channel: { _id: string; }) => channel._id !== channelId);
     });
