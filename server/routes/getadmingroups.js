@@ -2,7 +2,7 @@ module.exports = async function (app,db) {
 
     app.get('/api/groups/admin/:id', async (req, res) => {
         try {
-            const username = req.params.id;
+            const id = req.params.id;
             const groupsCollection = db.collection('groups');
             const adminGroups = await groupsCollection.find({ admins: id }).toArray();
             res.send(JSON.stringify(adminGroups));
