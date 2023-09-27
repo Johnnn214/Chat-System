@@ -1,20 +1,19 @@
+
 <div>
+    <h3>{{group.name}} <br> Channels</h3>
     <div>
-        <h3>{{group.name}} <br> Channels</h3>
-        <div>
-            <form (submit)="addChannel()">
-                <input type="text" [(ngModel)]="newchannel.name" name="channelName" placeholder="Enter channel name">
-                <button type="submit" class="btn btn-primary">Add Channel</button>
-            </form>
-            <br><br>
-        </div>
-        <div>
-            <ul *ngFor="let channel of channels">
-                <li>{{ channel.name}}
-                    <button type="button" class="btn btn-primary" (click)="joinChannel(channel.name)">Join Channel</button>
-                    <button type="button" class="btn btn-primary" (click)="removeChannel(channel._id)">Remove Channel</button>
-                </li>
-            </ul>
-        </div>
+        <form (submit)="addChannel()">
+            <input type="text" [(ngModel)]="newchannel.name" name="channelName" placeholder="Enter channel name">
+            <button type="submit" class="btn btn-primary">Add Channel</button>
+        </form>
+        <br><br>
+    </div>
+    <div>
+        <ul *ngFor="let channel of channels">
+            <li>{{ channel.name}}
+                <button type="button" class="btn btn-primary" (click)="joinChannel(channel.name)">Join Channel</button>
+                <button type="button" class="btn btn-primary" (click)="removeChannel(channel._id)">Remove Channel</button>
+            </li>
+        </ul>
     </div>
 </div>

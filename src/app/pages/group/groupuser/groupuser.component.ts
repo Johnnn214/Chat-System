@@ -13,47 +13,29 @@ import { Group } from '../../../models/group';
   styleUrls: ['./groupuser.component.css']
 })
 export class GroupuserComponent {
+  group: any = <any>{};
+  groupId:string = "";
+  usersingroup:any[] = [];
   constructor(
     private usersService: UsersService, 
     private groupsservice: GroupsService
   ) { }
 
-  newgroupname: string = '';
-  adduser: string = '';
-  currentgrouplist: Group[] = [];
-  user: User | null = null;
-
-
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('currentUser') || '{}');
-
-    if (this.user) {
-      // Fetch and populate the current group list based on the user's role
-      if (this.user.roles.includes('super')) {
-        this.groupsservice.getAllGroups().subscribe((groups) => {
-          this.currentgrouplist = groups;
-        });
-      } else {
-        this.groupsservice.getAdminGroups(this.user.username).subscribe((groups) => {
-          this.currentgrouplist = groups;
-        });
+    this.groupsservice.currentgroup$.subscribe({
+      next: (data) => {
+        this.group = data;
+        console.log("current group",this.group);
+        this.groupId = this.group._id;
       }
-    }
-  }
-  onSelect(group: Group) {
-    // Handle selecting a group
-  }
-  creategroup() {
-
+    }); 
   }
 
-  removeuser(){
+  loaduseringroup(){
+    
+  }
+  removeuseringroup(){
 
   }
-  addUser(){
-
-  }
-
-  
 
 }

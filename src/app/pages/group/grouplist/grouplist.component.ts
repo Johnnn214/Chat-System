@@ -23,7 +23,8 @@ export class GrouplistComponent implements OnInit {
 
   constructor(
     private groupsService: GroupsService,
-    private authService: AuthService
+    private authService: AuthService,
+    private usersService: UsersService
   ) {}
 
   loadgroup(){
@@ -75,7 +76,15 @@ export class GrouplistComponent implements OnInit {
     this.onSelect(group);
   }
 
-  addUser() {
-    // Implement your logic to add a user to a group
+  addUser(group: any) {
+    const usernameToAdd = this.adduser; // Get the username to add from your input field
+    // Check if the username is empty or null (you can add more validation)
+    if (!usernameToAdd) {
+      // Handle the case where the username is not provided
+      return;
+    }
+    // Call the service method to add the user to the group
+    this.usersService.addUserInGroup(group._id, usernameToAdd).subscribe(
+      () => {});
   }
 }

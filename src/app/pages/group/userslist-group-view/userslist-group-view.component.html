@@ -1,7 +1,29 @@
-<div> 
-    <h3>Users</h3>
-    <ul *ngFor="let user of currentuserarray">
-        <li>{{user.username}}
+<div class="user-management">
+    <h2>Users</h2>
+    
+    <!-- Create User Form -->
+    <div>
+      <h3>Create User</h3>
+      <form (ngSubmit)="createUser()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" [(ngModel)]="newUser.username" name="name" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="newUser.email" name="email" required>
+        
+        <button type="submit">Create User</button>
+      </form>
+    </div>
+    
+    <!-- List of Users -->
+    <div>
+      <h3>List of Users</h3>
+      <ul>
+        <li *ngFor="let user of users">
+          {{ user.username }} ({{ user.email }})
+          <br>
+          <button (click)="deleteUser(user._id)">Delete</button>
         </li>
-    </ul>
+      </ul>
+    </div>
 </div>

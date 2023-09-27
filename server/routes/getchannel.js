@@ -10,8 +10,8 @@ module.exports = async function (app, db) {
       const groupId = new ObjectId(id);
       // Query for channels with the matching groupId
       const channels = await channelsCollection.find({ groupId }).toArray();
-      console.log("channels",channels);
-      console.log("id", id);
+      //console.log("channels",channels);
+      //console.log("id", id);
 
       res.send(JSON.stringify(channels));
     } catch (error) {

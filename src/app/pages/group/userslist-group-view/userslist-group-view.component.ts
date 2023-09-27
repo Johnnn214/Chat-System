@@ -2,24 +2,53 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../models/user';
 import { UsersService } from '../../../services/users.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-userslist-group-view',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './userslist-group-view.component.html',
   styleUrls: ['./userslist-group-view.component.css']
 })
 export class UserslistGroupViewComponent {
+  users: any[] = [];
+  newUser: User = {
+    username: '', 
+    email: '',
+    id: '',
+    password: '123',
+    roles: ["user"],
+    group: [],
+    valid: false
+  };
 
-  constructor(private usersService: UsersService) { }
-  currentuserarray:Array<User> = []
+  constructor(private userService: UsersService) {}
 
-  ngOnInit(){
-    this.usersService.getAllUsers().subscribe((data: any) => {
-      this.currentuserarray = data;
-      console.log("users",this.currentuserarray);
-    })
-    
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  loadUsers(): void {
+    this.userService.getAllUsers().subscribe((users) => {
+      this.users = users;
+    });
+  }
+
+  createUser(): void {
+    if (this.newUser.username && this.newUser.email) {
+      this.userService.createUser(this.newUser).subscribe(() => {
+      });
+    }
+    this.loadUsers();
+    this.newUser.username = "";
+    this.newUser.email = "";
+  }
+
+  deleteUser(userId: string): void {
+    this.userService.removeUser(userId).subscribe(() => {
+      this.users = this.users.filter((user) => user.id !== userId);
+    });
+    this.loadUsers();
   }
 }

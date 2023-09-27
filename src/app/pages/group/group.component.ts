@@ -13,7 +13,7 @@ import { GrouplistUserViewComponent } from 'src/app/pages/group/grouplist-user-v
     templateUrl: './group.component.html',
     styleUrls: ['./group.component.css'],
     imports: [CommonModule, GrouplistComponent,
-      UserslistGroupViewComponent,ChannelComponent, GroupuserComponent, GrouplistUserViewComponent]
+      UserslistGroupViewComponent, ChannelComponent, GroupuserComponent, GrouplistUserViewComponent]
 })
 export class GroupComponent {
  

@@ -12,7 +12,7 @@
           <button (click)="onSelect(group)">{{ group.name }}</button>
           <form>
             <input type="text" [(ngModel)]="adduser" name="newuser" class="form-control" />
-            <button type="button" (click)="addUser()" class="btn btn-primary">Add User</button>
+            <button type="button" (click)="addUser(group)" class="btn btn-primary">Add User</button>
           </form>
           <button type="button" (click)="remove(group)" class="btn btn-danger">Remove Group</button>
         </li>

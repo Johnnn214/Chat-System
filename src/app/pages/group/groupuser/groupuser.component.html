@@ -1,8 +1,8 @@
 <div>
-    <h3>Users in </h3>
-    <ul *ngFor="let user of currentgrouplist">
+    <h3>Users in {{group.name}}</h3>
+    <ul *ngFor="let user of usersingroup">
         <li>{{user}}
-            <button type="button" (click)="removeuser() " class="btn btn-primary">remove user</button>
+            <button type="button" (click)="removeuseringroup() " class="btn btn-primary">remove user</button>
         </li>
     </ul>
 </div>
