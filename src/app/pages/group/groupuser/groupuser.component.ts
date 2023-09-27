@@ -28,6 +28,7 @@ export class GroupuserComponent {
         console.log("current group",this.group);
         this.groupId = this.group._id;
         this.getUsersInGroup(this.groupId);
+        console.log("groupid",this.groupId);
       }
     }); 
   }
@@ -35,11 +36,14 @@ export class GroupuserComponent {
   getUsersInGroup(groupId: string): void {
     this.usersService.getUserInGroup(groupId).subscribe(users => {
       this.usersingroup = users;
+      console.log("users",this.usersingroup);
     });
   }
 
-  removeuseringroup(){
-
+  removeUserFromGroup(userId: string) {
+    this.usersService.removeUserFromGroup(userId, this.groupId).subscribe(() => {
+      this.getUsersInGroup(this.groupId);
+    });
   }
 
 }

@@ -24,10 +24,6 @@ export class UsersService {
     return this.http.delete(`${this.baseUrl}/api/users/${userId}`);
   }
 
-  removeUserFromGroup(userId: string, groupId: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/api/groups/${groupId}/users/${userId}`);
-  }
-
   addUserInGroup(groupId: string, username: string): Observable<any> {
     const body = { username };
     return this.http.post(`${this.baseUrl}/api/groups/${groupId}/users`, body);
@@ -35,6 +31,10 @@ export class UsersService {
   getUserInGroup(groupId: string): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}/api/groups/${groupId}/users`);
   }
+  removeUserFromGroup(userId: string, groupId: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/api/groups/${groupId}/users/${userId}`);
+  }
+
 
 
 }
