@@ -19,6 +19,7 @@ export class GrouplistComponent implements OnInit {
   currentgrouplist: Group[] = [];
   adduser: string = '';
   currentUser!: any;
+  group!:any;
 
   constructor(
     private groupsService: GroupsService,
@@ -49,7 +50,7 @@ export class GrouplistComponent implements OnInit {
     this.loadgroup();
 
   }
-  group!:any;
+ 
   onSelect(group: Group) {
     this.group = this.groupsService.setcurrentgroup(group);
   }
@@ -71,6 +72,7 @@ export class GrouplistComponent implements OnInit {
     this.groupsService.deleteGroup(group._id).subscribe(() => {
     });
     this.loadgroup();
+    this.onSelect(group);
   }
 
   addUser() {

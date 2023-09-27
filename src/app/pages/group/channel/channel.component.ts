@@ -30,21 +30,26 @@ export class ChannelComponent implements OnInit {
     }); 
   }
   loadChannels() {
-    this.groupsservice.getChannelsForGroup(this.groupId).subscribe(
-      {next: (data) => {
-      this.channels = data;
-      console.log(this.channels);
-      }
-    });
+    if(!this.groupId){
+      console.log("no group selected");
+    }else{
+      this.groupsservice.getChannelsForGroup(this.groupId).subscribe(
+        {next: (data) => {
+        this.channels = data;
+        console.log(this.channels);
+        }
+      });
+    }
   }
   addChannel() {
     // Implement logic to add a channel to the current group
     this.groupsservice.addChannelToGroup(this.group._id, this.newchannel).subscribe((result) => {
       // Handle the result (e.g., update the group object)
       this.group.channels.push(result);
-      this.newchannel.name = ''; // Clear the input field
+      
     });
     this.loadChannels();
+    this.newchannel.name = ''; // Clear the input field
   }
 
   removeChannel(channelId: string) {
