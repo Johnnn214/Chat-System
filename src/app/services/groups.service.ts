@@ -20,8 +20,8 @@ export class GroupsService {
     return this.http.get<Group[]>(`${this.baseUrl}`);
   }
 
-  getAdminGroups(username: string): Observable<Group[]> {
-    return this.http.get<Group[]>(`${this.baseUrl}/admin/${username}`);
+  getAdminGroups(id: string): Observable<Group[]> {
+    return this.http.get<Group[]>(`${this.baseUrl}/admin/${id}`);
   }
 
   createGroup(group: Group): Observable<Group> {

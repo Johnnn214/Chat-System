@@ -1,7 +1,7 @@
 <div>
     <h3>Users in {{group.name}}</h3>
     <ul *ngFor="let user of usersingroup">
-        <li>{{user}}
+        <li>{{user.username}}
             <button type="button" (click)="removeuseringroup() " class="btn btn-primary">remove user</button>
         </li>
     </ul>

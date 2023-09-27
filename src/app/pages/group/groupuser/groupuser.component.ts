@@ -27,13 +27,17 @@ export class GroupuserComponent {
         this.group = data;
         console.log("current group",this.group);
         this.groupId = this.group._id;
+        this.getUsersInGroup(this.groupId);
       }
     }); 
   }
 
-  loaduseringroup(){
-    
+  getUsersInGroup(groupId: string): void {
+    this.usersService.getUserInGroup(groupId).subscribe(users => {
+      this.usersingroup = users;
+    });
   }
+
   removeuseringroup(){
 
   }

@@ -26,7 +26,7 @@ async function main() {
       require('./routes/createuser.js')(app,db);
       require('./routes/deleteuser.js')(app,db);
       require('./routes/addusertogroup.js')(app,db);
-      //require('./routes/getusersingroup.js')(app,db);
+      require('./routes/getusersingroup.js')(app,db);
 
       require('./routes/creategroup.js')(app,db);
       require('./routes/deletegroup.js')(app,db);

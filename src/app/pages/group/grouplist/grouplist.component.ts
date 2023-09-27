@@ -37,7 +37,7 @@ export class GrouplistComponent implements OnInit {
         });
       } else if (this.currentUser.roles && this.currentUser.roles.includes('group')) {
         // Fetch admin groups based on the current user's ID
-        this.groupsService.getAdminGroups(this.currentUser.username).subscribe((groups) => {
+        this.groupsService.getAdminGroups(this.currentUser._id).subscribe((groups) => {
           this.currentgrouplist = groups;
           console.log("admingroup",this.currentgrouplist);
         });
@@ -48,6 +48,7 @@ export class GrouplistComponent implements OnInit {
     // Check if currentUser is defined before accessing its properties
     this.currentUser = this.authService.getCurrentuser();
     this.currentUser = JSON.parse(this.currentUser);
+    console.log("current User",this.currentUser);
     this.loadgroup();
 
   }
@@ -60,7 +61,7 @@ export class GrouplistComponent implements OnInit {
     // Implement your logic to create a group
     const newGroup: Group = {
       name: this.newgroupname,
-      admins: [this.currentUser?.username],
+      admins: [this.currentUser?.id],
     };
     this.groupsService.createGroup(newGroup).subscribe((createdGroup) => {
       this.currentgrouplist.push(createdGroup);
