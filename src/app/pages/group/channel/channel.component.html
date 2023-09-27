@@ -12,7 +12,7 @@
             <ul *ngFor="let channel of channels">
                 <li>{{ channel.name}}
                     <button type="button" class="btn btn-primary" (click)="joinChannel(channel.name)">Join Channel</button>
-                    <button type="button" class="btn btn-primary" (click)="removeChannel(channel.name)">Remove Channel</button>
+                    <button type="button" class="btn btn-primary" (click)="removeChannel(channel._id)">Remove Channel</button>
                 </li>
             </ul>
         </div>
