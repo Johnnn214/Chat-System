@@ -4,27 +4,27 @@
     <form>
         <div class="form-outline mb-4 w-75">
             <div class="col ">
-                <input type="text" [(ngModel)]="email"  name="email" class="form-control" />
+                <input type="text" [(ngModel)]="newUser.email"  name="email" class="form-control" />
                 <label class="form-label">Email address</label>
             </div>
         </div>
         <!-- Password input -->
         <div class="form-outline mb-4 w-75 ">
             <div class="col ">  
-                <input type="password" [(ngModel)]="pwd" name="pwd" class="form-control" />
+                <input type="password" [(ngModel)]="newUser.password" name="pwd" class="form-control" />
                 <label class="form-label">Password</label>
             </div>
         </div>
         <div class="form-outline mb-4 w-75">
             <div class="col ">
-                <input type="text" [(ngModel)]="username"  name="username" class="form-control" />
+                <input type="text" [(ngModel)]="newUser.username"  name="username" class="form-control" />
                 <label class="form-label">Username</label>
             </div>
         </div>
         <!-- Submit button -->
         <div class="row mb-4 w-100">
             <div class="col d-flex justify-content-center">
-                <button type="button" (click)="signup($event) " class="btn btn-primary">Sign Up</button>
+                <button type="button" (click)="signup() " class="btn btn-primary">Sign Up</button>
             </div>
         </div>
     </form>

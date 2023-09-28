@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { User } from 'src/app/models/user';
+import { UsersService } from 'src/app/services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,19 +13,25 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit  {
+  newUser: User = {
+    username: '', 
+    email: '',
+    id: '',
+    password: '',
+    roles: ["user"],
+    group: [],
+    valid: false
+  };
+  constructor(private userService: UsersService, private router: Router) {}
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-
-  }
-
-  username:string ="";
-  email:string ="";
-  pwd:string ="";
   
-  signup(event:any){
-    
+
+  signup(): void {
+    if (this.newUser.username && this.newUser.email) {
+      this.userService.createUser(this.newUser).subscribe(() => {
+      });
+    }
+    this.router.navigate(['']);
   }
-  
-
-
 }
