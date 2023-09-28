@@ -3,6 +3,7 @@
       <div *ngFor="let message of messagesin" class="message">
         <span class="message-timestamp">{{ message.dt | date: 'hh:mm:ss a' }}</span>
         <span class="message-content">{{ message.msg }}</span>
+        <span class="message-content">{{ message.userid }}</span>
       </div>
     </div>
     <div class="chat-input">
@@ -14,4 +15,7 @@
       />
       <button (click)="send()">Send</button>
     </div>
-  </div>
+    <div>
+      <button (click)="leave()">leave</button>
+    </div>
+</div>

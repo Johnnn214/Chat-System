@@ -9,7 +9,6 @@ module.exports = async function (app, db) {
       console.log(req.body); // Corrected console.log
 
       const newChannel = {
-        msg: [],
         name,
         groupId: new ObjectId(groupId), // Use 'new' with ObjectId to create an instance
       };

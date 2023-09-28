@@ -19,8 +19,8 @@ module.exports = {
       // Handle incoming messages within a channel
       socket.on('message', (data) => {
         console.log(data);
-        const { channel, message } = data; // Extract channel and message
-        io.to(channel).emit('message', message); // Broadcast the message to the specified channel
+        const { channel, message, username } = data; // Extract channel and message
+        io.to(channel).emit('message',{ message, username}); // Broadcast the message to the specified channel
       });
 
       // Handle disconnections

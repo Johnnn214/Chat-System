@@ -29,9 +29,9 @@ export class SocketsService {
     this.socket.emit('leave', channel);
   }
 
-  sendMessage(channel: string, message: string) {
+  sendMessage(channel: string, message: string, username: string) {
     // Emit a 'message' event with an object that includes the channel and message
-    this.socket.emit('message', { channel, message });
+    this.socket.emit('message', { channel, message, username });
   }
 
   getNewMessage(): Observable<string> {

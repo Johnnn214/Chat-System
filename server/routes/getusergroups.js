@@ -6,10 +6,10 @@ module.exports = async function (app, db) {
     try {
       const userId = req.params.userId;
       const objectId = new ObjectId(userId);
-      console.log(userId);
+      //console.log(userId);
       // Assuming you have a 'users' collection and a 'groups' collection
       const user = await db.collection('users').findOne({ _id: objectId });
-      console.log(user);
+     // console.log(user);
       if (!user) {
         return res.status(404).json({ error: 'User not found' });
       }

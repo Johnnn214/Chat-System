@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { SocketsService } from 'src/app/services/sockets.service';
 import { Msg } from 'src/app/models/msg';
 import { CommonModule } from '@angular/common';
@@ -23,6 +23,7 @@ export class ChatComponent implements OnInit {
     private socketService: SocketsService,
     private route: ActivatedRoute,
     private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,11 +41,12 @@ export class ChatComponent implements OnInit {
     this.socketService.initSocket();
     this.socketService.joinChannel(this.channel);
   
-    this.socketService.getNewMessage().subscribe((message: string) => {
+    this.socketService.getNewMessage().subscribe((data: any) => {
+      console.log(data);
       const newMsg: Msg = {
-        msg: message,
+        msg: data.message,
         dt: new Date(),
-        userid: this.currentUser.id // Replace with actual user ID
+        userid: data.username 
       };
       console.log("messagereceived", newMsg);
       this.messagesin.push(newMsg);
@@ -54,10 +56,14 @@ export class ChatComponent implements OnInit {
   send() {
     console.log('Sending message:', this.messageout); // Add this line for debugging
     if (this.messageout) {
-      this.socketService.sendMessage(this.channel, this.messageout);
+      this.socketService.sendMessage(this.channel, this.messageout, this.currentUser.username);
       this.messageout = '';
     } else {
       console.log('No Message');
     }
+  }
+  leave(){
+    this.socketService.leaveChannel(this.channel);
+    this.router.navigate(['/group']);
   }
 }
