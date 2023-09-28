@@ -2,17 +2,26 @@ const PORT = process.env.PORT || 3000;
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
-
 var fs = require('fs');
 var cors = require('cors')
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()) ;
-
 const { MongoClient } = require('mongodb');
 const url = 'mongodb://0.0.0.0:27017/';
 const client = new MongoClient(url);
 //app.use(express.static(__dirname, '../dist/'));
+
+
+const io = require('socket.io')(http,{
+cors:{
+    origin:"http://localhost:4200",
+    methods:["GET","POST"],
+  }
+});
+
+
+
 
 async function main() {
     try {
@@ -46,6 +55,11 @@ async function main() {
       require('./routes/deletechannel.js')(app,db);
 
       require('./listen.js')(http,PORT);
+
+      const sockets = require('./socket.js');
+      sockets.connect(io, PORT);
+
+
       
   
     } catch (error) {
