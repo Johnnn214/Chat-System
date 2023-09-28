@@ -1,5 +1,5 @@
 module.exports = {
-  connect: function (io, PORT) {
+  connect: function (io, PORT, db) {
     // Initialize socket.io on the server
     io.on('connection', (socket) => {
       console.log('User connected on port ' + PORT + ': ' + socket.id);
@@ -17,10 +17,25 @@ module.exports = {
       });
 
       // Handle incoming messages within a channel
-      socket.on('message', (data) => {
-        console.log(data);
-        const { channel, message, username } = data; // Extract channel and message
-        io.to(channel).emit('message',{ message, username}); // Broadcast the message to the specified channel
+      socket.on('message', async (data) => {
+        // Extract channel, username, and message from data
+        const { channel, username, message } = data;
+        const messagesCollection = db.collection('messages');
+        // Create a new ChatMessage document
+        const newMessage = {
+          channel,
+          username,
+          message,
+          timestamp: new Date(),
+        };
+        // Save the message to the database
+        try {
+          const result = await messagesCollection.insertOne(newMessage);
+          console.log('Insert result:', result);
+          io.to(channel).emit('message', data);
+        } catch (error) {
+          console.error('Error saving message to MongoDB:', error);
+        }
       });
 
       // Handle disconnections

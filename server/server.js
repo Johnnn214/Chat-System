@@ -19,8 +19,7 @@ cors:{
     methods:["GET","POST"],
   }
 });
-const sockets = require('./socket.js');
-sockets.connect(io, PORT);
+
 
 
 
@@ -29,6 +28,9 @@ async function main() {
       await client.connect();
       let db = client.db("assignmentdb");
       console.log('Connected to MongoDB');
+
+      const sockets = require('./socket.js');
+      sockets.connect(io, PORT, db);
 
       require('./routes/login.js')(app,db)
     
