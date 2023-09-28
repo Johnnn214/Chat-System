@@ -35,6 +35,12 @@ export class ChatComponent implements OnInit {
 
     this.currentUser = this.authService.getCurrentuser();
     this.currentUser = JSON.parse(this.currentUser);
+
+    this.socketService.getchathistory(this.channel).subscribe((chatHistory: any[]) => {
+      // Handle the chat history data here
+      this.messagesin = chatHistory;
+      console.log(this.messagesin);
+    });
   }
 
   private initIoConnection() {
@@ -44,9 +50,9 @@ export class ChatComponent implements OnInit {
     this.socketService.getNewMessage().subscribe((data: any) => {
       console.log(data);
       const newMsg: Msg = {
-        msg: data.message,
-        dt: new Date(),
-        userid: data.username 
+        message: data.message,
+        timestamp: new Date(),
+        username: data.username 
       };
       console.log("messagereceived", newMsg);
       this.messagesin.push(newMsg);

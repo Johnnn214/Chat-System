@@ -1,9 +1,9 @@
 <div class="chat-container">
     <div class="chat-messages">
       <div *ngFor="let message of messagesin" class="message">
-        <span class="message-timestamp">{{ message.dt | date: 'hh:mm:ss a' }}</span>
-        <span class="message-content">{{ message.msg }}</span>
-        <span class="message-content">{{ message.userid }}</span>
+        <span class="message-timestamp">{{ message.timestamp | date: 'hh:mm:ss a' }}</span>
+        <span class="message-content">{{ message.message }}</span>
+        <span class="message-content">{{ message.username }}</span>
       </div>
     </div>
     <div class="chat-input">

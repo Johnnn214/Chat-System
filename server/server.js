@@ -56,6 +56,7 @@ async function main() {
       require('./routes/createchannel.js')(app,db);
       require('./routes/getchannel.js')(app,db);
       require('./routes/deletechannel.js')(app,db);
+      require('./routes/chathistory.js')(app,db);
 
       require('./listen.js')(http,PORT);
 

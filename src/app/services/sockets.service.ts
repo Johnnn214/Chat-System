@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { io } from 'socket.io-client';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Msg } from '../models/msg';
 
 const SERVER_URL = 'http://localhost:3000';
 
@@ -9,8 +11,14 @@ const SERVER_URL = 'http://localhost:3000';
 })
 export class SocketsService {
   private socket: any;
+  private baseUrl = 'http://localhost:3000'
 
-  constructor() {}
+  constructor(private http: HttpClient) { }
+
+  getchathistory(channelid: string): Observable<Msg[]> {
+    return this.http.get<Msg[]>(`${this.baseUrl}/api/chat-history/${channelid}`);
+  }
+
 
   initSocket() {
     this.socket = io(SERVER_URL);

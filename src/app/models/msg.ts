@@ -1,13 +1,13 @@
 export class Msg {
-    msg:string;
-    dt:Date;
-    userid:number;
+    message:string;
+    timestamp:Date;
+    username:number;
 
-    constructor(_msg:string,_dt:Date,_userid:number)
+    constructor(_message:string,_timestamp:Date,_username:number)
     {
-        this.msg = _msg;
-        this.dt = _dt;
-        this.userid = _userid;
+        this.message = _message;
+        this.timestamp = _timestamp;
+        this.username = _username;
     }
 
 }
