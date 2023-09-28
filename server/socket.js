@@ -1,15 +1,20 @@
 module.exports = {
-    connect: function( io,PORT){
-        io.on('connect',(socket) => {
-          console.log('user connection on port '+ PORT + ' : '+ socket.id);
-            socket.on('message',(message)=>{
-              console.log('message received');
-              io.emit('message', message);
-            })
-              socket.on('disconnect',()=>{
-                io.emit("disconnect1");
-                console.log ("Client disconnected");
-              });
-            });
-      }
-    }
+  connect: function (io, PORT) {
+    io.on('connection', (socket) => {
+      console.log('User connected on port ' + PORT + ': ' + socket.id);
+
+      // Handle incoming messages
+      socket.on('message', (message) => {
+        console.log('Message received:', message);
+
+        // Broadcast the message to all connected clients
+        io.emit('message', message);
+      });
+
+      // Handle disconnections
+      socket.on('disconnect', () => {
+        console.log('Client disconnected:', socket.id);
+      });
+    });
+  },
+};

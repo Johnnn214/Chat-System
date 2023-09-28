@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'chat', component: ChatComponent, canActivate: [authGuard]},
   { path: 'group',component: GroupComponent, canActivate: [authGuard]},
   { path: 'profile',component: ProfileComponent, canActivate: [authGuard]},
+  { path: 'chat/:channelId',component: ChatComponent,canActivate: [authGuard]},
   { path: 'signup',component: SignupComponent},
 
 ];

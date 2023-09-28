@@ -4,6 +4,7 @@ import { Channel } from '../../../models/channel';
 import { GroupsService } from '../../../services/groups.service';
 import { Group } from '../../../models/group';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-channel',
   standalone: true,
@@ -16,7 +17,9 @@ export class ChannelComponent implements OnInit {
   newchannel: Channel = new Channel();
   channels: any[] = [];
   groupId:string = "";
-  constructor(private groupsservice: GroupsService) { }
+  constructor(private groupsservice: GroupsService,
+    private router: Router
+    ) { }
 
   ngOnInit(){
     this.groupsservice.currentgroup$.subscribe({
@@ -61,10 +64,6 @@ export class ChannelComponent implements OnInit {
   }
 
   joinChannel(channelId: string) {
-    // Implement logic to join a channel within the current group
-    this.groupsservice.joinChannelInGroup(this.group._id, channelId).subscribe(() => {
-      // Handle the result (e.g., update the user's channels)
-      // You might want to update the user's channels or perform any necessary actions here
-    });
+    this.router.navigate(['/chat', channelId]);
   }
 }

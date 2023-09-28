@@ -59,10 +59,6 @@ export class GroupsService {
     return this.http.delete<void>(url);
   }
 
-  // Join a channel within the current group
-  joinChannelInGroup(groupId: string, channelId: string): Observable<void> {
-    const url = `${this.baseUrl}/${groupId}/channels/${channelId}/join`;
-    return this.http.post<void>(url, {});
-  }
+
 
 }
