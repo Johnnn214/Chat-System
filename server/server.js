@@ -27,6 +27,9 @@ async function main() {
       require('./routes/deleteuser.js')(app,db);
       require('./routes/addusertogroup.js')(app,db);
 
+      require('./routes/promotetosuper.js')(app,db);
+      require('./routes/promotetogroupadmin.js')(app,db);
+
       require('./routes/getusersingroup.js')(app,db);
       require('./routes/deleteuseringroup.js')(app,db);
 

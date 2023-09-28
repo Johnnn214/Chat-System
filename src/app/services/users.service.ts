@@ -34,7 +34,13 @@ export class UsersService {
   removeUserFromGroup(userId: string, groupId: string): Observable<any> {
     return this.http.delete(`${this.baseUrl}/api/groups/${groupId}/users/${userId}`);
   }
-
-
-
+  
+  promotetosuper(userid:string): Observable<any>{
+    const body = { userid };
+    return this.http.post(`${this.baseUrl}/api/promotetosuper/${userid}`, body);
+  }
+  promotetogroupadmin(userid:string): Observable<any>{
+    const body = { userid };
+    return this.http.post(`${this.baseUrl}/api/promotetoadmin/${userid}`, body);
+  }
 }

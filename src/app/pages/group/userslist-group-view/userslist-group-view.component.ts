@@ -51,4 +51,16 @@ export class UserslistGroupViewComponent {
     });
     this.loadUsers();
   }
+  promotetosuper(userId: string){
+    this.userService.promotetosuper(userId).subscribe(() =>{
+
+    });
+    this.loadUsers();
+  }
+  promotetogroupadmin(userId: string){
+    this.userService.promotetogroupadmin(userId).subscribe(() =>{
+      
+    });
+    this.loadUsers();
+  }
 }
