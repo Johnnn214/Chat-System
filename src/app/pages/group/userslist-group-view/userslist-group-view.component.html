@@ -2,7 +2,7 @@
     <h2>Users</h2>
     
     <!-- Create User Form -->
-    <div>
+    <div *ngIf="issuperadmin">
       <h3>Create User</h3>
       <form (ngSubmit)="createUser()">
         <label for="name">Name:</label>
@@ -21,10 +21,11 @@
       <ul>
         <li *ngFor="let user of users">
           {{ user.username }} ({{ user.email }})
-          <br>
-          <button (click)="deleteUser(user._id)">Delete</button>
-          <button (click)="promotetosuper(user._id)">promotetosuper</button>
-          <button (click)="promotetogroupadmin(user._id)">promotetogroupadmin</button>
+          <div *ngIf="issuperadmin">
+            <button (click)="deleteUser(user._id)">Delete</button>
+            <button (click)="promotetosuper(user._id)">promotetosuper</button>
+            <button (click)="promotetogroupadmin(user._id)">promotetogroupadmin</button>
+          </div>
         </li>
       </ul>
     </div>

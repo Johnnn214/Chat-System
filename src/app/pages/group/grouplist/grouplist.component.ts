@@ -21,6 +21,13 @@ export class GrouplistComponent implements OnInit {
   currentUser!: any;
   group!:any;
 
+  issuperadmin: boolean= false;
+  isadmin: boolean= false;
+  currentuser:any = localStorage.getItem('currentUser');
+  user = JSON.parse(this.currentuser);
+  super:string= "super";
+  admin:string = "group";
+
   constructor(
     private groupsService: GroupsService,
     private authService: AuthService,
@@ -36,12 +43,13 @@ export class GrouplistComponent implements OnInit {
           console.log("allgroups",this.currentgrouplist);
         });
       } else if (this.currentUser.roles && this.currentUser.roles.includes('group')) {
-          // Fetch groups where the admin (current user) is a member
         this.groupsService.getUserGroups(this.currentUser.id).subscribe((userGroups) => {
-        // Fetch groups that the admin has created
           this.groupsService.getAdminGroups(this.currentUser.id).subscribe((adminGroups) => {
-        // Merge the two arrays of groups
-            this.currentgrouplist = [...userGroups, ...adminGroups];
+            const allGroups = [...userGroups, ...adminGroups];
+            const uniqueGroups = Array.from(new Set(allGroups.map(group => group._id)))
+              .map(groupID => allGroups.find(group => group._id === groupID))
+              .filter(group => group !== undefined) as Group[];
+            this.currentgrouplist = uniqueGroups;
             console.log("groups where admin is a member and created groups", this.currentgrouplist);
           });
         });
@@ -53,6 +61,7 @@ export class GrouplistComponent implements OnInit {
       }
     }
   }
+
   ngOnInit() {
     // Check if currentUser is defined before accessing its properties
     this.currentUser = this.authService.getCurrentuser();
@@ -60,6 +69,12 @@ export class GrouplistComponent implements OnInit {
     console.log("current User",this.currentUser);
     this.loadgroup();
 
+    if (this.user != null && this.user.roles) {
+      this.issuperadmin = this.user.roles.includes(this.super);
+      this.isadmin = this.user.roles.includes(this.admin);
+    } else {
+      console.log("Roles are empty");
+    }
   }
  
   onSelect(group: Group) {
@@ -71,6 +86,7 @@ export class GrouplistComponent implements OnInit {
     const newGroup: Group = {
       name: this.newgroupname,
       admins: [this.currentUser?.id],
+      _id: undefined
     };
     this.groupsService.createGroup(newGroup).subscribe((createdGroup) => {
       this.currentgrouplist.push(createdGroup);

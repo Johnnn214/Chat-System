@@ -1,11 +1,11 @@
 <div class="container">
     <div >
         <div class="row">
-            <app-availablegroup class="col-sm"></app-availablegroup>
-            <app-userslist-group-view class="col-sm"></app-userslist-group-view>
+            <app-availablegroup *ngIf="!issuperadmin" class="col-sm"></app-availablegroup>
+            <app-userslist-group-view *ngIf="isadmin" class="col-sm"></app-userslist-group-view>
             <app-grouplist class="col-sm"></app-grouplist>
             <app-channel class="col-sm"></app-channel>
-            <app-groupuser class="col-sm"></app-groupuser>
+            <app-groupuser class="col-sm" *ngIf="isadmin"></app-groupuser>
         </div>
     </div>
 </div>
