@@ -19,7 +19,8 @@ cors:{
     methods:["GET","POST"],
   }
 });
-
+const sockets = require('./socket.js');
+sockets.connect(io, PORT);
 
 
 
@@ -56,8 +57,7 @@ async function main() {
 
       require('./listen.js')(http,PORT);
 
-      const sockets = require('./socket.js');
-      sockets.connect(io, PORT);
+
 
 
       

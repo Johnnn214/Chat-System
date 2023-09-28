@@ -1,19 +1,31 @@
 module.exports = {
   connect: function (io, PORT) {
+    // Initialize socket.io on the server
     io.on('connection', (socket) => {
       console.log('User connected on port ' + PORT + ': ' + socket.id);
 
-      // Handle incoming messages
-      socket.on('message', (message) => {
-        console.log('Message received:', message);
+      // Handle joining a channel
+      socket.on('join', (channel) => {
+        socket.join(channel);
+        console.log(`User ${socket.id} joined channel: ${channel}`);
+      });
 
-        // Broadcast the message to all connected clients
-        io.emit('message', message);
+      // Handle leaving a channel
+      socket.on('leave', (channel) => {
+        socket.leave(channel);
+        console.log(`User ${socket.id} left channel: ${channel}`);
+      });
+
+      // Handle incoming messages within a channel
+      socket.on('message', (data) => {
+        console.log(data);
+        const { channel, message } = data; // Extract channel and message
+        io.to(channel).emit('message', message); // Broadcast the message to the specified channel
       });
 
       // Handle disconnections
       socket.on('disconnect', () => {
-        console.log('Client disconnected:', socket.id);
+        console.log('User disconnected: ' + socket.id);
       });
     });
   },

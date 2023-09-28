@@ -1,8 +1,10 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Msg } from 'src/app/models/msg';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { SocketsService } from 'src/app/services/sockets.service';
+import { Msg } from 'src/app/models/msg';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-chat',
@@ -11,32 +13,50 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit{
-  messageout= signal("");
-  messagesin = signal<Msg[]>([]);
-  constructor(private socketService: SocketsService) { }
+export class ChatComponent implements OnInit {
+  messageout = '';
+  messagesin: Msg[] = [];
+  channel: string = '';
+  currentUser!: any;
 
-
+  constructor(
+    private socketService: SocketsService,
+    private route: ActivatedRoute,
+    private authService: AuthService,
+  ) {}
 
   ngOnInit(): void {
-    this.initIoConnection();
-    }
+    // Get the channel ID from the route parameters
+    this.route.params.subscribe(params => {
+      this.channel = params['channelId'];
+      this.initIoConnection();
+    });
 
-  private initIoConnection(){
+    this.currentUser = this.authService.getCurrentuser();
+    this.currentUser = JSON.parse(this.currentUser);
+  }
+
+  private initIoConnection() {
     this.socketService.initSocket();
-
-    this.socketService.getNewMessage()
-    .subscribe((messages:any)=>{
-        this.messagesin.set(messages);
-          
+    this.socketService.joinChannel(this.channel);
+  
+    this.socketService.getNewMessage().subscribe((message: string) => {
+      const newMsg: Msg = {
+        msg: message,
+        dt: new Date(),
+        userid: this.currentUser.id // Replace with actual user ID
+      };
+      console.log("messagereceived", newMsg);
+      this.messagesin.push(newMsg);
     });
   }
-    
-  send(){
-    if(this.messageout()){
-      this.socketService.send(this.messageout());
-      this.messageout.set("");
-    }else{
+
+  send() {
+    console.log('Sending message:', this.messageout); // Add this line for debugging
+    if (this.messageout) {
+      this.socketService.sendMessage(this.channel, this.messageout);
+      this.messageout = '';
+    } else {
       console.log('No Message');
     }
   }
