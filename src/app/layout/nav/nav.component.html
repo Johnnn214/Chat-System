@@ -1,12 +1,11 @@
 <nav class="navbar navbar-expand-sm bg-light">
-    <div class="container-fluid">
-      <div class="navbar-brand" >Logo</div>
-        <div class="navbar-nav">
-          <a *ngIf="!loggedin" class="nav-link" routerLink="">Login</a>
-          <a class="nav-link" routerLink="/chat">Chat</a>
-          <a class="nav-link" routerLink="/group">Group</a>
-          <a class="nav-link" routerLink="/profile">Profile</a>
-          <a *ngIf="loggedin" class="nav-link " href="" (click) ="logout($event)">Logout</a>
-        </div>
+  <div class="container-fluid">
+    <div class="navbar-brand" >Logo</div>
+    <div class="navbar-nav">
+      <a *ngIf="!loggedin" class="nav-link" routerLink="">Login</a>
+      <a class="nav-link" routerLink="/group">Group</a>
+      <a class="nav-link" routerLink="/profile">Profile</a>
+      <a *ngIf="loggedin" class="nav-link " href="" (click) ="logout($event)">Logout</a>
     </div>
-  </nav>
+  </div>
+</nav>
