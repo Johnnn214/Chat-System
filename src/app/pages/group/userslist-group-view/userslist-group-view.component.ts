@@ -29,8 +29,10 @@ export class UserslistGroupViewComponent {
   user = JSON.parse(this.currentuser);
   super:string= "super";
   admin:string = "group";
-  
+  showCreateUserForm: boolean = false;
 
+  userButtonVisibility: { [key: string]: boolean } = {};
+  
   constructor(private userService: UsersService) {}
 
   ngOnInit(): void {
@@ -42,6 +44,10 @@ export class UserslistGroupViewComponent {
     } else {
       console.log("Roles are empty");
     }
+
+    this.users.forEach(user => {
+      this.userButtonVisibility[user._id] = false;
+    });
   }
 
   loadUsers(): void {
@@ -77,5 +83,12 @@ export class UserslistGroupViewComponent {
       
     });
     this.loadUsers();
+  }
+  toggleCreateUserForm() {
+    this.showCreateUserForm = !this.showCreateUserForm;
+  }
+
+  toggleButtonVisibility(userId: string, buttonType: string) {
+    this.userButtonVisibility[userId] = !this.userButtonVisibility[userId];
   }
 }
