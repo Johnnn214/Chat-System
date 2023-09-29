@@ -1,4 +1,4 @@
-const { ObjectId } = require('mongodb');
+//const { ObjectId } = require('mongodb');
 
 module.exports = async function (app, db) {
   app.post('/api/groups/:id/users', async (req, res) => {
@@ -6,7 +6,7 @@ module.exports = async function (app, db) {
       const userCollection = db.collection('users');
       const { username } = req.body; // Destructure the username from the request body
       const groupId = req.params.id;
-      const objectId = new ObjectId(groupId);
+      //const objectId = new ObjectId(groupId);
 
       // Find the user by username and group by _id
       const user = await userCollection.findOne({ username });
