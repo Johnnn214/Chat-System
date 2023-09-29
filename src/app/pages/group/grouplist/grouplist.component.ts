@@ -112,5 +112,7 @@ export class GrouplistComponent implements OnInit {
     // Call the service method to add the user to the group
     this.usersService.addUserInGroup(group._id, usernameToAdd).subscribe(
       () => {});
+      this.adduser="";
   }
+
 }

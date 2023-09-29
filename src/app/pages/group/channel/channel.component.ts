@@ -75,8 +75,8 @@ export class ChannelComponent implements OnInit {
     // Implement logic to remove a channel from the current group
     this.groupsservice.removeChannelFromGroup(this.group._id, channelId).subscribe((result) => {
       console.log('Response from API:', result);
+      this.loadChannels();
     });
-    this.loadChannels();
   }
 
   joinChannel(channelId: string) {
