@@ -3,10 +3,10 @@
     <h3>{{group.name}} <br> Channels</h3>
     <div>
         <form (submit)="addChannel()" *ngIf="isadmin">
-            <input type="text" [(ngModel)]="newchannel.name" name="channelName" placeholder="Enter channel name">
+            <input class="form-control" type="text" [(ngModel)]="newchannel.name" name="channelName" placeholder="Enter channel name">
             <button type="submit" class="btn btn-primary">Add Channel</button>
         </form>
-        <br><br>
+        <br>
     </div>
     <div>
         <ul *ngFor="let channel of channels">
