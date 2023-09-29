@@ -14,6 +14,10 @@ export class AuthService {
   private baseUrl = 'http://localhost:3000'
   constructor(private http: HttpClient, private router: Router) { }
 
+  updateUser(user:User){
+    return this.http.post<User>(`${this.baseUrl}/api/updateuser`, { user: user});
+  }
+
   login(email: string, password: string): Observable<User> {
     const loginData = { email: email, password: password };
     return this.http.post<User>(`${this.baseUrl}/api/auth`, loginData);

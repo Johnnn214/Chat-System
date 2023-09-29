@@ -1,9 +1,0 @@
-{
-    "groups":[
-        {"name": "group1", "id": "", "channel": ["channel1","channel2", "channlel3"],"admin": ["user1"]},
-        {"name": "group2", "id": "", "channel": ["123"],"admin": ["user1"]},
-        {"name": "group3", "id": "", "channel": ["qqq"],"admin": ["user1"]},
-        {"name": "group4", "id": "", "channel": ["444"],"admin": ["user2"]}
-        ]
-    
-}

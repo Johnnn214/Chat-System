@@ -8,6 +8,7 @@ var cors = require('cors')
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()) ;
+app.use('/images',express.static('userimages'));
 
 const { MongoClient } = require('mongodb');
 const url = 'mongodb://0.0.0.0:27017/';
@@ -19,9 +20,8 @@ cors:{
   }
 });
 const PORT = process.env.PORT || 3000;
-
-
-
+const formidable = require('formidable');
+const path = require('path');
 
 
 
@@ -34,7 +34,10 @@ async function main() {
       const sockets = require('./routes/socket.js');
       sockets.connect(io, PORT, db);
 
-      require('./routes/login.js')(app,db)
+      require('./routes/login.js')(app,db);
+
+      require('./routes/uploads.js')(app,formidable,fs,path);
+      require('./routes/updateuser.js')(app,db);
     
       require('./routes/getusers.js')(app,db);
       require('./routes/createuser.js')(app,db);

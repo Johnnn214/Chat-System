@@ -6,6 +6,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { authGuard } from './auth.guard';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 const routes: Routes = [
   { path: '',component: LoginComponent},
@@ -18,7 +21,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),
+    ToastrModule.forRoot(), BrowserAnimationsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

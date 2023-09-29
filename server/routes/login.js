@@ -8,6 +8,7 @@ module.exports = async function (app,db) {
             const email = req.body.email;
             const password = req.body.password;     
             var customer = {};
+            customer.avatar;
             customer.id;
             customer.valid = false;
             customer.email = '';
@@ -23,6 +24,7 @@ module.exports = async function (app,db) {
                     customer.username = users[i].username;
                     customer.roles = users[i].roles;
                     customer.group = users[i].group;
+                    customer.avatar = users[i].avatar;
                 }
             }
             res.send(customer);

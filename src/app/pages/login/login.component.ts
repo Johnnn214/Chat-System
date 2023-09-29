@@ -32,10 +32,11 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.email,this.password).subscribe({
       next:
         (data)=>{
+          console.log("data",data);
           if (data.valid == true){
-            this.newuser = new User(data.username, data.email,data.id, data.password,
+            this.newuser = new User(data.username, data.email, data.id, data.avatar, data.password,
                data.roles, data.group, data.valid);
-            console.log(this.newuser);
+            console.log("user",this.newuser);
             this.authService.setCurrentuser(this.newuser);
             this.router.navigate(['/profile']);
           }else{

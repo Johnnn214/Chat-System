@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit  {
   newUser: User = {
+    avatar: '',
     username: '', 
     email: '',
     id: '',

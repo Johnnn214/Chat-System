@@ -20,7 +20,8 @@ export class UserslistGroupViewComponent {
     password: '123',
     roles: ["user"],
     group: [],
-    valid: false
+    valid: false,
+    avatar:''
   };
   issuperadmin: boolean= false;
   isadmin: boolean= false;
