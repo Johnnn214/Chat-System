@@ -29,7 +29,7 @@ async function main() {
       let db = client.db("assignmentdb");
       console.log('Connected to MongoDB');
 
-      const sockets = require('./socket.js');
+      const sockets = require('./routes/socket.js');
       sockets.connect(io, PORT, db);
 
       require('./routes/login.js')(app,db)
@@ -58,7 +58,7 @@ async function main() {
       require('./routes/deletechannel.js')(app,db);
       require('./routes/chathistory.js')(app,db);
 
-      require('./listen.js')(http,PORT);
+      require('./routes/listen.js')(http,PORT);
 
 
 
