@@ -1,3 +1,46 @@
 ul {
     list-style-type: none;
   }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Style the profile header */
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Style the file input and upload button */
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  /* Style the avatar image */
+  .avatar {
+    border: 2px solid #fff;
+    border-radius: 50%;
+    margin-top: 10px;
+  }
+  
+  /* Style user information */
+  .user-info {
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  /* Style the list of roles */
+  .roles-list {
+    margin-top: 10px;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .roles-list li {
+    margin-bottom: 5px;
+  }
