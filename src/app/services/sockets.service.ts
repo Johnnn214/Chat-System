@@ -3,6 +3,7 @@ import { io } from 'socket.io-client';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Msg } from '../models/msg';
+import { Channel } from '../models/channel';
 
 const SERVER_URL = 'http://localhost:3000';
 
@@ -19,6 +20,9 @@ export class SocketsService {
     return this.http.get<Msg[]>(`${this.baseUrl}/api/chat-history/${channelid}`);
   }
 
+  getchannelbyid(channelid: string): Observable<Channel> {
+    return this.http.get<Channel>(`${this.baseUrl}/api/chat/${channelid}`);
+  }
 
   initSocket() {
     this.socket = io(SERVER_URL);

@@ -60,6 +60,7 @@ async function main() {
 
       require('./routes/createchannel.js')(app,db);
       require('./routes/getchannel.js')(app,db);
+      require('./routes/getchannelbyid.js')(app,db);
       require('./routes/deletechannel.js')(app,db);
       require('./routes/chathistory.js')(app,db);
 

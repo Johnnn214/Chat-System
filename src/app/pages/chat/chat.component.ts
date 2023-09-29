@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { SocketsService } from 'src/app/services/sockets.service';
 import { Msg } from 'src/app/models/msg';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { Channel } from 'src/app/models/channel';
 
 @Component({
   selector: 'app-chat',
@@ -14,10 +15,13 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
+  @ViewChild('scrollable', { static: true }) scrollable!: ElementRef;
+
   messageout = '';
   messagesin: Msg[] = [];
   channel: string = '';
   currentUser!: any;
+  newChannel:Channel = new Channel();
 
   constructor(
     private socketService: SocketsService,
@@ -31,7 +35,15 @@ export class ChatComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.channel = params['channelId'];
       this.initIoConnection();
+      this.socketService.getchannelbyid(this.channel).subscribe(data => {
+        if (Array.isArray(data)) {
+          this.newChannel = data[0];
+          console.log("channel", this.newChannel);
+        }
+      });
     });
+
+   
 
     this.currentUser = this.authService.getCurrentuser();
     this.currentUser = JSON.parse(this.currentUser);
@@ -40,7 +52,9 @@ export class ChatComponent implements OnInit {
       // Handle the chat history data here
       this.messagesin = chatHistory;
       console.log(this.messagesin);
+      this.scrollToBottom();
     });
+    
   }
 
   private initIoConnection() {
@@ -56,6 +70,8 @@ export class ChatComponent implements OnInit {
       };
       console.log("messagereceived", newMsg);
       this.messagesin.push(newMsg);
+
+      this.scrollToBottom();
     });
   }
 
@@ -71,5 +87,16 @@ export class ChatComponent implements OnInit {
   leave(){
     this.socketService.leaveChannel(this.channel);
     this.router.navigate(['/group']);
+  }
+
+  scrollToBottom(): void {
+    try {
+      // Use a setTimeout to allow the DOM to update before scrolling
+      setTimeout(() => {
+        this.scrollable.nativeElement.scrollTop = this.scrollable.nativeElement.scrollHeight;
+      });
+    } catch (err) {
+      console.error(err);
+    }
   }
 }
