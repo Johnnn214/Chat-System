@@ -28,6 +28,8 @@ export class GrouplistComponent implements OnInit {
   super:string= "super";
   admin:string = "group";
 
+  groupButtonVisibility: { [key: string]: boolean } = {};
+
   constructor(
     private groupsService: GroupsService,
     private authService: AuthService,
@@ -75,6 +77,10 @@ export class GrouplistComponent implements OnInit {
     } else {
       console.log("Roles are empty");
     }
+
+    this.currentgrouplist.forEach(group => {
+      this.groupButtonVisibility[group._id] = false;
+    });
   }
  
   onSelect(group: Group) {
@@ -114,5 +120,10 @@ export class GrouplistComponent implements OnInit {
       () => {});
       this.adduser="";
   }
+
+  toggleButtonVisibility(groupId: string, buttonType: string) {
+    this.groupButtonVisibility[groupId] = !this.groupButtonVisibility[groupId];
+  }
+
 
 }

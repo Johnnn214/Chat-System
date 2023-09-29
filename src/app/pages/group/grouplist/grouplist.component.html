@@ -1,24 +1,35 @@
 <div>
-    <h3>Group list</h3>
-    <div>
+  <h3 class="mb-3">Group list</h3>
+  <div>
       <form *ngIf="isadmin">
-        <input type="text" [(ngModel)]="newgroupname" name="newgroup" class="form-control" placeholder="Enter group name" />
-        <button type="button" (click)="createGroup()" class="btn btn-primary">Create Group</button>
+          <div>
+              <input type="text" [(ngModel)]="newgroupname" name="newgroup" class="form-control" placeholder="Enter group name" />
+              <button type="button" (click)="createGroup()" class="btn btn-primary">Create Group</button>
+          </div>
       </form>
-    </div>
-    <div>
-      <ul>
-        <li *ngFor="let group of currentgrouplist">
-          <button (click)="onSelect(group)">{{ group.name }}</button>
-          <div >
-            <form *ngIf="isadmin">
-              <input type="text" [(ngModel)]="adduser" name="newuser" class="form-control" />
-              <button type="button" (click)="addUser(group)" class="btn btn-primary">Add User</button>
-            </form>
-            <button *ngIf="isadmin" type="button" (click)="remove(group)" class="btn btn-danger">Remove Group</button>
+  </div>
+  <div>
+    <ul class="list-group">
+        <li *ngFor="let group of currentgrouplist" class="list-group-item">
+          <div class="row">
+            <div class="col">
+                <button (click)="onSelect(group)" class="btn btn-light">{{ group.name }}</button>
+            </div>
+            <div class="col">
+                <button (click)="toggleButtonVisibility(group._id, 'toggle')" class="btn btn-primary">Edit</button>
+            </div>
+        </div>
+          <div *ngIf="groupButtonVisibility[group._id]">
+              <form *ngIf="isadmin">
+                  <div>
+                      <input type="text" [(ngModel)]="adduser" name="newuser" class="form-control" />
+                      <button type="button" (click)="addUser(group)" class="btn btn-primary">Add User</button>
+                  </div>
+              </form>
+              <button *ngIf="isadmin" type="button" (click)="remove(group)" class="btn btn-danger">Remove Group</button>
           </div>
         </li>
-      </ul>
-    </div>
+    </ul>
   </div>
+</div>
 
