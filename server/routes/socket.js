@@ -1,7 +1,5 @@
-const { async } = require("rxjs");
-
 module.exports = {
-  connect: function (io, PORT, db) {
+  connect: function (io, PORT, db, async) {
     // Initialize socket.io on the server
     io.on('connection', (socket) => {
       console.log('User connected on port ' + PORT + ': ' + socket.id);
@@ -92,6 +90,10 @@ module.exports = {
       // Handle disconnections
       socket.on('disconnect', () => {
         console.log('User disconnected: ' + socket.id);
+
+
+
+        
       });
     });
   },
