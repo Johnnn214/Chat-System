@@ -32,14 +32,14 @@ export class SocketsService {
     };
   }
 
-  joinChannel(channel: string) {
+  joinChannel(channel: string, user: string, message: string) {
     // Emit a 'join' event to join the specified channel
-    this.socket.emit('join', channel);
+    this.socket.emit('join', {channel, user, message});
   }
 
-  leaveChannel(channel: string) {
+  leaveChannel(channel: string,  user: string, message: string) {
     // Emit a 'leave' event to leave the specified channel
-    this.socket.emit('leave', channel);
+    this.socket.emit('leave', {channel,user, message});
   }
 
   sendMessage(channel: string, message: string, user: User) {

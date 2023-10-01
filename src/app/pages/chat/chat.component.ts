@@ -22,6 +22,8 @@ export class ChatComponent implements OnInit {
   channel: string = '';
   currentUser!: any;
   newChannel:Channel = new Channel();
+  join:string = "Just joined the channel";
+  left:string = "Just left the channel";
 
   constructor(
     private socketService: SocketsService,
@@ -31,7 +33,8 @@ export class ChatComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
+    this.currentUser = this.authService.getCurrentuser();
+    this.currentUser = JSON.parse(this.currentUser);
     // Get the channel ID from the route parameters
     this.route.params.subscribe(params => {
       this.channel = params['channelId'];
@@ -44,11 +47,6 @@ export class ChatComponent implements OnInit {
       });
     });
 
-   
-
-    this.currentUser = this.authService.getCurrentuser();
-    this.currentUser = JSON.parse(this.currentUser);
-
     this.socketService.getchathistory(this.channel).subscribe((chatHistory: any[]) => {
       // Handle the chat history data here
       this.messagesin = chatHistory;
@@ -60,7 +58,7 @@ export class ChatComponent implements OnInit {
 
   private initIoConnection() {
     this.socketService.initSocket();
-    this.socketService.joinChannel(this.channel);
+    this.socketService.joinChannel(this.channel, this.currentUser, this.join);
     this.socketService.getNewMessage().subscribe((data: any) => {
       console.log(data);
       const newMsg: Msg = {
@@ -87,7 +85,7 @@ export class ChatComponent implements OnInit {
     }
   }
   leave(){
-    this.socketService.leaveChannel(this.channel);
+    this.socketService.leaveChannel(this.channel, this.currentUser, this.left);
     this.router.navigate(['/group']);
   }
 
