@@ -59,30 +59,29 @@ export class UserslistGroupViewComponent {
   createUser(): void {
     if (this.newUser.username && this.newUser.email) {
       this.userService.createUser(this.newUser).subscribe(() => {
+        this.loadUsers();
       });
     }
-    this.loadUsers();
     this.newUser.username = "";
     this.newUser.email = "";
   }
-
   deleteUser(userId: string): void {
     this.userService.removeUser(userId).subscribe(() => {
       this.users = this.users.filter((user) => user.id !== userId);
+      this.loadUsers();
     });
-    this.loadUsers();
   }
   promotetosuper(userId: string){
     this.userService.promotetosuper(userId).subscribe(() =>{
-
-    });
     this.loadUsers();
+    });
+    
   }
   promotetogroupadmin(userId: string){
     this.userService.promotetogroupadmin(userId).subscribe(() =>{
-      
-    });
     this.loadUsers();
+    });
+    
   }
   toggleCreateUserForm() {
     this.showCreateUserForm = !this.showCreateUserForm;

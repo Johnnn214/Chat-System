@@ -29,6 +29,9 @@
               <div *ngIf="issuperadmin">
                   <button (click)="toggleButtonVisibility(user._id, 'promote')" class="btn btn-light">{{ user.email }}</button>
                   <div *ngIf="userButtonVisibility[user._id]" class="ml-3">
+                      <ul class="roles-list">
+                        <li *ngFor="let role of user.roles">{{ role }}</li>
+                      </ul>
                       <button (click)="promotetosuper(user._id)" class="btn btn-primary">Promote to Super</button>
                       <button (click)="promotetogroupadmin(user._id)" class="btn btn-primary">Promote to Group Admin</button>
                       <button (click)="deleteUser(user._id)" class="btn btn-danger">Delete</button>
