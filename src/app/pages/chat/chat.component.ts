@@ -31,6 +31,7 @@ export class ChatComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     // Get the channel ID from the route parameters
     this.route.params.subscribe(params => {
       this.channel = params['channelId'];
@@ -60,13 +61,14 @@ export class ChatComponent implements OnInit {
   private initIoConnection() {
     this.socketService.initSocket();
     this.socketService.joinChannel(this.channel);
-  
     this.socketService.getNewMessage().subscribe((data: any) => {
       console.log(data);
       const newMsg: Msg = {
         message: data.message,
         timestamp: new Date(),
-        username: data.username 
+        avatar: data.user.avatar,
+        username: data.user.username,
+        isImage:false
       };
       console.log("messagereceived", newMsg);
       this.messagesin.push(newMsg);
@@ -78,7 +80,7 @@ export class ChatComponent implements OnInit {
   send() {
     console.log('Sending message:', this.messageout); // Add this line for debugging
     if (this.messageout) {
-      this.socketService.sendMessage(this.channel, this.messageout, this.currentUser.username);
+      this.socketService.sendMessage(this.channel, this.messageout, this.currentUser);
       this.messageout = '';
     } else {
       console.log('No Message');

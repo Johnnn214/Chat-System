@@ -8,6 +8,7 @@ module.exports = {
       socket.on('join', (channel) => {
         socket.join(channel);
         console.log(`User ${socket.id} joined channel: ${channel}`);
+        
       });
 
       // Handle leaving a channel
@@ -19,12 +20,17 @@ module.exports = {
       // Handle incoming messages within a channel
       socket.on('message', async (data) => {
         // Extract channel, username, and message from data
-        const { channel, username, message } = data;
+        const { channel, user, message } = data;
         const messagesCollection = db.collection('messages');
         // Create a new ChatMessage document
+        const username = user.username;
+        const avatar = user.avatar;
+
+        console.log(username);
         const newMessage = {
           channel,
           username,
+          avatar,
           message,
           timestamp: new Date(),
         };

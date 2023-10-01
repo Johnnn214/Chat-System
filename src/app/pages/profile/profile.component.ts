@@ -41,6 +41,7 @@ export class ProfileComponent implements OnInit {
           this.currentuser.avatar  = res.data.filename; 
           this.authService.updateUser(this.currentuser).subscribe({
             next: (data) => { 
+              console.log(data);
               this.toastr.success('User Update', 'User data was updated.');
             }
           });

@@ -3,6 +3,7 @@
   <div class="chat-messages">
     <div id="scrollable" #scrollable class="scrollable">
       <div *ngFor="let message of messagesin" class="message">
+        <img class="avatar" width="50" height="50" class="avatar" [src]="'http://localhost:3000/images/' + message.avatar" />
         <span class="message-content">{{ message.username }}:</span>
         <span class="message-content">{{ message.message }}</span>
         <div>

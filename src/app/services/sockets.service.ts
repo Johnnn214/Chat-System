@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Msg } from '../models/msg';
 import { Channel } from '../models/channel';
+import { User } from '../models/user';
 
 const SERVER_URL = 'http://localhost:3000';
 
@@ -41,9 +42,9 @@ export class SocketsService {
     this.socket.emit('leave', channel);
   }
 
-  sendMessage(channel: string, message: string, username: string) {
+  sendMessage(channel: string, message: string, user: User) {
     // Emit a 'message' event with an object that includes the channel and message
-    this.socket.emit('message', { channel, message, username });
+    this.socket.emit('message', { channel, message, user });
   }
 
   getNewMessage(): Observable<string> {
