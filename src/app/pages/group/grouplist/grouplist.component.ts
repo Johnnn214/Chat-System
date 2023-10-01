@@ -18,7 +18,6 @@ export class GrouplistComponent implements OnInit {
   newgroupname: string = '';
   currentgrouplist: Group[] = [];
   adduser: string = '';
-  currentUser!: any;
   group!:any;
 
   issuperadmin: boolean= false;
@@ -29,6 +28,7 @@ export class GrouplistComponent implements OnInit {
   admin:string = "group";
 
   groupButtonVisibility: { [key: string]: boolean } = {};
+  isadminforgroup: { [key: string]: boolean } = {};
 
   constructor(
     private groupsService: GroupsService,
@@ -36,39 +36,9 @@ export class GrouplistComponent implements OnInit {
     private usersService: UsersService
   ) {}
 
-  loadgroup(){
-    if (this.currentUser) {
-      if (this.currentUser.roles && this.currentUser.roles.includes('super')) {
-        // Fetch super groups
-        this.groupsService.getAllGroups().subscribe((groups) => {
-          this.currentgrouplist = groups;
-          console.log("allgroups",this.currentgrouplist);
-        });
-      } else if (this.currentUser.roles && this.currentUser.roles.includes('group')) {
-        this.groupsService.getUserGroups(this.currentUser.id).subscribe((userGroups) => {
-          this.groupsService.getAdminGroups(this.currentUser.id).subscribe((adminGroups) => {
-            const allGroups = [...userGroups, ...adminGroups];
-            const uniqueGroups = Array.from(new Set(allGroups.map(group => group._id)))
-              .map(groupID => allGroups.find(group => group._id === groupID))
-              .filter(group => group !== undefined) as Group[];
-            this.currentgrouplist = uniqueGroups;
-            console.log("groups where admin is a member and created groups", this.currentgrouplist);
-          });
-        });
-      }else if (this.currentUser.roles && this.currentUser.roles.includes('user')) {
-        this.groupsService.getUserGroups(this.currentUser.id).subscribe((groups) => {
-          this.currentgrouplist = groups;
-          console.log("usergroups", this.currentgrouplist);
-        });
-      }
-    }
-  }
-
   ngOnInit() {
     // Check if currentUser is defined before accessing its properties
-    this.currentUser = this.authService.getCurrentuser();
-    this.currentUser = JSON.parse(this.currentUser);
-    console.log("current User",this.currentUser);
+    console.log("current User",this.user);
     this.loadgroup();
 
     if (this.user != null && this.user.roles) {
@@ -81,6 +51,43 @@ export class GrouplistComponent implements OnInit {
     this.currentgrouplist.forEach(group => {
       this.groupButtonVisibility[group._id] = false;
     });
+
+  }
+  loadgroup(){
+    if (this.user) {
+      if (this.user.roles && this.user.roles.includes('super')) {
+        // Fetch super groups
+        this.groupsService.getAllGroups().subscribe((groups) => {
+          this.currentgrouplist = groups;
+          console.log("allgroups",this.currentgrouplist);
+        });
+      } else if (this.user.roles && this.user.roles.includes('group')) {
+        this.groupsService.getUserGroups(this.user.id).subscribe((userGroups) => {
+          this.groupsService.getAdminGroups(this.user.id).subscribe((adminGroups) => {
+            const allGroups = [...userGroups, ...adminGroups];
+            const uniqueGroups = Array.from(new Set(allGroups.map(group => group._id)))
+              .map(groupID => allGroups.find(group => group._id === groupID))
+              .filter(group => group !== undefined) as Group[];
+            this.currentgrouplist = uniqueGroups;
+            console.log("groups where admin is a member and created groups", this.currentgrouplist);
+            // if current admin is the admin of the group
+            this.currentgrouplist.forEach(group => {
+              if(group.admins.includes(this.user.id)){
+              this.isadminforgroup[group._id] = true;
+              }else{
+                this.isadminforgroup[group._id] = false
+              }
+              console.log(this.isadminforgroup);
+            });
+          });
+        });
+      }else if (this.user.roles && this.user.roles.includes('user')) {
+        this.groupsService.getUserGroups(this.user.id).subscribe((groups) => {
+          this.currentgrouplist = groups;
+          console.log("usergroups", this.currentgrouplist);
+        });
+      }
+    }
   }
  
   onSelect(group: Group) {
@@ -91,7 +98,7 @@ export class GrouplistComponent implements OnInit {
     // Implement your logic to create a group
     const newGroup: Group = {
       name: this.newgroupname,
-      admins: [this.currentUser?.id],
+      admins: [this.user?.id],
       _id: undefined
     };
     this.groupsService.createGroup(newGroup).subscribe((createdGroup) => {
@@ -103,22 +110,16 @@ export class GrouplistComponent implements OnInit {
 
   remove(group: any) {
     this.groupsService.deleteGroup(group._id).subscribe(() => {
+      
     });
     this.loadgroup();
-    this.onSelect(group);
   }
 
   addUser(group: any) {
-    const usernameToAdd = this.adduser; // Get the username to add from your input field
-    // Check if the username is empty or null (you can add more validation)
-    if (!usernameToAdd) {
-      // Handle the case where the username is not provided
-      return;
-    }
-    // Call the service method to add the user to the group
+    const usernameToAdd = this.adduser;
     this.usersService.addUserInGroup(group._id, usernameToAdd).subscribe(
       () => {});
-      this.adduser="";
+      this.adduser=""
   }
 
   toggleButtonVisibility(groupId: string, buttonType: string) {

@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="issuperadmin || isadminofgroup">
     <h3>Users in {{group.name}}</h3>
     <ul *ngFor="let user of usersingroup">
         <li>{{user.username}}

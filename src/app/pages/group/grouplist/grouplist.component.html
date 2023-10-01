@@ -16,18 +16,20 @@
             <div class="col">
                 <button (click)="onSelect(group)" class="btn btn-light">{{ group.name }}</button>
             </div>
-            <div class="col">
-                <button (click)="toggleButtonVisibility(group._id, 'toggle')" class="btn btn-primary">Edit</button>
+            <div class="col" *ngIf="issuperadmin || isadminforgroup[group._id]">
+                <div *ngIf="isadmin">
+                    <button (click)="toggleButtonVisibility(group._id, 'toggle')" class="btn btn-primary">Edit</button>
+                </div>
             </div>
         </div>
           <div *ngIf="groupButtonVisibility[group._id]">
-              <form *ngIf="isadmin">
+              <form>
                   <div>
                       <input type="text" [(ngModel)]="adduser" name="newuser" class="form-control" />
                       <button type="button" (click)="addUser(group)" class="btn btn-primary">Add User</button>
                   </div>
               </form>
-              <button *ngIf="isadmin" type="button" (click)="remove(group)" class="btn btn-danger">Remove Group</button>
+              <button type="button" (click)="remove(group)" class="btn btn-danger">Remove Group</button>
           </div>
         </li>
     </ul>

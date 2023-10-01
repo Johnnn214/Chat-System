@@ -24,6 +24,7 @@ export class ChannelComponent implements OnInit {
   user = JSON.parse(this.currentuser);
   super:string= "super";
   admin:string = "group";
+  isadminofgroup:boolean = false;
 
   constructor(private groupsservice: GroupsService,
     private router: Router
@@ -33,12 +34,20 @@ export class ChannelComponent implements OnInit {
     this.groupsservice.currentgroup$.subscribe({
       next: (data) => {
         this.group = data;
-        console.log("current group",this.group);
         this.groupId = this.group._id;
-        //console.log(this.groupId);
+        console.log("group", this.group);
+        console.log("user", this.user);
+        if (this.group && this.group.admins) {
+          this.isadminofgroup = this.group.admins.includes(this.user.id);
+          console.log(this.isadminofgroup)
+        } else {
+          this.isadminofgroup = false; 
+        }
         this.loadChannels();
       }
     }); 
+
+
 
     if (this.user != null && this.user.roles) {
       this.issuperadmin = this.user.roles.includes(this.super);
@@ -46,8 +55,8 @@ export class ChannelComponent implements OnInit {
     } else {
       console.log("Roles are empty");
     }
-    
   }
+
   loadChannels() {
     if(!this.groupId){
       console.log("no group selected");

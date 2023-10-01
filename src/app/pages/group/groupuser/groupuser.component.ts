@@ -16,6 +16,14 @@ export class GroupuserComponent {
   group: any = <any>{};
   groupId:string = "";
   usersingroup:any[] = [];
+  currentuser:any = localStorage.getItem('currentUser');
+  user = JSON.parse(this.currentuser);
+  super:string= "super";
+  admin:string = "group";
+  isadminofgroup:boolean = false;
+  issuperadmin: boolean= false;
+  isadmin: boolean= false;
+
   constructor(
     private usersService: UsersService, 
     private groupsservice: GroupsService
@@ -26,11 +34,24 @@ export class GroupuserComponent {
       next: (data) => {
         this.group = data;
         console.log("current group",this.group);
+        if (this.group && this.group.admins) {
+          this.isadminofgroup = this.group.admins.includes(this.user.id);
+          console.log(this.isadminofgroup)
+        } else {
+          this.isadminofgroup = false; 
+        }
         this.groupId = this.group._id;
         this.getUsersInGroup(this.groupId);
         console.log("groupid",this.groupId);
       }
     }); 
+
+    if (this.user != null && this.user.roles) {
+      this.issuperadmin = this.user.roles.includes(this.super);
+      this.isadmin = this.user.roles.includes(this.admin);
+    } else {
+      console.log("Roles are empty");
+    }
   }
 
   getUsersInGroup(groupId: string): void {
