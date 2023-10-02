@@ -17,9 +17,9 @@ import { ImageuploadService } from 'src/app/services/imageupload.service';
 })
 export class ChatComponent implements OnInit {
   @ViewChild('scrollable', { static: true }) scrollable!: ElementRef;
-
-  messageout = '';
-  messagesin: Msg[] = [];
+  @ViewChild('fileInput', { static: true }) fileInput!: ElementRef<HTMLInputElement>;
+  newmessage = '';
+  messages: Msg[] = [];
   channel: string = '';
   currentUser!: any;
   newChannel:Channel = new Channel();
@@ -53,8 +53,8 @@ export class ChatComponent implements OnInit {
 
     this.socketService.getchathistory(this.channel).subscribe((chatHistory: any[]) => {
       // Handle the chat history data here
-      this.messagesin = chatHistory;
-      console.log(this.messagesin);
+      this.messages = chatHistory;
+      console.log(this.messages);
       this.scrollToBottom();
     });
     
@@ -73,34 +73,41 @@ export class ChatComponent implements OnInit {
         image: data.image,
       };
       console.log("messagereceived", newMsg);
-      this.messagesin.push(newMsg);
+      this.messages.push(newMsg);
 
       this.scrollToBottom();
     });
   }
 
   send() {
-    console.log('Sending message:', this.messageout); // Add this line for debugging
-    if(this.selectedfile || this.messageout ){
+    console.log('Sending message:', this.newmessage); // Add this line for debugging
+    if(this.selectedfile || this.newmessage ){
       if(this.selectedfile){
       const fd = new FormData();
       fd.append('image', this.selectedfile, this.selectedfile.name);
       this.imgService.imgupload(fd).subscribe({
         next: (res) => {  
-          console.log(this.messageout);
+          console.log(this.newmessage);
           this.uploadedimage = res.data.filename; 
-          this.socketService.sendMessage(this.channel, this.messageout, this.currentUser, this.uploadedimage);
-          this.messageout = '';
+          this.socketService.sendMessage(this.channel, this.newmessage, this.currentUser, this.uploadedimage);
+          this.newmessage = '';
           this.uploadedimage = '';
+          this.resetFileInput();
         }
       });
       }else{
-        this.socketService.sendMessage(this.channel, this.messageout, this.currentUser, this.uploadedimage);
-        this.messageout = '';
+        this.socketService.sendMessage(this.channel, this.newmessage, this.currentUser, this.uploadedimage);
+        this.newmessage = '';
       }
     } else{
       console.log('No image or message');
     }
+  }
+
+  private resetFileInput() {
+    // Reset the file input value to an empty array
+    this.fileInput.nativeElement.value = '';
+    this.selectedfile = null;
   }
 
   leave(){

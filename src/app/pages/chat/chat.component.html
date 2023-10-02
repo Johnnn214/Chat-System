@@ -2,7 +2,7 @@
   <h2 class="channel-heading">{{ newChannel.name }}</h2>
   <div class="chat-messages">
     <div id="scrollable" #scrollable class="scrollable">
-      <div *ngFor="let message of messagesin" class="message">
+      <div *ngFor="let message of messages" class="message">
         <img class="avatar" width="50" height="50" class="avatar" [src]="'http://localhost:3000/images/' + message.avatar" />
         <span class="message-content">{{ message.username }}:</span>
         <span class="message-content">{{ message.message }}</span>
@@ -16,14 +16,14 @@
   <div class="chat-input">
       <input
           type="text"
-          [(ngModel)]="messageout"
+          [(ngModel)]="newmessage"
           class="form-control"
           placeholder="Type your message..."
           (keyup.enter)="send()"
       />
       <button class="btn btn-primary" (click)="send()">Send</button>
   </div>
-  <input type="file" class="form-control" (change)="onFileSelected($event)" name="image" id="uploadfile" />
+  <input type="file" class="form-control" #fileInput (change)="onFileSelected($event)" name="image" id="uploadfile" />
   <div class="leave-button">
       <button class="btn btn-danger" (click)="leave()">Leave</button>
   </div>
