@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ImageuploadService } from 'src/app/services/imageupload.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,6 +19,7 @@ export class ProfileComponent implements OnInit {
   private toastr = inject(ToastrService);
   private imgService = inject(ImageuploadService);
   private authService = inject(AuthService);
+  private userService = inject(UsersService);
   selectedfile:any = null;
   imagepath:String ="";
   currentuser:User = new User();
@@ -60,8 +62,10 @@ export class ProfileComponent implements OnInit {
 
 
 
-  deleteAcount(event:any){
-    
+  deleteAcount(){
+    this.userService.removeUser(this.currentuser.id).subscribe(() => {
+    this.authService.logout();
+    }); 
   }
  
 }

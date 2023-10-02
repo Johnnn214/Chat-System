@@ -6,7 +6,7 @@
         <a *ngIf="!(loggedin$ | async)" class="nav-link" routerLink="">Login</a>
         <a class="nav-link" routerLink="/group">Group</a>
         <a class="nav-link" routerLink="/profile">Profile</a>
-        <a *ngIf="(loggedin$ | async)" class="nav-link" href="" (click)="logout($event)">Logout</a>
+        <a *ngIf="(loggedin$ | async)" class="nav-link" href="" (click)="logout()">Logout</a>
       </div>
     </div>
   </nav>

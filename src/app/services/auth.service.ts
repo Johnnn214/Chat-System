@@ -45,7 +45,7 @@ export class AuthService {
     return localStorage.getItem('currentUser');
   }
 
-  logout(event:any){
+  logout(){
     localStorage.removeItem('currentUser');
     this.isLoggedInSubject.next(false);
     this.router.navigateByUrl('');

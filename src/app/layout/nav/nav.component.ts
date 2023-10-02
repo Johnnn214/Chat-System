@@ -20,8 +20,8 @@ export class NavComponent {
   }
   
 
-  logout(event:any){
-    this.authServices.logout(event);
+  logout(){
+    this.authServices.logout();
     }
 
 }
