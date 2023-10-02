@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   errormsg: string ="";
   newuser:User = new User();
   ngOnInit() {
+
   }
 
   signin(event:any){
@@ -36,12 +37,11 @@ export class LoginComponent implements OnInit {
                data.roles, data.group, data.valid);
             console.log("user",this.newuser);
             this.authService.setCurrentuser(this.newuser);
+            this.authService.logined();
             this.router.navigate(['/profile']);
           }else{
-           
             this.errormsg = "There is a problem with the credentials";
           }
-      
       error:
         this.errormsg = "There is a problem with the credentials";
       

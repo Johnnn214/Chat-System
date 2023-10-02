@@ -25,10 +25,13 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<User> {
-    const isLoggedIn = true;
-    this.isLoggedInSubject.next(isLoggedIn);
     const loginData = { email: email, password: password };
     return this.http.post<User>(`${this.baseUrl}/api/auth`, loginData);
+  }
+
+  logined(){
+    const isLoggedIn = true;
+    this.isLoggedInSubject.next(isLoggedIn);
   }
 
   isLoggedin(): Observable<boolean> {
