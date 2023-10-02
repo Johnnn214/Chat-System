@@ -1,13 +1,17 @@
 <div>
   <nav class="navbar navbar-expand-sm bg-light">
     <div class="container-fluid">
-      <div class="navbar-brand" >Logo</div>
+      <div class="navbar-brand">Logo</div>
       <div class="navbar-nav">
-        <a *ngIf="!loggedin" class="nav-link" routerLink="">Login</a>
+        <a *ngIf="!(loggedin$ | async)" class="nav-link" routerLink="">Login</a>
         <a class="nav-link" routerLink="/group">Group</a>
         <a class="nav-link" routerLink="/profile">Profile</a>
-        <a *ngIf="loggedin" class="nav-link " href="" (click) ="logout($event)">Logout</a>
+        <a *ngIf="(loggedin$ | async)" class="nav-link" href="" (click)="logout($event)">Logout</a>
       </div>
     </div>
   </nav>
 </div>
+
+
+
+

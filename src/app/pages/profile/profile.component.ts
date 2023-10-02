@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageuploadService } from 'src/app/services/imageupload.service';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -20,11 +21,14 @@ export class ProfileComponent implements OnInit {
   selectedfile:any = null;
   imagepath:String ="";
   currentuser:User = new User();
+  loggedin$!: Observable<boolean>;
 
   ngOnInit(){
     this.currentuser = JSON.parse(this.authService.getCurrentuser() || '{}');
     console.log(this.currentuser);
 
+    this.loggedin$ = this.authService.isLoggedin();
+    console.log("is login ", this.authService.isLoggedin());
   }
 
   onFileSelected(event:any){

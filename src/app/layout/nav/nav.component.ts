@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
@@ -11,37 +12,13 @@ export class NavComponent {
     
   constructor(private authServices: AuthService) { }
 
-  isadmin:boolean = false;
-  issuperadmin: boolean= false;
-  user:any = localStorage.getItem('currentUser');
-  superadmin:string = "super"
-  user1 = JSON.parse(this.user);
-  role!: Array<string>;
-  loggedin:boolean = false;
+  loggedin$!: Observable<boolean>;
 
   ngOnInit() {
-    if (localStorage.getItem('currentUser')){
-      this.loggedin = true;
-    }else{
-      this.loggedin = false;
-    }
-    if (this.user1 != null){
-      this.role = this.user1.roles;
-      if (this.role.includes(this.superadmin)){
-      this.issuperadmin = true;
-      }else{
-        this.issuperadmin = false;
-      }
-      console.log("user ",this.user1);
-      console.log("roles", this.role);
-      console.log(this.issuperadmin);
-    }
-    else {
-      console.log("role is empty")
-
-    }
-
+    this.loggedin$ = this.authServices.isLoggedin();
+    console.log("is login ", this.authServices.isLoggedin());
   }
+  
 
   logout(event:any){
     this.authServices.logout(event);

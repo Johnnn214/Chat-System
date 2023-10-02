@@ -3,6 +3,7 @@ import { User } from 'src/app/models/user';
 import{ HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
+import { BehaviorSubject, of } from 'rxjs';
 
 
 
@@ -11,24 +12,27 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class AuthService {
 
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
+
   private baseUrl = 'http://localhost:3000'
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+    const isLoggedIn = localStorage.getItem('currentUser') ? true : false;
+    this.isLoggedInSubject.next(isLoggedIn);
+   }
 
   updateUser(user:User){
     return this.http.post<User>(`${this.baseUrl}/api/updateuser`, { user: user});
   }
 
   login(email: string, password: string): Observable<User> {
+    const isLoggedIn = true;
+    this.isLoggedInSubject.next(isLoggedIn);
     const loginData = { email: email, password: password };
     return this.http.post<User>(`${this.baseUrl}/api/auth`, loginData);
   }
 
-  isLoggedin(){
-    if (localStorage.getItem('currentUser')){
-      return true;
-    }else{
-      return false;
-    }
+  isLoggedin(): Observable<boolean> {
+    return this.isLoggedInSubject.asObservable();
   }
 
   setCurrentuser(newuser:User){
@@ -40,6 +44,7 @@ export class AuthService {
 
   logout(event:any){
     localStorage.removeItem('currentUser');
+    this.isLoggedInSubject.next(false);
     this.router.navigateByUrl('');
 
   }
