@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes at least the full viewport height. */
+    margin: 0; /* Remove default margin to avoid unwanted space. */
+  }
+  
+  .main {
+    flex-grow: 1; /* Allow the main content to grow and push the footer to the bottom. */
+  }
+  
+  .footer {
+    padding: 10px;
+  }
