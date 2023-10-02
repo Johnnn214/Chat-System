@@ -67,15 +67,18 @@ export class ChannelComponent implements OnInit {
       });
     }
   }
+  errormsg:string= '';
   addChannel() {
-    // Implement logic to add a channel to the current group
-    this.groupsservice.addChannelToGroup(this.group._id, this.newchannel).subscribe((result) => {
-      // Handle the result (e.g., update the group object)
-      this.group.channels.push(result);
-      
-    });
-    this.loadChannels();
-    this.newchannel.name = ''; // Clear the input field
+    if(this.newchannel.name){
+      this.groupsservice.addChannelToGroup(this.group._id, this.newchannel).subscribe((result) => {
+        this.group.channels.push(result);
+      });
+      this.loadChannels();
+      this.newchannel.name = ''; 
+      this.errormsg = ''
+    }else{
+      this.errormsg = 'Name is Required';
+    }
   }
 
   removeChannel(channelId: string) {

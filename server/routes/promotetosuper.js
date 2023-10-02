@@ -13,11 +13,19 @@ module.exports = async function (app, db) {
         return res.status(400).json({ error: 'User is already a super admin' });
       }
 
-      // Update the user's role to 'super' in your database logic
-      await db.collection('users').updateOne(
-        { _id: objectId },
-        { $push: { roles: { $each: ['super', 'group'] } } }
-      );
+      const isGroupAdmin = await db.collection('users').findOne({ _id: objectId, roles: 'group' });
+
+      if (!isGroupAdmin) {
+        await db.collection('users').updateOne(
+          { _id: objectId },
+          { $push: { roles: { $each: ['super', 'group'] } } }
+        );
+      }else{
+        await db.collection('users').updateOne(
+          { _id: objectId },
+          { $push: { roles: 'super' } }
+        );
+      }
      
       res.status(200).json({ message: 'User promoted to super admin' });
     } catch (error) {

@@ -13,6 +13,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class UserslistGroupViewComponent {
   users: any[] = [];
+  errormsg = "";
+  promotedsuper = '';
+  promotedadmin = '';
   newUser: User = {
     username: '', 
     email: '',
@@ -32,6 +35,8 @@ export class UserslistGroupViewComponent {
   showCreateUserForm: boolean = false;
 
   userButtonVisibility: { [key: string]: boolean } = {};
+  isuseranadmin: { [key: string]: boolean } = {};
+  isuserasuper: { [key: string]: boolean } = {};
   
   constructor(private userService: UsersService) {}
 
@@ -53,6 +58,20 @@ export class UserslistGroupViewComponent {
   loadUsers(): void {
     this.userService.getAllUsers().subscribe((users) => {
       this.users = users;
+      this.users.forEach(user => {
+        if(user.roles.includes(this.super)){
+        this.isuserasuper[user._id] = true;
+        }else{
+          this.isuserasuper[user._id] = false
+        }
+      });
+      this.users.forEach(user => {
+        if(user.roles.includes(this.admin)){
+        this.isuseranadmin[user._id] = true;
+        }else{
+          this.isuseranadmin[user._id] = false
+        }
+      });
     });
   }
 
@@ -60,7 +79,10 @@ export class UserslistGroupViewComponent {
     if (this.newUser.username && this.newUser.email) {
       this.userService.createUser(this.newUser).subscribe(() => {
         this.loadUsers();
+        this.errormsg = "";
       });
+    }else{
+      this.errormsg = "add username and email"
     }
     this.newUser.username = "";
     this.newUser.email = "";
@@ -71,6 +93,7 @@ export class UserslistGroupViewComponent {
       this.loadUsers();
     });
   }
+
   promotetosuper(userId: string){
     this.userService.promotetosuper(userId).subscribe(() =>{
     this.loadUsers();

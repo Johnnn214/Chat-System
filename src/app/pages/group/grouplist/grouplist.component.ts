@@ -19,6 +19,7 @@ export class GrouplistComponent implements OnInit {
   currentgrouplist: Group[] = [];
   adduser: string = '';
   group!:any;
+  errormsg:string = '';
 
   issuperadmin: boolean= false;
   isadmin: boolean= false;
@@ -26,6 +27,8 @@ export class GrouplistComponent implements OnInit {
   user = JSON.parse(this.currentuser);
   super:string= "super";
   admin:string = "group";
+  success:string = '';
+  erroruser:string= '';
 
   groupButtonVisibility: { [key: string]: boolean } = {};
   isadminforgroup: { [key: string]: boolean } = {};
@@ -96,30 +99,42 @@ export class GrouplistComponent implements OnInit {
 
   createGroup() {
     // Implement your logic to create a group
-    const newGroup: Group = {
-      name: this.newgroupname,
-      admins: [this.user?.id],
-      _id: undefined
-    };
-    this.groupsService.createGroup(newGroup).subscribe((createdGroup) => {
-      this.currentgrouplist.push(createdGroup);
-    });
+    if(this.newgroupname){
+      const newGroup: Group = {
+        name: this.newgroupname,
+        admins: [this.user?.id],
+        _id: undefined
+      };
+      this.groupsService.createGroup(newGroup).subscribe((createdGroup) => {
+        this.currentgrouplist.push(createdGroup);
+      });
+      this.errormsg = "";
+    }else{
+      this.errormsg = " require name";
+    }
     this.loadgroup();
     this.newgroupname = ""; // Clear the input field
   }
 
   remove(group: any) {
     this.groupsService.deleteGroup(group._id).subscribe(() => {
-      
     });
     this.loadgroup();
   }
-
+ 
   addUser(group: any) {
-    const usernameToAdd = this.adduser;
-    this.usersService.addUserInGroup(group._id, usernameToAdd).subscribe(
-      () => {});
-      this.adduser=""
+    if (this.adduser) {
+      this.usersService.addUserInGroup(group._id, this.adduser).subscribe(
+        (response) => {
+          this.adduser = "";
+          this.erroruser = "";
+          this.success = "Added User"
+        },
+        (error) => {this.erroruser = "User is already in the Group";}
+      );
+    } else {
+      this.erroruser = "Name is Required";
+    }
   }
 
   toggleButtonVisibility(groupId: string, buttonType: string) {

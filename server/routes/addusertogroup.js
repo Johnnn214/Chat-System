@@ -12,12 +12,6 @@ module.exports = async function (app, db) {
       const user = await userCollection.findOne({ username });
 
 
-      if (!user || !groupId ) {
-        // Handle the case where the user or group does not exist
-        res.status(404).json({ error: 'User or group not found' });
-        return;
-      }
-
       // Check if the user is already associated with the group
       if (user.group.includes(groupId)) {
         res.status(400).json({ error: 'User is already in the group' });

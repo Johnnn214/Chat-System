@@ -18,6 +18,10 @@
       
       <button type="submit" class="btn btn-primary" >Create User</button>
     </form>
+    <div>
+      {{errormsg}}
+    </div>
+
   </div>
   <!-- List of Users -->
   <div>
@@ -32,8 +36,8 @@
                       <ul class="roles-list">
                         <li *ngFor="let role of user.roles">{{ role }}</li>
                       </ul>
-                      <button (click)="promotetosuper(user._id)" class="btn btn-primary">Promote to Super</button>
-                      <button (click)="promotetogroupadmin(user._id)" class="btn btn-primary">Promote to Group Admin</button>
+                      <button *ngIf="!isuserasuper[user._id]" (click)="promotetosuper(user._id)" class="btn btn-primary">Promote to Super</button>
+                      <button *ngIf="!isuseranadmin[user._id]"(click)="promotetogroupadmin(user._id)" class="btn btn-primary">Promote to Group Admin</button>
                       <button (click)="deleteUser(user._id)" class="btn btn-danger">Delete</button>
                   </div>
               </div>
