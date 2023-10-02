@@ -91,6 +91,7 @@ export class ChatComponent implements OnInit {
           this.uploadedimage = res.data.filename; 
           this.socketService.sendMessage(this.channel, this.messageout, this.currentUser, this.uploadedimage);
           this.messageout = '';
+          this.uploadedimage = '';
         }
       });
       }else{
