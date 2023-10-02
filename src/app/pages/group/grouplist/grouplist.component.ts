@@ -131,10 +131,13 @@ export class GrouplistComponent implements OnInit {
           this.erroruser = "";
           this.success = "Added User"
         },
-        (error) => {this.erroruser = "User is already in the Group";}
+        (error) => {
+          this.erroruser = "User is already in the Group"
+          this.success = "";}
       );
     } else {
       this.erroruser = "Name is Required";
+      this.success = "";
     }
   }
 
