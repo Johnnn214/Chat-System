@@ -21,11 +21,7 @@ export class LoginComponent implements OnInit {
   password:string = "";
   errormsg: string ="";
   newuser:User = new User();
-  loggedin:boolean = false;
   ngOnInit() {
-    this.authService.isLoggedin().subscribe((loggedIn) => {
-      this.loggedin = loggedIn;
-    });
   }
 
   signin(event:any){

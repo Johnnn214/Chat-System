@@ -1,5 +1,5 @@
 <div>
-    <div *ngIf="!loggedin">
+    <div>
         <h1 class="heading mt-4 mb-4 text-center">Log In</h1>
         <form class="custom-form">
             <div class="form-outline mb-4 w-100">
@@ -28,10 +28,5 @@
             <a href="/signup">Create Account</a>
         </div>
     </div>
-    <div *ngIf="loggedin">
-        <h1>You are already logged in.</h1>
-        <a href="/account">Home</a>
-    </div>
-
     <p>{{ errormsg }}</p>
 </div>
