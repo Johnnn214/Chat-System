@@ -6,7 +6,6 @@ module.exports = async function (app, db) {
       const channelsCollection = db.collection('channels');
       const { name } = req.body; // Destructure name from req.body
       const { id: groupId } = req.params; // Destructure id from req.params
-      console.log(req.body); // Corrected console.log
 
       const newChannel = {
         name,
@@ -15,7 +14,7 @@ module.exports = async function (app, db) {
 
       const result = await channelsCollection.insertOne(newChannel);
 
-      console.log('Insert result:', result);
+      res.status(200).json(result); 
     } catch (error) {
       console.error('Error creating channel:', error);
       res.status(500).json({ error: 'Internal server error' });

@@ -56,10 +56,10 @@ export class GrouplistComponent implements OnInit {
     });
 
   }
+
   loadgroup(){
     if (this.user) {
       if (this.user.roles && this.user.roles.includes('super')) {
-        // Fetch super groups
         this.groupsService.getAllGroups().subscribe((groups) => {
           this.currentgrouplist = groups;
           console.log("allgroups",this.currentgrouplist);
@@ -73,7 +73,7 @@ export class GrouplistComponent implements OnInit {
               .filter(group => group !== undefined) as Group[];
             this.currentgrouplist = uniqueGroups;
             console.log("groups where admin is a member and created groups", this.currentgrouplist);
-            // if current admin is the admin of the group
+
             this.currentgrouplist.forEach(group => {
               if(group.admins.includes(this.user.id)){
               this.isadminforgroup[group._id] = true;
@@ -113,13 +113,14 @@ export class GrouplistComponent implements OnInit {
       this.errormsg = " require name";
     }
     this.loadgroup();
-    this.newgroupname = ""; // Clear the input field
+    this.newgroupname = "";
   }
 
   remove(group: any) {
-    this.groupsService.deleteGroup(group._id).subscribe(() => {
+    this.groupsService.deleteGroup(group._id).subscribe((data) => {
+        console.log("Group deleted successfully.");
+        this.currentgrouplist = this.currentgrouplist.filter((g) => g._id !== group._id);
     });
-    this.loadgroup();
   }
  
   addUser(group: any) {

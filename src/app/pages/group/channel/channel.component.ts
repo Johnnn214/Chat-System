@@ -67,6 +67,7 @@ export class ChannelComponent implements OnInit {
       });
     }
   }
+
   errormsg:string= '';
   addChannel() {
     if(this.newchannel.name){
@@ -82,7 +83,6 @@ export class ChannelComponent implements OnInit {
   }
 
   removeChannel(channelId: string) {
-    // Implement logic to remove a channel from the current group
     this.groupsservice.removeChannelFromGroup(this.group._id, channelId).subscribe((result) => {
       console.log('Response from API:', result);
       this.loadChannels();
