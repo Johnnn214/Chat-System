@@ -63,20 +63,22 @@ module.exports = {
       // Handle incoming messages within a channel
       socket.on('message', async (data) => {
         // Extract channel, username, and message from data
-        const { channel, user, message } = data;
+        const { channel, user, message, image } = data;
         const messagesCollection = db.collection('messages');
         // Create a new ChatMessage document
         const username = user.username;
         const avatar = user.avatar;
 
-        console.log(username);
         const newMessage = {
           channel,
           username,
           avatar,
           message,
+          image,
           timestamp: new Date(),
         };
+        console.log("new message::::::::::::",newMessage);
+        console.log("new message::::::::::::",data);
         // Save the message to the database
         try {
           const result = await messagesCollection.insertOne(newMessage);

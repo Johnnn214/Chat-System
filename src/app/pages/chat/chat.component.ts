@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Channel } from 'src/app/models/channel';
+import { ImageuploadService } from 'src/app/services/imageupload.service';
 
 @Component({
   selector: 'app-chat',
@@ -24,12 +25,15 @@ export class ChatComponent implements OnInit {
   newChannel:Channel = new Channel();
   join:string = "Just joined the channel";
   left:string = "Just left the channel";
+  selectedfile:any = null;
+  uploadedimage:string = "";
 
   constructor(
     private socketService: SocketsService,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private imgService: ImageuploadService
   ) {}
 
   ngOnInit(): void {
@@ -66,7 +70,7 @@ export class ChatComponent implements OnInit {
         timestamp: new Date(),
         avatar: data.user.avatar,
         username: data.user.username,
-        isImage:false
+        image: data.image,
       };
       console.log("messagereceived", newMsg);
       this.messagesin.push(newMsg);
@@ -77,13 +81,27 @@ export class ChatComponent implements OnInit {
 
   send() {
     console.log('Sending message:', this.messageout); // Add this line for debugging
-    if (this.messageout) {
-      this.socketService.sendMessage(this.channel, this.messageout, this.currentUser);
-      this.messageout = '';
-    } else {
-      console.log('No Message');
+    if(this.selectedfile || this.messageout ){
+      if(this.selectedfile){
+      const fd = new FormData();
+      fd.append('image', this.selectedfile, this.selectedfile.name);
+      this.imgService.imgupload(fd).subscribe({
+        next: (res) => {  
+          console.log(this.messageout);
+          this.uploadedimage = res.data.filename; 
+          this.socketService.sendMessage(this.channel, this.messageout, this.currentUser, this.uploadedimage);
+          this.messageout = '';
+        }
+      });
+      }else{
+        this.socketService.sendMessage(this.channel, this.messageout, this.currentUser, this.uploadedimage);
+        this.messageout = '';
+      }
+    } else{
+      console.log('No image or message');
     }
   }
+
   leave(){
     this.socketService.leaveChannel(this.channel, this.currentUser, this.left);
     this.router.navigate(['/group']);
@@ -99,4 +117,9 @@ export class ChatComponent implements OnInit {
       console.error(err);
     }
   }
+
+  onFileSelected(event:any){
+    this.selectedfile = event.target.files[0];
+  }
+
 }

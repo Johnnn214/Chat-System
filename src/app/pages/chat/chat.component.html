@@ -6,6 +6,7 @@
         <img class="avatar" width="50" height="50" class="avatar" [src]="'http://localhost:3000/images/' + message.avatar" />
         <span class="message-content">{{ message.username }}:</span>
         <span class="message-content">{{ message.message }}</span>
+        <img *ngIf="message.image" width="200" height="200" [src]="'http://localhost:3000/images/' + message.image" />
         <div>
           <span class="message-timestamp">{{ message.timestamp | date: 'hh:mm:ss a' }}</span>
         </div>
@@ -22,6 +23,7 @@
       />
       <button class="btn btn-primary" (click)="send()">Send</button>
   </div>
+  <input type="file" class="form-control" (change)="onFileSelected($event)" name="image" id="uploadfile" />
   <div class="leave-button">
       <button class="btn btn-danger" (click)="leave()">Leave</button>
   </div>

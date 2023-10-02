@@ -47,8 +47,6 @@ export class ChannelComponent implements OnInit {
       }
     }); 
 
-
-
     if (this.user != null && this.user.roles) {
       this.issuperadmin = this.user.roles.includes(this.super);
       this.isadmin = this.user.roles.includes(this.admin);
