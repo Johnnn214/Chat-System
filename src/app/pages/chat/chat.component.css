@@ -1,3 +1,8 @@
+.channel-heading{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
 .avatar {
     border: 2px solid #fff;
     border-radius: 50%;
@@ -9,8 +14,8 @@
     background-color: #f5f5f5; /* Set a background color */
 }
 .scrollable {
-    min-height: 300px;
-    max-height: 300px; /* Set a maximum height for the scrollable area */
+    min-height: 500px;
+    max-height: 700px; /* Set a maximum height for the scrollable area */
     overflow-y: auto; /* Enable vertical scrolling */
   }
 
@@ -32,7 +37,7 @@
 }
 
 .chat-container {
-    width: 50%; /* Adjust the width as needed */
+    width: 60%; /* Adjust the width as needed */
     margin: 0 auto; /* Center the form horizontally */
 }
 
