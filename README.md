@@ -317,7 +317,7 @@ If there is an error, it returns a 500 Internal Server Error response.
 
 What it does: This route retrieves all users from the users collection, excluding the password field.
 
-Get Users in Group
+#### Get Users in Group
 
 Route: /api/groups/:groupId/users
 
