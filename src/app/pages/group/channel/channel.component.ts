@@ -25,6 +25,7 @@ export class ChannelComponent implements OnInit {
   super:string= "super";
   admin:string = "group";
   isadminofgroup:boolean = false;
+  errormsg:string= '';
 
   constructor(private groupsservice: GroupsService,
     private router: Router
@@ -37,6 +38,7 @@ export class ChannelComponent implements OnInit {
         this.groupId = this.group._id;
         console.log("group", this.group);
         console.log("user", this.user);
+        // checks for user is the admin and if it made the group.
         if (this.group && this.group.admins) {
           this.isadminofgroup = this.group.admins.includes(this.user.id);
           console.log(this.isadminofgroup)
@@ -46,7 +48,7 @@ export class ChannelComponent implements OnInit {
         this.loadChannels();
       }
     }); 
-
+    // checking the user roles
     if (this.user != null && this.user.roles) {
       this.issuperadmin = this.user.roles.includes(this.super);
       this.isadmin = this.user.roles.includes(this.admin);
@@ -55,6 +57,7 @@ export class ChannelComponent implements OnInit {
     }
   }
 
+  // loading channels of group
   loadChannels() {
     if(!this.groupId){
       console.log("no group selected");
@@ -68,7 +71,7 @@ export class ChannelComponent implements OnInit {
     }
   }
 
-  errormsg:string= '';
+  // create channel
   addChannel() {
     if(this.newchannel.name){
       this.groupsservice.addChannelToGroup(this.group._id, this.newchannel).subscribe((result) => {
@@ -81,14 +84,14 @@ export class ChannelComponent implements OnInit {
       this.errormsg = 'Name is Required';
     }
   }
-
+  // deleting channel
   removeChannel(channelId: string) {
     this.groupsservice.removeChannelFromGroup(this.group._id, channelId).subscribe((result) => {
       console.log('Response from API:', result);
       this.loadChannels();
     });
   }
-
+  //joining channel which take to the chat component
   joinChannel(channelId: string) {
     this.router.navigate(['/chat', channelId]);
   }

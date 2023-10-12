@@ -15,16 +15,16 @@
   <div>
     <ul class="list-group">
         <li *ngFor="let group of currentgrouplist" class="list-group-item">
-          <div class="row">
-            <div class="col">
-                <button (click)="onSelect(group)" class="btn btn-light">{{ group.name }}</button>
-            </div>
-            <div class="col" *ngIf="issuperadmin || isadminforgroup[group._id]">
-                <div *ngIf="isadmin">
-                    <button (click)="toggleButtonVisibility(group._id, 'toggle')" class="btn btn-primary">Edit</button>
+            <div class="row">
+                <div class="col">
+                    <button (click)="onSelect(group)" class="btn btn-light">{{ group.name }}</button>
+                </div>
+                <div class="col" *ngIf="issuperadmin || isadminforgroup[group._id]">
+                    <div *ngIf="isadmin">
+                        <button (click)="toggleButtonVisibility(group._id, 'toggle')" class="btn btn-primary">Edit</button>
+                    </div>
                 </div>
             </div>
-        </div>
           <div *ngIf="groupButtonVisibility[group._id]">
               <form>
                   <div>

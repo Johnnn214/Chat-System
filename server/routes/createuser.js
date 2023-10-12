@@ -3,7 +3,7 @@ module.exports = async function (app, db) {
       try {
         const user = req.body;
         const result = await db.collection('users').insertOne(user);
-        console.log('Insert result:', result); // Use console.log here
+        console.log('Insert result:', result);
         res.status(200).json(result); // Optionally, send a response with the result
       } catch (error) {
         console.error('Error creating user:', error);

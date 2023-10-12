@@ -37,6 +37,7 @@ export class ChatComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     this.currentUser = this.authService.getCurrentuser();
     this.currentUser = JSON.parse(this.currentUser);
     // Get the channel ID from the route parameters
@@ -59,7 +60,7 @@ export class ChatComponent implements OnInit {
     });
     
   }
-
+// socket.io connection
   private initIoConnection() {
     this.socketService.initSocket();
     this.socketService.joinChannel(this.channel, this.currentUser, this.join);
@@ -78,7 +79,7 @@ export class ChatComponent implements OnInit {
       this.scrollToBottom();
     });
   }
-
+// sending message and images and saving it
   send() {
     console.log('Sending message:', this.newmessage); // Add this line for debugging
     if(this.selectedfile || this.newmessage ){
@@ -103,21 +104,20 @@ export class ChatComponent implements OnInit {
       console.log('No image or message');
     }
   }
-
+// reseting input after sending
   private resetFileInput() {
     // Reset the file input value to an empty array
     this.fileInput.nativeElement.value = '';
     this.selectedfile = null;
   }
-
+// leaving chat
   leave(){
     this.socketService.leaveChannel(this.channel, this.currentUser, this.left);
     this.router.navigate(['/group']);
   }
-
+// when a new chat is added it scroll to the bottom of the box
   scrollToBottom(): void {
     try {
-      // Use a setTimeout to allow the DOM to update before scrolling
       setTimeout(() => {
         this.scrollable.nativeElement.scrollTop = this.scrollable.nativeElement.scrollHeight;
       });
@@ -125,7 +125,7 @@ export class ChatComponent implements OnInit {
       console.error(err);
     }
   }
-
+// selected file
   onFileSelected(event:any){
     this.selectedfile = event.target.files[0];
   }

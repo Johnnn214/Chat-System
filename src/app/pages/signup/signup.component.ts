@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit  {
   constructor(private userService: UsersService, private router: Router) {}
   ngOnInit(): void {}
 
-  
+  // signup
 
   signup(): void {
     if (this.newUser.username && this.newUser.email) {

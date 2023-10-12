@@ -24,12 +24,13 @@ export class AvailablegroupComponent {
     this.loadOtherGroups();
   }
 
+  // loading the available groups 
   loadOtherGroups() {
     this.groupsservice.getOtherGroups(this.currentUser.id).subscribe(groups => {
       this.otherGroups = groups;
     });
   }
-
+  // not implemented
   apply(event:any){
   }
 }

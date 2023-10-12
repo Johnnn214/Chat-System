@@ -16,39 +16,40 @@ export class GroupsService {
 
   private baseUrl = 'http://localhost:3000/api/groups'
 
+  // get all groups
   getAllGroups(): Observable<Group[]> {
     return this.http.get<Group[]>(`${this.baseUrl}`);
   }
-
+  // gets groups that an admin administers
   getAdminGroups(id: string): Observable<Group[]> {
     return this.http.get<Group[]>(`${this.baseUrl}/admin/${id}`);
   }
-
+  // get groups that the user is part of
   getUserGroups(id: string): Observable<Group[]> {
     return this.http.get<Group[]>(`${this.baseUrl}/users/${id}`);
   }
-
+  // get other groups that was not selected
   getOtherGroups(userId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/other-groups/${userId}`);
   }
-
+  // group creation
   createGroup(group: Group): Observable<Group> {
     return this.http.post<Group>(`${this.baseUrl}`, group);
   }
-
+  // delete group
   deleteGroup(groupId: string): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${groupId}`);
   }
-
+  // selects a group 
   setcurrentgroup(group:Group){
     this._currentgroup.next(group);
   }
-
+  // adding channel
   addChannelToGroup(groupId: string, channel: Channel): Observable<Channel> {
     const url = `${this.baseUrl}/${groupId}/channel`;
     return this.http.post<Channel>(url, channel);
   }
-
+  // getting channel
   getChannelsForGroup(groupId: string): Observable<any[]> {
     return this.http.get<Channel[]>(`${this.baseUrl}/${groupId}/channels`);
   }

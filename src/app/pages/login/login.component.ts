@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
   }
-
+  //signin
   signin(event:any){
     console.log("at signin");
     event.preventDefault();

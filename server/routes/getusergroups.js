@@ -7,18 +7,15 @@ module.exports = async function (app, db) {
       const userId = req.params.userId;
       const objectId = new ObjectId(userId);
       //console.log(userId);
-      // Assuming you have a 'users' collection and a 'groups' collection
+
       const user = await db.collection('users').findOne({ _id: objectId });
      // console.log(user);
       if (!user) {
         return res.status(404).json({ error: 'User not found' });
       }
   
-      // You need to implement the logic to fetch groups associated with this user
-      // This could involve querying the 'groups' collection based on the user's ID or another attribute
-      
-      // For example, if the user has a 'groupIds' field that contains group IDs
-      const groupIds = user.group || []; // Fix the property name here
+    
+      const groupIds = user.group || []; 
       console.log(groupIds);
 
       const groupObjectIds = groupIds.map(id => new ObjectId(id));

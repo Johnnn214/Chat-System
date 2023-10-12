@@ -23,9 +23,6 @@ const PORT = process.env.PORT || 3000;
 const formidable = require('formidable');
 const path = require('path');
 
-
-
-
 async function main() {
     try {
       await client.connect();
@@ -66,11 +63,6 @@ async function main() {
       require('./routes/chathistory.js')(app,db);
 
       require('./routes/listen.js')(http,PORT);
-
-
-
-
-      
   
     } catch (error) {
       console.error('Error:', error);

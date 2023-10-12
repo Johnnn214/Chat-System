@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
   onFileSelected(event:any){
     this.selectedfile = event.target.files[0];
   }
-
+  // uploading selected image 
   onUpload() {
     if (this.selectedfile) { // Check if a file is selected
       const fd = new FormData();
@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
   }
 
 
-
+  // deletes user
   deleteAcount(){
     this.userService.removeUser(this.currentuser.id).subscribe(() => {
     this.authService.logout();

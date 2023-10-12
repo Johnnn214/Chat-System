@@ -2,13 +2,11 @@ const { ObjectId } = require('mongodb');
 
 module.exports = async function (app, db) {
 
-  // API to get groups that were not selected by a user
   app.get('/api/groups/other-groups/:userId', async (req, res) => {
     try {
       const userId = req.params.userId;
       const objectId = new ObjectId(userId);
 
-      // Assuming you have a 'users' collection and a 'groups' collection
       const user = await db.collection('users').findOne({ _id: objectId });
 
       if (!user) {

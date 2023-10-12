@@ -42,7 +42,7 @@ export class UserslistGroupViewComponent {
 
   ngOnInit(): void {
     this.loadUsers();
-
+    // checks role if user
     if (this.user != null && this.user.roles) {
       this.issuperadmin = this.user.roles.includes(this.super);
       this.isadmin = this.user.roles.includes(this.admin);
@@ -54,7 +54,7 @@ export class UserslistGroupViewComponent {
       this.userButtonVisibility[user._id] = false;
     });
   }
-
+  // load users
   loadUsers(): void {
     this.userService.getAllUsers().subscribe((users) => {
       this.users = users;
@@ -74,7 +74,7 @@ export class UserslistGroupViewComponent {
       });
     });
   }
-
+  // creates user
   createUser(): void {
     if (this.newUser.username && this.newUser.email) {
       this.userService.createUser(this.newUser).subscribe(() => {
@@ -87,29 +87,32 @@ export class UserslistGroupViewComponent {
     this.newUser.username = "";
     this.newUser.email = "";
   }
+  // deleting user
   deleteUser(userId: string): void {
     this.userService.removeUser(userId).subscribe(() => {
       this.users = this.users.filter((user) => user.id !== userId);
       this.loadUsers();
     });
   }
-
+  // promote user to super
   promotetosuper(userId: string){
     this.userService.promotetosuper(userId).subscribe(() =>{
     this.loadUsers();
     });
     
   }
+  // promote user to group admin
   promotetogroupadmin(userId: string){
     this.userService.promotetogroupadmin(userId).subscribe(() =>{
     this.loadUsers();
     });
     
   }
+  // toggle create form
   toggleCreateUserForm() {
     this.showCreateUserForm = !this.showCreateUserForm;
   }
-
+  // toggles edit button
   toggleButtonVisibility(userId: string, buttonType: string) {
     this.userButtonVisibility[userId] = !this.userButtonVisibility[userId];
   }
