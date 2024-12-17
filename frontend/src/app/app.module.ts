@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import{ HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './layout/nav/nav.component';
 import { FooterComponent } from './layout/footer/footer.component';
-
+import { UsersingroupComponent } from './usersingroup/usersingroup.component';
 
 @NgModule({
   declarations: [

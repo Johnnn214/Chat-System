@@ -1,0 +1,17 @@
+<div>
+    <h3>Users in {{group.name}}</h3>
+    <div>
+        <ul *ngFor="let user of usersingroup" class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col">
+                    <p>{{user.username}}</p> 
+                    </div>
+                    <div class="col"  *ngIf="issuperadmin || isadminofgroup">
+                        <button type="button" (click)="removeUserFromGroup(user._id)" class="btn btn-danger">Remove</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

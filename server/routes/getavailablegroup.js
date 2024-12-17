@@ -18,7 +18,13 @@ module.exports = async function (app, db) {
       const groupObjectIds = groupIds.map(id => new ObjectId(id));
 
       // Fetch all groups that are NOT in the user's groups
-      const otherGroups = await db.collection('groups').find({ _id: { $nin: groupObjectIds } }).toArray();
+      //const otherGroups = await db.collection('groups').find({ _id: { $nin: groupObjectIds } }).toArray();
+
+       // Find all groups where the user is NOT an admin and NOT part of the group
+       const otherGroups = await db.collection('groups').find({
+        _id: { $nin: groupObjectIds },
+        admins: { $nin: [userId] } // Exclude groups where the user is an admin
+      }).toArray();
 
       res.status(200).json(otherGroups);
     } catch (error) {

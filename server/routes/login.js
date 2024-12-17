@@ -6,10 +6,10 @@ module.exports = async function (app,db) {
             const users = await usersCollection.find({}).toArray();
             //console.log(users);
             const email = req.body.email;
-            const password = req.body.password;     
+            const password = req.body.password;
             var customer = {};
             customer.avatar;
-            customer.id;
+            customer._id;
             customer.valid = false;
             customer.email = '';
             customer.username = '';
@@ -18,7 +18,7 @@ module.exports = async function (app,db) {
     
             for (let i = 0; i < users.length; i++) {
                 if (email == users[i].email && password == users[i].password) {
-                    customer.id = users[i]._id;
+                    customer._id = users[i]._id;
                     customer.valid = true;
                     customer.email = users[i].email;
                     customer.username = users[i].username;
@@ -28,7 +28,7 @@ module.exports = async function (app,db) {
                 }
             }
             res.send(customer);
-            //console.log(customer);
+            console.log(customer);
 
         } catch (error) {
           console.error('Error querying the database:', error);

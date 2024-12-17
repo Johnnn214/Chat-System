@@ -11,7 +11,7 @@ app.use(express.json()) ;
 app.use('/images',express.static('userimages'));
 
 const { MongoClient } = require('mongodb');
-const url = 'mongodb://0.0.0.0:27017/';
+const url = "mongodb://localhost:27017/";
 const client = new MongoClient(url);
 const io = require('socket.io')(http,{
 cors:{
@@ -26,7 +26,7 @@ const path = require('path');
 async function main() {
     try {
       await client.connect();
-      let db = client.db("assignmentdb");
+      let db = client.db("ChatSystem");
       console.log('Connected to MongoDB');
 
       const sockets = require('./routes/socket.js');

@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   email:string = "";
   password:string = "";
   errormsg: string ="";
-  newuser:User = new User();
+  newuser: User = new User();
   ngOnInit() {
 
   }
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         (data)=>{
           console.log("data",data);
           if (data.valid == true){
-            this.newuser = new User(data.username, data.email, data.id, data.avatar, data.password,
+            this.newuser = new User(data.username, data.email, data._id, data.avatar, data.password,
                data.roles, data.group, data.valid);
             console.log("user",this.newuser);
             this.authService.setCurrentuser(this.newuser);

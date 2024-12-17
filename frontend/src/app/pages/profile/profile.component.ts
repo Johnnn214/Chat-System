@@ -63,7 +63,7 @@ export class ProfileComponent implements OnInit {
 
   // deletes user
   deleteAcount(){
-    this.userService.removeUser(this.currentuser.id).subscribe(() => {
+    this.userService.removeUser(this.currentuser._id).subscribe(() => {
     this.authService.logout();
     }); 
   }

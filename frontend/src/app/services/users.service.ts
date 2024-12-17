@@ -22,7 +22,7 @@ export class UsersService {
     return this.http.post<User>(`${this.baseUrl}/api/createuser`, user);
   }
   // delete user
-  removeUser(userId: string): Observable<any> {
+  removeUser(userId: string | undefined): Observable<any> {
     return this.http.delete(`${this.baseUrl}/api/users/${userId}`);
   }
   // adding user to a group
