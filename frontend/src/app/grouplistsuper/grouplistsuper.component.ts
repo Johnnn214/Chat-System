@@ -16,7 +16,6 @@ export class GrouplistsuperComponent {
 
     newgroupname: string = '';
     currentgrouplist: Group[] = [];
-    adduser: string = '';
     group!:any;
     errormsg:string = '';
   
@@ -25,11 +24,12 @@ export class GrouplistsuperComponent {
     currentuser:any = localStorage.getItem('currentUser');
     user = JSON.parse(this.currentuser);
     super:string= "super";
-    success:string = '';
-    erroruser:string= '';
   
     groupButtonVisibility: { [key: string]: boolean } = {};
     isadminforgroup: { [key: string]: boolean } = {};
+    groupUserinput: { [key: string]: string } = {};
+    groupErroruser: { [key: string]: string } = {};
+    groupSuccess: { [key: string]: string } = {};
   
     constructor(
       private groupsService: GroupsService,
@@ -50,6 +50,18 @@ export class GrouplistsuperComponent {
   
       this.currentgrouplist.forEach(group => {
         this.groupButtonVisibility[group._id] = false;
+      });
+
+      this.currentgrouplist.forEach(group => {
+        this.groupUserinput[group._id] = "";
+      });
+
+      this.currentgrouplist.forEach(group => {
+        this.groupErroruser[group._id] = "";
+      });
+  
+      this.currentgrouplist.forEach(group => {
+        this.groupSuccess[group._id] = "";
       });
   
     }
@@ -95,22 +107,25 @@ export class GrouplistsuperComponent {
     }
    // adding user to group
     addUser(group: any) {
-      if (this.adduser) {
-        this.usersService.addUserInGroup(group._id, this.adduser).subscribe(
+      if (this.groupUserinput[group._id]) {
+        this.usersService.addUserInGroup(group._id, this.groupUserinput[group._id]).subscribe(
           (response) => {
-            this.adduser = "";
-            this.erroruser = "";
-            this.success = "Added User"
+            this.groupUserinput[group._id] = "";
+            this.groupErroruser[group._id] = "";
+            this.groupSuccess[group._id] = "Added User"
           },
           (error) => {
-            this.erroruser = "User is already in the Group"
-            this.success = "";}
+            // console.log(error.error.error);
+            this.groupUserinput[group._id] = "";
+            this.groupErroruser[group._id] = error.error.error;
+            this.groupSuccess[group._id] = "";}
         );
       } else {
-        this.erroruser = "Name is Required";
-        this.success = "";
+        this.groupErroruser[group._id] = "Name is Required";
+        this.groupSuccess[group._id] = "";
       }
     }
+
     // toggles the edit button
     toggleButtonVisibility(groupId: string, buttonType: string) {
       this.groupButtonVisibility[groupId] = !this.groupButtonVisibility[groupId];
