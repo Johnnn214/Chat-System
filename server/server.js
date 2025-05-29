@@ -11,6 +11,7 @@ app.use(express.json()) ;
 app.use('/images',express.static('userimages'));
 
 const { MongoClient } = require('mongodb');
+// host
 const url = "mongodb://localhost:27017/";
 const client = new MongoClient(url);
 const io = require('socket.io')(http,{
