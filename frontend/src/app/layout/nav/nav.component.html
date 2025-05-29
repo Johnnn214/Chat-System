@@ -4,7 +4,9 @@
       <div class="navbar-brand">Logo</div>
       <div class="navbar-nav">
         <a *ngIf="!(loggedin$ | async)" class="nav-link" routerLink="">Login</a>
-        <a class="nav-link" routerLink="/group">Group</a>
+        <a class="nav-link" routerLink="/groupsuper">Groupsuper</a>
+        <a class="nav-link" routerLink="/groupadmin">Groupadmin</a>
+        <a class="nav-link" routerLink="/groupusers">Groupusers</a>
         <a class="nav-link" routerLink="/profile">Profile</a>
         <a *ngIf="(loggedin$ | async)" class="nav-link" href="" (click)="logout()">Logout</a>
       </div>
