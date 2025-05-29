@@ -16,7 +16,6 @@ import { UsersingroupComponent } from '../usersingroup/usersingroup.component';
 export class GrouplistadminComponent {
   newgroupname: string = '';
   currentgrouplist: Group[] = [];
-  adduser: string = '';
   group!:any;
   errormsg:string = '';
 
@@ -30,6 +29,9 @@ export class GrouplistadminComponent {
 
   groupButtonVisibility: { [key: string]: boolean } = {};
   isadminforgroup: { [key: string]: boolean } = {};
+  groupUserinput: { [key: string]: string } = {};
+  groupErroruser: { [key: string]: string } = {};
+  groupSuccess: { [key: string]: string } = {};
 
   constructor(
     private groupsService: GroupsService,
@@ -96,23 +98,25 @@ export class GrouplistadminComponent {
     });
   }
  // adding user to group
-  addUser(group: any) {
-    if (this.adduser) {
-      this.usersService.addUserInGroup(group._id, this.adduser).subscribe(
-        (response) => {
-          this.adduser = "";
-          this.erroruser = "";
-          this.success = "Added User"
-        },
-        (error) => {
-          this.erroruser = "User is already in the Group"
-          this.success = "";}
-      );
-    } else {
-      this.erroruser = "Name is Required";
-      this.success = "";
-    }
+ addUser(group: any) {
+  if (this.groupUserinput[group._id]) {
+    this.usersService.addUserInGroup(group._id, this.groupUserinput[group._id]).subscribe(
+      (response) => {
+        this.groupUserinput[group._id] = "";
+        this.groupErroruser[group._id] = "";
+        this.groupSuccess[group._id] = "Added User"
+      },
+      (error) => {
+        // console.log(error.error.error);
+        this.groupUserinput[group._id] = "";
+        this.groupErroruser[group._id] = error.error.error;
+        this.groupSuccess[group._id] = "";}
+    );
+  } else {
+    this.groupErroruser[group._id] = "Name is Required";
+    this.groupSuccess[group._id] = "";
   }
+}
   // toggles the edit button
   toggleButtonVisibility(groupId: string, buttonType: string) {
     this.groupButtonVisibility[groupId] = !this.groupButtonVisibility[groupId];
